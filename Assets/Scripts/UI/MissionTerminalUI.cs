@@ -11,9 +11,12 @@ public class MissionTerminalUI : MonoBehaviour
     [SerializeField] private MissionButtonUI missionButtonPrefab;
     [SerializeField] private Button closeButton;
     [SerializeField] private SimpleFirstPersonController playerController;
+    [SerializeField] private PlayerInteractor playerInteractor;
 
     [Header("Mission List")]
     [SerializeField] private MissionData[] missions;
+
+    
 
     private void Awake()
     {
@@ -26,12 +29,19 @@ public class MissionTerminalUI : MonoBehaviour
     public void Open()
     {
         if (terminalRoot != null)
+        {       
             terminalRoot.SetActive(true);
+        }
 
         if (playerController != null)
         {
             playerController.SetInputEnabled(false);
             playerController.SetCursorLocked(false);
+        }
+
+        if (playerInteractor != null)
+        {
+            playerInteractor.SetInteractionEnabled(false);
         }
 
         PopulateMissionList();
@@ -46,6 +56,10 @@ public class MissionTerminalUI : MonoBehaviour
         {
             playerController.SetInputEnabled(true);
             playerController.SetCursorLocked(true);
+        }
+        if (playerInteractor != null)
+        {
+            playerInteractor.SetInteractionEnabled(true);
         }
     }
 

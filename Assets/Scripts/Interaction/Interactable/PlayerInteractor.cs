@@ -48,5 +48,12 @@ public class PlayerInteractor : MonoBehaviour
 
         promptUI.Hide();
     }
+    public void SetInteractionEnabled(bool isEnabled)
+    {
+        this.enabled = isEnabled;
+
+        if (!isEnabled && promptUI != null)
+            promptUI.Hide();
+    }
 }
 //-----PlayerInteractor.cs END-----
