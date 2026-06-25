@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f9538b3c061244fac103a3179e9c7b, type: 3}
   m_Name: MissionData_InventoryTrial
   m_EditorClassIdentifier: Assembly-CSharp::MissionData
-  missionId: 
-  displayName: 
-  description: 
+  missionId: InventoryTrial
+  displayName: Inventory Trial
+  description: A trial of the inventory system
   sceneName: 
   unlockedByDefault: 0
   requiredCompletedMissionIds:
