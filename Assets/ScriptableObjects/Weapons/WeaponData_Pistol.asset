@@ -16,9 +16,9 @@ MonoBehaviour:
   displayName: Pistol
   weaponType: Pistol
   description: "A basic pistol\t"
-  viewModelPrefab: {fileID: 0}
-  viewLocalPosition: {x: 0, y: 0, z: 0}
-  viewLocalEulerAngles: {x: 0, y: 0, z: 0}
+  viewModelPrefab: {fileID: 7082093157589730192, guid: 0c6b8f3bcfd37224b8a97c447ebf1ee0, type: 3}
+  viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
+  viewLocalEulerAngles: {x: 90, y: 90, z: 0}
   viewLocalScale: {x: 1, y: 1, z: 1}
   fireMode: 0
   projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}

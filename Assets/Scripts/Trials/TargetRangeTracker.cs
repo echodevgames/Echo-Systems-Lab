@@ -1,5 +1,6 @@
 //-----TargetRangeTracker.cs START-----
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,8 +9,11 @@ public class TargetRangeTracker : MonoBehaviour
 {
     public static TargetRangeTracker Instance { get; private set; }
 
+    public event Action OnStatsChanged;
+    public event Action OnTrialCompleted;
+
     [Header("Mission Completion")]
-    [SerializeField] private string missionIdToComplete = "CombatTrial";
+    [SerializeField] private string missionIdToComplete = "TargetRangeTrial";
     [SerializeField] private string hubSceneName = "Hub";
     [SerializeField] private KeyCode returnToHubKey = KeyCode.R;
 
@@ -24,13 +28,29 @@ public class TargetRangeTracker : MonoBehaviour
     private readonly Dictionary<string, int> weaponXp = new Dictionary<string, int>();
 
     private bool trialCompleted;
+    private string currentWeaponId;
+    private string currentWeaponType;
 
     public int TotalTargets => totalTargets;
     public int DestroyedTargets => destroyedTargets;
+    public int TargetsRemaining => Mathf.Max(0, totalTargets - destroyedTargets);
     public int Score => score;
     public int ShotsFired => shotsFired;
     public int HitsLanded => hitsLanded;
     public bool TrialCompleted => trialCompleted;
+    public string CurrentWeaponId => currentWeaponId;
+    public string CurrentWeaponType => currentWeaponType;
+
+    public float AccuracyPercent
+    {
+        get
+        {
+            if (shotsFired <= 0)
+                return 0f;
+
+            return (float)hitsLanded / shotsFired * 100f;
+        }
+    }
 
     private void Awake()
     {
@@ -41,6 +61,11 @@ public class TargetRangeTracker : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        NotifyStatsChanged();
     }
 
     private void Update()
@@ -62,13 +87,22 @@ public class TargetRangeTracker : MonoBehaviour
 
         registeredTargets.Add(target);
         totalTargets = registeredTargets.Count;
+
+        Debug.Log($"Registered target: {target.name}. Total targets: {totalTargets}");
+
+        NotifyStatsChanged();
     }
 
     public void RegisterWeaponEquipped(string weaponId, string weaponType)
     {
+        currentWeaponId = weaponId;
+        currentWeaponType = weaponType;
+
         EnsureWeaponXpEntry(weaponId);
 
         Debug.Log($"Weapon equipped: {weaponId} ({weaponType})");
+
+        NotifyStatsChanged();
     }
 
     public void RegisterShot(string weaponId, string weaponType)
@@ -76,6 +110,8 @@ public class TargetRangeTracker : MonoBehaviour
         shotsFired++;
 
         Debug.Log($"Shot fired with {weaponId}. Total shots: {shotsFired}");
+
+        NotifyStatsChanged();
     }
 
     public void RegisterHit(string weaponId, string weaponType)
@@ -85,11 +121,15 @@ public class TargetRangeTracker : MonoBehaviour
         AddWeaponXp(weaponId, 1);
 
         Debug.Log($"Hit landed with {weaponId}. Total hits: {hitsLanded}");
+
+        NotifyStatsChanged();
     }
 
     public void RegisterTargetDamaged(TargetHealth target, DamageInfo damageInfo)
     {
         Debug.Log($"Target damaged: {target.name} for {damageInfo.damageAmount}");
+
+        NotifyStatsChanged();
     }
 
     public void RegisterTargetDestroyed(TargetHealth target, DamageInfo damageInfo)
@@ -101,7 +141,20 @@ public class TargetRangeTracker : MonoBehaviour
 
         Debug.Log($"Target destroyed: {target.name}. Score: {score}");
 
+        NotifyStatsChanged();
+
         CheckTrialCompletion();
+    }
+
+    public int GetWeaponXp(string weaponId)
+    {
+        if (string.IsNullOrWhiteSpace(weaponId))
+            return 0;
+
+        if (!weaponXp.ContainsKey(weaponId))
+            return 0;
+
+        return weaponXp[weaponId];
     }
 
     private void CheckTrialCompletion()
@@ -125,17 +178,13 @@ public class TargetRangeTracker : MonoBehaviour
         MissionProgress.MarkCompleted(missionIdToComplete);
 
         Debug.Log("Target Range Trial completed.");
+        Debug.Log($"Completed Mission Id: {missionIdToComplete}");
         Debug.Log($"Final Score: {score}");
-        Debug.Log($"Accuracy: {GetAccuracyPercent():0.0}%");
+        Debug.Log($"Accuracy: {AccuracyPercent:0.0}%");
         Debug.Log("Press R to return to Hub.");
-    }
 
-    private float GetAccuracyPercent()
-    {
-        if (shotsFired <= 0)
-            return 0f;
-
-        return (float)hitsLanded / shotsFired * 100f;
+        OnTrialCompleted?.Invoke();
+        NotifyStatsChanged();
     }
 
     private void AddWeaponXp(string weaponId, int amount)
@@ -159,6 +208,11 @@ public class TargetRangeTracker : MonoBehaviour
             weaponXp.Add(weaponId, 0);
     }
 
+    private void NotifyStatsChanged()
+    {
+        OnStatsChanged?.Invoke();
+    }
+
     private void ReturnToHub()
     {
         if (GameSceneLoader.Instance != null)
@@ -170,5 +224,4 @@ public class TargetRangeTracker : MonoBehaviour
         SceneManager.LoadScene(hubSceneName);
     }
 }
-
 //-----TargetRangeTracker.cs END-----

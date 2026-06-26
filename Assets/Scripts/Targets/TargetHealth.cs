@@ -15,6 +15,9 @@ public class TargetHealth : MonoBehaviour, IDamageable
     private int currentHealth;
     private bool isDestroyed;
 
+    public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
+
     public string TargetId => targetId;
     public int ScoreValue => scoreValue;
     public bool IsDestroyed => isDestroyed;
@@ -40,6 +43,8 @@ public class TargetHealth : MonoBehaviour, IDamageable
             return;
 
         currentHealth -= damageInfo.damageAmount;
+
+        Debug.Log($"{name} health: {currentHealth}/{maxHealth}");
 
         TargetRangeTracker tracker = TargetRangeTracker.Instance;
         if (tracker != null)

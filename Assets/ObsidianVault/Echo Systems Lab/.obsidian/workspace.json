@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Echo_Systems_Lab_Milestone_1B_Target_Range_Trial_Plan.md",
+                "file": "Echo_Systems_Lab_Milestone_1C_Target_Range_HUD_And_Feedback.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Echo_Systems_Lab_Milestone_1B_Target_Range_Trial_Plan"
+              "title": "Echo_Systems_Lab_Milestone_1C_Target_Range_HUD_And_Feedback"
             }
           }
         ],
@@ -200,9 +200,11 @@
   },
   "active": "6117c7b1a0b65fab",
   "lastOpenFiles": [
+    "Echo_Systems_Lab_Milestone_1C_Target_Range_HUD_And_Feedback.md.meta",
+    "Echo_Systems_Lab_Milestone_1B_Target_Range_Trial_Plan.md",
+    "Echo_Systems_Lab_Milestone_1C_Target_Range_HUD_And_Feedback.md",
     "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
     "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md.meta",
-    "Echo_Systems_Lab_Milestone_1B_Target_Range_Trial_Plan.md",
     "Third-Party Asset Credits.md",
     "Third-Party Asset Credits.md.meta",
     "Echo_Systems_Lab_Milestone_1_Hub_Terminal_Loop.md",

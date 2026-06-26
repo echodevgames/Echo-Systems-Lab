@@ -6,13 +6,14 @@ public class PlayerWeaponController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform weaponHolder;
-    [SerializeField] private Transform muzzlePoint;
+    [SerializeField] private Transform fallbackMuzzlePoint;
 
     [Header("Input")]
     [SerializeField] private KeyCode fireKey = KeyCode.Mouse0;
 
     private WeaponData currentWeapon;
     private GameObject currentViewModel;
+    private Transform currentMuzzlePoint;
     private float nextFireTime;
 
     public WeaponData CurrentWeapon => currentWeapon;
@@ -74,7 +75,7 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
-        Transform spawnPoint = muzzlePoint != null ? muzzlePoint : playerCamera.transform;
+        Transform spawnPoint = GetMuzzlePoint();
 
         GameObject projectileObject = Instantiate(
             currentWeapon.projectilePrefab,
@@ -98,8 +99,21 @@ public class PlayerWeaponController : MonoBehaviour
             currentWeapon.projectileLifetime);
     }
 
+    private Transform GetMuzzlePoint()
+    {
+        if (currentMuzzlePoint != null)
+            return currentMuzzlePoint;
+
+        if (fallbackMuzzlePoint != null)
+            return fallbackMuzzlePoint;
+
+        return playerCamera.transform;
+    }
+
     private void SpawnViewModel()
     {
+        currentMuzzlePoint = null;
+
         if (currentViewModel != null)
             Destroy(currentViewModel);
 
@@ -111,6 +125,13 @@ public class PlayerWeaponController : MonoBehaviour
         currentViewModel.transform.localPosition = currentWeapon.viewLocalPosition;
         currentViewModel.transform.localEulerAngles = currentWeapon.viewLocalEulerAngles;
         currentViewModel.transform.localScale = currentWeapon.viewLocalScale;
+
+        Transform muzzle = currentViewModel.transform.Find("MuzzlePoint");
+
+        if (muzzle != null)
+            currentMuzzlePoint = muzzle;
+        else
+            Debug.LogWarning($"{currentWeapon.displayName} view model has no child named MuzzlePoint. Using fallback muzzle.");
     }
 }
 //-----PlayerWeaponController.cs END-----   

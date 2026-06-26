@@ -69,6 +69,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPedestal
   weaponData: {fileID: 11400000, guid: ef320e83e2b1b4448bfe9e7e73905f1c, type: 2}
+  pedestalWeaponVisual: {fileID: 2187921350455171220}
+  hideVisualAfterPickup: 1
+  disableInteractionAfterPickup: 1
   promptPrefix: Press E to equip
 --- !u!1001 &2128256977871219804
 PrefabInstance:
@@ -218,5 +221,10 @@ PrefabInstance:
 --- !u!4 &1519646345788375598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7567022197725468970, guid: 421626e2da5a32a46983faa1ab5a1e7e, type: 3}
+  m_PrefabInstance: {fileID: 8941238263801436932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2187921350455171220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7082093157589730192, guid: 421626e2da5a32a46983faa1ab5a1e7e, type: 3}
   m_PrefabInstance: {fileID: 8941238263801436932}
   m_PrefabAsset: {fileID: 0}
