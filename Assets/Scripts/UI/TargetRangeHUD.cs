@@ -76,7 +76,7 @@ public class TargetRangeHUD : MonoBehaviour
 
         if (weaponXpText != null)
         {
-            int xp = tracker.GetWeaponXp(tracker.CurrentWeaponId);
+            int xp = PlayerProgress.GetWeaponTypeXp(tracker.CurrentWeaponType);
             weaponXpText.text = $"Weapon XP: {xp}";
         }
     }

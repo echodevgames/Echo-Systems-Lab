@@ -8,6 +8,7 @@ public class GameSceneLoader : MonoBehaviour
     public static GameSceneLoader Instance { get; private set; }
 
     [SerializeField] private string hubSceneName = "Hub";
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     private void Awake()
     {
@@ -43,6 +44,10 @@ public class GameSceneLoader : MonoBehaviour
         SceneManager.LoadScene(hubSceneName);
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(mainMenuSceneName);
+    }
     public void QuitGame()
     {
         Application.Quit();

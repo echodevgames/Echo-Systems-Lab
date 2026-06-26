@@ -35,7 +35,7 @@ public class MissionButtonUI : MonoBehaviour
 
         if (button != null)
         {
-            button.interactable = unlocked && !completed;
+            button.interactable = unlocked;
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => onClicked?.Invoke(mission));
         }

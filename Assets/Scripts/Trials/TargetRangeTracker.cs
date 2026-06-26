@@ -109,7 +109,10 @@ public class TargetRangeTracker : MonoBehaviour
     {
         shotsFired++;
 
+        PlayerProgress.AddWeaponTypeXp(weaponType, 1);
+
         Debug.Log($"Shot fired with {weaponId}. Total shots: {shotsFired}");
+        Debug.Log($"{weaponType} XP: {PlayerProgress.GetWeaponTypeXp(weaponType)}");
 
         NotifyStatsChanged();
     }
@@ -176,6 +179,9 @@ public class TargetRangeTracker : MonoBehaviour
         trialCompleted = true;
 
         MissionProgress.MarkCompleted(missionIdToComplete);
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveGame();
 
         Debug.Log("Target Range Trial completed.");
         Debug.Log($"Completed Mission Id: {missionIdToComplete}");

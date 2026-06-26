@@ -123,7 +123,7 @@ MonoBehaviour:
   hitsText: {fileID: 2834007170943389372}
   accuracyText: {fileID: 3959793508327608958}
   weaponXpText: {fileID: 3391498397822082389}
-  completionText: {fileID: 0}
+  completionText: {fileID: 665646546884101534}
 --- !u!1 &596357985621258534
 GameObject:
   m_ObjectHideFlags: 0

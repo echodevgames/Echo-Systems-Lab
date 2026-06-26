@@ -8,7 +8,8 @@ public static class MissionProgress
 
     public static bool IsCompleted(string missionId)
     {
-        return completedMissionIds.Contains(missionId);
+        return !string.IsNullOrWhiteSpace(missionId) &&
+               completedMissionIds.Contains(missionId);
     }
 
     public static void MarkCompleted(string missionId)
@@ -35,6 +36,33 @@ public static class MissionProgress
         }
 
         return true;
+    }
+
+    public static List<string> GetCompletedMissionIds()
+    {
+        return new List<string>(completedMissionIds);
+    }
+
+    public static void LoadFromSaveData(SaveData saveData)
+    {
+        completedMissionIds.Clear();
+
+        if (saveData == null || saveData.completedMissionIds == null)
+            return;
+
+        foreach (string missionId in saveData.completedMissionIds)
+        {
+            if (!string.IsNullOrWhiteSpace(missionId))
+                completedMissionIds.Add(missionId);
+        }
+    }
+
+    public static void WriteToSaveData(SaveData saveData)
+    {
+        if (saveData == null)
+            return;
+
+        saveData.completedMissionIds = GetCompletedMissionIds();
     }
 
     public static void ResetProgress()
