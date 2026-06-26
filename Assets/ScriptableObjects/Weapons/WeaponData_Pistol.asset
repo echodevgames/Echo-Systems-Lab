@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7024cf73fd9caa34697893e885881bce, type: 3}
+  m_Name: WeaponData_Pistol
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponId: pistol_basic
+  displayName: Pistol
+  weaponType: Pistol
+  description: "A basic pistol\t"
+  viewModelPrefab: {fileID: 0}
+  viewLocalPosition: {x: 0, y: 0, z: 0}
+  viewLocalEulerAngles: {x: 0, y: 0, z: 0}
+  viewLocalScale: {x: 1, y: 1, z: 1}
+  fireMode: 0
+  projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
+  damage: 1
+  fireRate: 0.35
+  projectileSpeed: 30
+  projectileLifetime: 4
+  xpPerHit: 1
+  xpPerTargetDestroyed: 5

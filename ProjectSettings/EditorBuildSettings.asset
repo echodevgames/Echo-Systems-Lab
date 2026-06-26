@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Hub.unity
     guid: dec7c052dfe52e04fb95664319427d46
   - enabled: 1
+    path: Assets/Scenes/TargetRangeTrial.unity
+    guid: 37c97d9832058b64d93d749c6c7306fe
+  - enabled: 1
     path: Assets/Scenes/CombatTrial.unity
     guid: 4b5d945056742004a855747ad9d139b2
   m_configObjects:

@@ -113,10 +113,10 @@ The targets are primitive bullseyes built from Unity primitives. They should be 
 
 Build only the smallest usable version first.
 
-- [ ] Create `TargetRange` scene
-- [ ] Add scene to Build Settings
-- [ ] Update the first mission `sceneName` from `CombatTrial` to `TargetRange`
-- [ ] Create a simple shooting range room
+- [x] Create `TargetRange` scene
+- [x] Add scene to Build Settings
+- [x] Update the first mission `sceneName` from `CombatTrial` to `TargetRange`
+- [x] Create a simple shooting range room
 - [ ] Create a primitive bullseye target prefab
 - [ ] Create a weapon pedestal prefab
 - [ ] Create ranged weapon ScriptableObject data

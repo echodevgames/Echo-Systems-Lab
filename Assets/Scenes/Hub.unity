@@ -1109,6 +1109,38 @@ PrefabInstance:
       propertyPath: playerInteractor
       value: 
       objectReference: {fileID: 213493441}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: missions.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: 'missions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 14b78b68e161d11429b3d8b192b12166, type: 2}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: 'missions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: bf1614f3a8cb7ac40a4671fa0960a33c, type: 2}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: 'missions.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eb8d3cf011855ec4fb3b14d4173fcfa9, type: 2}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: 'missions.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ccbf0290627d7946ba28e256d32c807, type: 2}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: 'missions.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a5458fa446505d4bb54983b536a29a6, type: 2}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: 'missions.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1e6b04b9d8a8b1e489a08dd53713da17, type: 2}
+    - target: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: 'missions.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 65629094382dcb64aa479e4b7ae05e55, type: 2}
     - target: {fileID: 7524018128480541283, guid: 833421f4690184c4881a47836596a02e, type: 3}
       propertyPath: m_Name
       value: Canvas_MissionTerminal

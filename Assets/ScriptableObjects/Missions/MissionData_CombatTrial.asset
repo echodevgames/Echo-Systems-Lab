@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Combat Trial
   description: "Defeat all training drones in the combat simulation\t\t"
   sceneName: CombatTrial
-  unlockedByDefault: 1
+  unlockedByDefault: 0
   requiredCompletedMissionIds:
-  - 
+  - TargetRangeTrial
