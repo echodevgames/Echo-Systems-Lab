@@ -14376,6 +14376,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1669781109300623314, guid: e41f2185f1c11a8409ff3cd219f789a1, type: 3}
   m_PrefabInstance: {fileID: 790886935}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &796359299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 86279966290460952, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+  m_PrefabInstance: {fileID: 1957067262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd2cf13a154fec47a6986058fee8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalUI
 --- !u!1001 &798459211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26006,7 +26017,7 @@ PrefabInstance:
       objectReference: {fileID: 2120182962}
     - target: {fileID: 7189368829393013908, guid: 97d75e14304273f46b3861495396acd2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34957,6 +34968,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1669781109300623314, guid: e41f2185f1c11a8409ff3cd219f789a1, type: 3}
   m_PrefabInstance: {fileID: 1954685302}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1957067262
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -32.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869534436495986134, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: m_Name
+      value: ComputerDesk
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412600094249637319, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: terminalUI
+      value: 
+      objectReference: {fileID: 796359299}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
 --- !u!1001 &1958781931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37958,3 +38030,4 @@ SceneRoots:
   - {fileID: 237225050}
   - {fileID: 645539578}
   - {fileID: 489449146}
+  - {fileID: 1957067262}

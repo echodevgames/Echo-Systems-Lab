@@ -5,6 +5,11 @@ using System.Collections.Generic;
 public static class PlayerProgress
 {
     private static readonly Dictionary<string, int> weaponTypeXp = new Dictionary<string, int>();
+    private static readonly HashSet<string> ownedWeaponIds = new HashSet<string>();
+
+    private static string activeWeaponId;
+
+    public static string ActiveWeaponId => activeWeaponId;
 
     public static int GetWeaponTypeXp(string weaponType)
     {
@@ -28,20 +33,64 @@ public static class PlayerProgress
         weaponTypeXp[weaponType] += amount;
     }
 
+    public static bool OwnsWeapon(string weaponId)
+    {
+        return !string.IsNullOrWhiteSpace(weaponId) &&
+               ownedWeaponIds.Contains(weaponId);
+    }
+
+    public static void AddOwnedWeapon(string weaponId)
+    {
+        if (string.IsNullOrWhiteSpace(weaponId))
+            return;
+
+        ownedWeaponIds.Add(weaponId);
+    }
+
+    public static void SetActiveWeapon(string weaponId)
+    {
+        if (string.IsNullOrWhiteSpace(weaponId))
+            return;
+
+        AddOwnedWeapon(weaponId);
+        activeWeaponId = weaponId;
+    }
+
+    public static List<string> GetOwnedWeaponIds()
+    {
+        return new List<string>(ownedWeaponIds);
+    }
+
     public static void LoadFromSaveData(SaveData saveData)
     {
         weaponTypeXp.Clear();
+        ownedWeaponIds.Clear();
+        activeWeaponId = null;
 
-        if (saveData == null || saveData.weaponTypeXpEntries == null)
+        if (saveData == null)
             return;
 
-        foreach (WeaponTypeXpEntry entry in saveData.weaponTypeXpEntries)
+        if (saveData.weaponTypeXpEntries != null)
         {
-            if (entry == null || string.IsNullOrWhiteSpace(entry.weaponType))
-                continue;
+            foreach (WeaponTypeXpEntry entry in saveData.weaponTypeXpEntries)
+            {
+                if (entry == null || string.IsNullOrWhiteSpace(entry.weaponType))
+                    continue;
 
-            weaponTypeXp[entry.weaponType] = entry.xp;
+                weaponTypeXp[entry.weaponType] = entry.xp;
+            }
         }
+
+        if (saveData.ownedWeaponIds != null)
+        {
+            foreach (string weaponId in saveData.ownedWeaponIds)
+            {
+                if (!string.IsNullOrWhiteSpace(weaponId))
+                    ownedWeaponIds.Add(weaponId);
+            }
+        }
+
+        activeWeaponId = saveData.activeWeaponId;
     }
 
     public static void WriteToSaveData(SaveData saveData)
@@ -53,11 +102,16 @@ public static class PlayerProgress
 
         foreach (KeyValuePair<string, int> pair in weaponTypeXp)
             saveData.weaponTypeXpEntries.Add(new WeaponTypeXpEntry(pair.Key, pair.Value));
+
+        saveData.ownedWeaponIds = GetOwnedWeaponIds();
+        saveData.activeWeaponId = activeWeaponId;
     }
 
     public static void ResetProgress()
     {
         weaponTypeXp.Clear();
+        ownedWeaponIds.Clear();
+        activeWeaponId = null;
     }
 }
 //-----PlayerProgress.cs END-----

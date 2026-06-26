@@ -50,7 +50,8 @@ public class PlayerInteractor : MonoBehaviour
     }
     public void SetInteractionEnabled(bool isEnabled)
     {
-        this.enabled = isEnabled;
+        enabled = isEnabled;
+        currentInteractable = null;
 
         if (!isEnabled && promptUI != null)
             promptUI.Hide();

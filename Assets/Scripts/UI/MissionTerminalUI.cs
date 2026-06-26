@@ -10,41 +10,51 @@ public class MissionTerminalUI : MonoBehaviour
     [SerializeField] private Transform missionButtonParent;
     [SerializeField] private MissionButtonUI missionButtonPrefab;
     [SerializeField] private Button closeButton;
-    [SerializeField] private SimpleFirstPersonController playerController;
-    [SerializeField] private PlayerInteractor playerInteractor;
 
     [Header("Mission List")]
     [SerializeField] private MissionData[] missions;
 
-    
+    private SimpleFirstPersonController activePlayerController;
+    private PlayerInteractor activePlayerInteractor;
+    private bool isOpen;
 
     private void Awake()
     {
         if (closeButton != null)
             closeButton.onClick.AddListener(Close);
 
-        Close();
+        if (terminalRoot != null)
+            terminalRoot.SetActive(false);
     }
 
-    public void Open()
+    public void Open(PlayerInteractor interactor)
     {
-        if (terminalRoot != null)
-        {       
-            terminalRoot.SetActive(true);
-        }
+        if (isOpen)
+            return;
 
-        if (playerController != null)
-        {
-            playerController.SetInputEnabled(false);
-            playerController.SetCursorLocked(false);
-        }
+        activePlayerInteractor = interactor;
 
-        if (playerInteractor != null)
-        {
-            playerInteractor.SetInteractionEnabled(false);
-        }
+        if (activePlayerInteractor != null)
+            activePlayerController = activePlayerInteractor.GetComponent<SimpleFirstPersonController>();
+
+        if (activePlayerController == null)
+            activePlayerController = FindFirstObjectByType<SimpleFirstPersonController>();
 
         PopulateMissionList();
+
+        if (terminalRoot != null)
+            terminalRoot.SetActive(true);
+
+        if (activePlayerController != null)
+        {
+            activePlayerController.SetInputEnabled(false);
+            activePlayerController.SetCursorLocked(false);
+        }
+
+        if (activePlayerInteractor != null)
+            activePlayerInteractor.SetInteractionEnabled(false);
+
+        isOpen = true;
     }
 
     public void Close()
@@ -52,15 +62,18 @@ public class MissionTerminalUI : MonoBehaviour
         if (terminalRoot != null)
             terminalRoot.SetActive(false);
 
-        if (playerController != null)
+        if (activePlayerController != null)
         {
-            playerController.SetInputEnabled(true);
-            playerController.SetCursorLocked(true);
+            activePlayerController.SetInputEnabled(true);
+            activePlayerController.SetCursorLocked(true);
         }
-        if (playerInteractor != null)
-        {
-            playerInteractor.SetInteractionEnabled(true);
-        }
+
+        if (activePlayerInteractor != null)
+            activePlayerInteractor.SetInteractionEnabled(true);
+
+        activePlayerController = null;
+        activePlayerInteractor = null;
+        isOpen = false;
     }
 
     private void PopulateMissionList()
@@ -79,17 +92,24 @@ public class MissionTerminalUI : MonoBehaviour
 
             buttonInstance.Setup(mission, unlocked, completed, OnMissionClicked);
         }
+
+        if (missionButtonParent is RectTransform rectTransform)
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
     }
 
     private void ClearMissionButtons()
     {
+        if (missionButtonParent == null)
+            return;
+
         for (int i = missionButtonParent.childCount - 1; i >= 0; i--)
             Destroy(missionButtonParent.GetChild(i).gameObject);
     }
 
     private void OnMissionClicked(MissionData mission)
     {
-        GameSceneLoader.Instance.LoadMissionScene(mission);
+        if (GameSceneLoader.Instance != null)
+            GameSceneLoader.Instance.LoadMissionScene(mission);
     }
 }
 //-----MissionTerminalUI.cs END-----

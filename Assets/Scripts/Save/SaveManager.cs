@@ -1,17 +1,24 @@
 //-----SaveManager.cs START-----
-
+using System;
 using System.IO;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    public event Action OnGameSaved;
+    public event Action OnGameLoaded;
+
     public static SaveManager Instance { get; private set; }
 
     private const string SaveFileName = "echo_systems_lab_save.json";
 
+    [Header("Databases")]
+    [SerializeField] private WeaponDatabase weaponDatabase;
+
     private SaveData currentSaveData = new SaveData();
 
     public SaveData CurrentSaveData => currentSaveData;
+    public WeaponDatabase WeaponDatabase => weaponDatabase;
 
     private string SavePath => Path.Combine(Application.persistentDataPath, SaveFileName);
 
@@ -52,6 +59,8 @@ public class SaveManager : MonoBehaviour
         File.WriteAllText(SavePath, json);
 
         Debug.Log($"Game saved to: {SavePath}");
+
+        OnGameSaved?.Invoke();
     }
 
     public bool LoadGame()
@@ -64,6 +73,8 @@ public class SaveManager : MonoBehaviour
             PlayerProgress.LoadFromSaveData(currentSaveData);
 
             Debug.Log("No save file found. Created fresh save data in memory.");
+
+            OnGameLoaded?.Invoke();
             return false;
         }
 

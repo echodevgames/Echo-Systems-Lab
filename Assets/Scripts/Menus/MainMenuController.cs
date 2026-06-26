@@ -1,3 +1,4 @@
+//------MainMenuController.cs START-----
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -66,6 +67,14 @@ public class MainMenuController : MonoBehaviour
 
     private void QuitGame()
     {
+        if (GameSceneLoader.Instance != null)
+        {
+            GameSceneLoader.Instance.QuitGame();
+            return;
+        }
+
         Application.Quit();
     }
 }
+
+//------MainMenuController.cs END-----

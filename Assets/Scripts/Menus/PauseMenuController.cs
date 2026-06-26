@@ -123,6 +123,12 @@ public class PauseMenuController : MonoBehaviour
 
     private void QuitGame()
     {
+        if (GameSceneLoader.Instance != null)
+        {
+            GameSceneLoader.Instance.QuitGame();
+            return;
+        }
+
         Application.Quit();
     }
 }

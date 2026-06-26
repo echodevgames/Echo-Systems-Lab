@@ -930,17 +930,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1643631026 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4203589498044864372, guid: 97d75e14304273f46b3861495396acd2, type: 3}
-  m_PrefabInstance: {fileID: 2831545636721570348}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd2cf13a154fec47a6986058fee8b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalUI
 --- !u!1 &1896470138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,12 +1320,23 @@ PrefabInstance:
     - target: {fileID: 7412600094249637319, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
       propertyPath: terminalUI
       value: 
-      objectReference: {fileID: 1643631026}
+      objectReference: {fileID: 8781505074986131305}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+--- !u!114 &8781505074986131305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 86279966290460952, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+  m_PrefabInstance: {fileID: 8781505074986131304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd2cf13a154fec47a6986058fee8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalUI
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1162,9 +1162,8 @@ MonoBehaviour:
   missionButtonParent: {fileID: 8768322056850789282}
   missionButtonPrefab: {fileID: 3247816280593789063, guid: 6a8f655e8d287fa488fcc5fc342d6f67, type: 3}
   closeButton: {fileID: 5190777950455426374}
-  playerController: {fileID: 0}
-  playerInteractor: {fileID: 0}
   missions:
+  - {fileID: 11400000, guid: 14b78b68e161d11429b3d8b192b12166, type: 2}
   - {fileID: 11400000, guid: bf1614f3a8cb7ac40a4671fa0960a33c, type: 2}
   - {fileID: 11400000, guid: eb8d3cf011855ec4fb3b14d4173fcfa9, type: 2}
   - {fileID: 11400000, guid: 5ccbf0290627d7946ba28e256d32c807, type: 2}

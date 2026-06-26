@@ -59,3 +59,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc530694b4191c0459b1156b110e5e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  weaponDatabase: {fileID: 11400000, guid: f7c5783013782ef439e46e0ba4c57ecf, type: 2}
