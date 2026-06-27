@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7024cf73fd9caa34697893e885881bce, type: 3}
+  m_Name: WeaponData_Shotgun
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponId: shotgun_basic
+  displayName: Shotgun
+  weaponType: Shotgun
+  description: A basic Shotgun
+  viewModelPrefab: {fileID: 4032772441934868610, guid: a6a213b6e290bcc40912c9cce63b109c, type: 3}
+  viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
+  viewLocalEulerAngles: {x: 0, y: 0, z: 0}
+  viewLocalScale: {x: 1, y: 1, z: 1}
+  fireMode: 0
+  defaultAmmo: {fileID: 11400000, guid: cb974dc9df21bd74183e22f9d2bb8b23, type: 2}
+  fireRate: 0.85
+  isAutomatic: 0
+  clipSize: 8
+  reloadTime: 2.5
+  infiniteReserveAmmo: 1
+  projectilesPerShot: 8
+  spreadAngle: 5
+  xpPerUse: 10

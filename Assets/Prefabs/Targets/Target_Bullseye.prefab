@@ -131,7 +131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetHealth
   targetId: 
-  maxHealth: 3
+  maxHealth: 50
   scoreValue: 100
+  weaponTypeXpOnHit: 10
+  weaponTypeXpOnDestroyed: 25
   destroyEffect: {fileID: 0}
   destroyOnDeath: 1

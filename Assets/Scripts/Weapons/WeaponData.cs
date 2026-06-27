@@ -29,15 +29,21 @@ public class WeaponData : ScriptableObject
 
     [Header("Firing")]
     public WeaponFireMode fireMode = WeaponFireMode.Projectile;
-    public GameObject projectilePrefab;
-    public int damage = 1;
+    public AmmoData defaultAmmo;
     public float fireRate = 0.35f;
-    public float projectileSpeed = 30f;
-    public float projectileLifetime = 4f;
+    public bool isAutomatic;
+
+    [Header("Magazine")]
+    public int clipSize = 6;
+    public float reloadTime = 1.25f;
+    public bool infiniteReserveAmmo = true;
+
+    [Header("Projectile Pattern")]
+    public int projectilesPerShot = 1;
+    public float spreadAngle = 0f;
 
     [Header("Progression")]
-    public int xpPerHit = 1;
-    public int xpPerTargetDestroyed = 5;
+    public int xpPerUse = 10;
 }
 
 //-----WeaponData.cs END-----

@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     private GameObject owner;
     private float lifeTime;
     private bool hasInitialized;
+    private bool hasHit;
 
     private Rigidbody rb;
 
@@ -34,6 +35,7 @@ public class Projectile : MonoBehaviour
         lifeTime = projectileLifeTime;
 
         hasInitialized = true;
+        hasHit = false;
 
         rb.linearVelocity = transform.forward * speed;
 
@@ -42,11 +44,16 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!hasInitialized)
+        if (!hasInitialized || hasHit)
             return;
 
-        if (other.gameObject == owner)
+        if (IsOwnerOrOwnerChild(other.gameObject))
             return;
+
+        if (IsOtherProjectile(other))
+            return;
+
+        hasHit = true;
 
         IDamageable damageable = other.GetComponentInParent<IDamageable>();
 
@@ -63,11 +70,29 @@ public class Projectile : MonoBehaviour
 
             TargetRangeTracker tracker = TargetRangeTracker.Instance;
             if (tracker != null)
-               tracker.RegisterHit(weaponId, weaponType);
+                tracker.RegisterHit(weaponId, weaponType);
         }
 
         Destroy(gameObject);
     }
-}
 
+    private bool IsOwnerOrOwnerChild(GameObject otherObject)
+    {
+        if (owner == null || otherObject == null)
+            return false;
+
+        if (otherObject == owner)
+            return true;
+
+        return otherObject.transform.IsChildOf(owner.transform);
+    }
+
+    private bool IsOtherProjectile(Collider other)
+    {
+        if (other == null)
+            return false;
+
+        return other.GetComponentInParent<Projectile>() != null;
+    }
+}
 //-----Projectile.cs END-----

@@ -1,5 +1,6 @@
 //-----WeaponDatabase.cs START-----
 
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(
@@ -25,5 +26,22 @@ public class WeaponDatabase : ScriptableObject
 
         return null;
     }
+
+    public List<WeaponData> GetOwnedWeaponsInDatabaseOrder()
+    {
+        List<WeaponData> ownedWeapons = new List<WeaponData>();
+
+        foreach (WeaponData weapon in weapons)
+        {
+            if (weapon == null)
+                continue;
+
+            if (PlayerProgress.OwnsWeapon(weapon.weaponId))
+                ownedWeapons.Add(weapon);
+        }
+
+        return ownedWeapons;
+    }
 }
+
 //-----WeaponDatabase.cs END-----

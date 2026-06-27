@@ -109,19 +109,13 @@ public class TargetRangeTracker : MonoBehaviour
     {
         shotsFired++;
 
-        PlayerProgress.AddWeaponTypeXp(weaponType, 1);
-
         Debug.Log($"Shot fired with {weaponId}. Total shots: {shotsFired}");
-        Debug.Log($"{weaponType} XP: {PlayerProgress.GetWeaponTypeXp(weaponType)}");
 
         NotifyStatsChanged();
     }
-
     public void RegisterHit(string weaponId, string weaponType)
     {
         hitsLanded++;
-
-        AddWeaponXp(weaponId, 1);
 
         Debug.Log($"Hit landed with {weaponId}. Total hits: {hitsLanded}");
 
@@ -139,8 +133,6 @@ public class TargetRangeTracker : MonoBehaviour
     {
         destroyedTargets++;
         score += target.ScoreValue;
-
-        AddWeaponXp(damageInfo.weaponId, 5);
 
         Debug.Log($"Target destroyed: {target.name}. Score: {score}");
 

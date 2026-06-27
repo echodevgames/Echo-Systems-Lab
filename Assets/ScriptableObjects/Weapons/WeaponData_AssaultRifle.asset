@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7024cf73fd9caa34697893e885881bce, type: 3}
+  m_Name: WeaponData_AssaultRifle
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponId: assault_rifle_basic
+  displayName: Assault Rifle
+  weaponType: Assault Rifle
+  description: "A basic Assault Rifle\t\t\t"
+  viewModelPrefab: {fileID: 19091819725372749, guid: 273ce9f127d1cac4fa3398feb0b10c08, type: 3}
+  viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
+  viewLocalEulerAngles: {x: 0, y: 0, z: 0}
+  viewLocalScale: {x: 1, y: 1, z: 1}
+  fireMode: 0
+  defaultAmmo: {fileID: 11400000, guid: 8d58d81e150ac314e951f86199e3cc40, type: 2}
+  fireRate: 0.12
+  isAutomatic: 1
+  clipSize: 30
+  reloadTime: 1.25
+  infiniteReserveAmmo: 1
+  projectilesPerShot: 1
+  spreadAngle: 1.25
+  xpPerUse: 10

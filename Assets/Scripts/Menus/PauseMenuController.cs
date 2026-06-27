@@ -10,6 +10,8 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject pauseRoot;
     [SerializeField] private SimpleFirstPersonController playerController;
     [SerializeField] private PlayerInteractor playerInteractor;
+    [SerializeField] private PlayerWeaponController playerWeaponController;
+[SerializeField] private PlayerWeaponLoadoutController playerWeaponLoadoutController;
 
     [Header("Buttons")]
     [SerializeField] private Button resumeButton;
@@ -88,7 +90,14 @@ public class PauseMenuController : MonoBehaviour
         }
 
         if (playerInteractor != null)
-            playerInteractor.enabled = !paused;
+            playerInteractor.SetInteractionEnabled(!paused);
+
+        if (playerWeaponController != null)
+            playerWeaponController.SetInputEnabled(!paused);
+
+        if (playerWeaponLoadoutController != null)
+            playerWeaponLoadoutController.SetInputEnabled(!paused);
+
     }
 
     private void Save()

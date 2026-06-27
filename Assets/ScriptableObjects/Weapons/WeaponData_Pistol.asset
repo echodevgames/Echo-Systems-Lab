@@ -15,16 +15,18 @@ MonoBehaviour:
   weaponId: pistol_basic
   displayName: Pistol
   weaponType: Pistol
-  description: "A basic pistol\t"
+  description: A basic Pistol
   viewModelPrefab: {fileID: 7082093157589730192, guid: 0c6b8f3bcfd37224b8a97c447ebf1ee0, type: 3}
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
   viewLocalEulerAngles: {x: 90, y: 90, z: 0}
   viewLocalScale: {x: 1, y: 1, z: 1}
   fireMode: 0
-  projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
-  damage: 1
-  fireRate: 0.35
-  projectileSpeed: 30
-  projectileLifetime: 4
-  xpPerHit: 1
-  xpPerTargetDestroyed: 5
+  defaultAmmo: {fileID: 11400000, guid: a45279fe36f6a6d42b814c50dc2c673d, type: 2}
+  fireRate: 0.25
+  isAutomatic: 0
+  clipSize: 16
+  reloadTime: 0.5
+  infiniteReserveAmmo: 1
+  projectilesPerShot: 1
+  spreadAngle: 0.1
+  xpPerUse: 10

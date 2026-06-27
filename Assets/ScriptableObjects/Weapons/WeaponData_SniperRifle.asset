@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7024cf73fd9caa34697893e885881bce, type: 3}
+  m_Name: WeaponData_SniperRifle
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponId: sniper_rifle_basic
+  displayName: Sniper Rifle
+  weaponType: Sniper Rifle
+  description: A basic Sniper Rifle
+  viewModelPrefab: {fileID: 6152209470405386627, guid: b9c5dd8079aeae74da94cb32d5cd04c9, type: 3}
+  viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
+  viewLocalEulerAngles: {x: 0, y: 0, z: 0}
+  viewLocalScale: {x: 1, y: 1, z: 1}
+  fireMode: 0
+  defaultAmmo: {fileID: 11400000, guid: f4903f557b083c145accb063c088ae57, type: 2}
+  fireRate: 1.25
+  isAutomatic: 0
+  clipSize: 8
+  reloadTime: 0.75
+  infiniteReserveAmmo: 1
+  projectilesPerShot: 1
+  spreadAngle: 0
+  xpPerUse: 10

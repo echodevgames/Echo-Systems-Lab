@@ -5,8 +5,12 @@ public class TargetHealth : MonoBehaviour, IDamageable
 {
     [Header("Target")]
     [SerializeField] private string targetId;
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 30;
     [SerializeField] private int scoreValue = 100;
+
+    [Header("Progression")]
+    [SerializeField] private int weaponTypeXpOnHit = 10;
+    [SerializeField] private int weaponTypeXpOnDestroyed = 25;
 
     [Header("Visual Feedback")]
     [SerializeField] private GameObject destroyEffect;
@@ -43,6 +47,9 @@ public class TargetHealth : MonoBehaviour, IDamageable
             return;
 
         currentHealth -= damageInfo.damageAmount;
+        currentHealth = Mathf.Max(0, currentHealth);
+
+        AwardWeaponTypeXp(damageInfo, weaponTypeXpOnHit, "Target hit");
 
         Debug.Log($"{name} health: {currentHealth}/{maxHealth}");
 
@@ -61,6 +68,8 @@ public class TargetHealth : MonoBehaviour, IDamageable
 
         isDestroyed = true;
 
+        AwardWeaponTypeXp(damageInfo, weaponTypeXpOnDestroyed, "Target destroyed");
+
         if (destroyEffect != null)
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
@@ -73,6 +82,18 @@ public class TargetHealth : MonoBehaviour, IDamageable
         else
             gameObject.SetActive(false);
     }
-}
 
+    private void AwardWeaponTypeXp(DamageInfo damageInfo, int amount, string reason)
+    {
+        if (amount <= 0)
+            return;
+
+        if (string.IsNullOrWhiteSpace(damageInfo.weaponType))
+            return;
+
+        PlayerProgress.AddWeaponTypeXp(damageInfo.weaponType, amount);
+
+        Debug.Log($"{reason}: +{amount} {damageInfo.weaponType} XP. Total: {PlayerProgress.GetWeaponTypeXp(damageInfo.weaponType)}");
+    }
+}
 //-----TargetHealth.cs END-----

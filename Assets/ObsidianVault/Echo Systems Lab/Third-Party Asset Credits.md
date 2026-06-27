@@ -29,6 +29,11 @@ This project uses third-party assets for placeholder/environment art during deve
 - Purpose: Placeholder ground/environment materials
 - Notes: Used for prototyping.
 
+### Weapons FREE - Low Poly 3D Models Pack
+- Source: Unity Asset Store
+- Purpose: Placeholder Weapons
+- Notes: Used for prototyping.
+
 ## Project Authorship Note
 
 All gameplay systems, mission flow, interaction logic, weapon data architecture, target systems, UI logic, and scene progression systems are authored as part of Echo Systems Lab.

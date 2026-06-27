@@ -739,6 +739,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f982292cb37d9b4493d90f921ec33d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptUI
+--- !u!114 &1528608913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2357343401271460194, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+  m_PrefabInstance: {fileID: 6068231392619191007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d9bf3d66e16fb14fb51a7fd655c0d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponController
+--- !u!114 &1528608918 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2252759787046056143, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+  m_PrefabInstance: {fileID: 6068231392619191007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23b0118c953d9b479bd0d836465ec15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponLoadoutController
 --- !u!1 &1548267792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,6 +1160,14 @@ PrefabInstance:
       propertyPath: playerInteractor
       value: 
       objectReference: {fileID: 213493441}
+    - target: {fileID: 4203968950649229799, guid: 97d75e14304273f46b3861495396acd2, type: 3}
+      propertyPath: playerWeaponController
+      value: 
+      objectReference: {fileID: 1528608913}
+    - target: {fileID: 4203968950649229799, guid: 97d75e14304273f46b3861495396acd2, type: 3}
+      propertyPath: playerWeaponLoadoutController
+      value: 
+      objectReference: {fileID: 1528608918}
     - target: {fileID: 8099873123704924047, guid: 97d75e14304273f46b3861495396acd2, type: 3}
       propertyPath: m_IsActive
       value: 0

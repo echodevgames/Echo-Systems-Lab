@@ -16,6 +16,10 @@ public class MissionTerminalUI : MonoBehaviour
 
     private SimpleFirstPersonController activePlayerController;
     private PlayerInteractor activePlayerInteractor;
+
+    private PlayerWeaponController activeWeaponController;
+    private PlayerWeaponLoadoutController activeWeaponLoadoutController;
+
     private bool isOpen;
 
     private void Awake()
@@ -35,7 +39,11 @@ public class MissionTerminalUI : MonoBehaviour
         activePlayerInteractor = interactor;
 
         if (activePlayerInteractor != null)
+        {
             activePlayerController = activePlayerInteractor.GetComponent<SimpleFirstPersonController>();
+            activeWeaponController = activePlayerInteractor.GetComponent<PlayerWeaponController>();
+            activeWeaponLoadoutController = activePlayerInteractor.GetComponent<PlayerWeaponLoadoutController>();
+        }
 
         if (activePlayerController == null)
             activePlayerController = FindFirstObjectByType<SimpleFirstPersonController>();
@@ -54,6 +62,12 @@ public class MissionTerminalUI : MonoBehaviour
         if (activePlayerInteractor != null)
             activePlayerInteractor.SetInteractionEnabled(false);
 
+        if (activeWeaponController != null)
+            activeWeaponController.SetInputEnabled(false);
+
+        if (activeWeaponLoadoutController != null)
+            activeWeaponLoadoutController.SetInputEnabled(false);
+
         isOpen = true;
     }
 
@@ -71,8 +85,17 @@ public class MissionTerminalUI : MonoBehaviour
         if (activePlayerInteractor != null)
             activePlayerInteractor.SetInteractionEnabled(true);
 
+        if (activeWeaponController != null)
+            activeWeaponController.SetInputEnabled(true);
+
+        if (activeWeaponLoadoutController != null)
+            activeWeaponLoadoutController.SetInputEnabled(true);
+
         activePlayerController = null;
         activePlayerInteractor = null;
+        activeWeaponController = null;
+        activeWeaponLoadoutController = null;
+
         isOpen = false;
     }
 
