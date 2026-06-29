@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoData
   ammoId: ammo_44
   displayName: .45 Round
+  ammoIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  hudColor: {r: 1, g: 1, b: 1, a: 1}
   caliberLabel: .45
   description: .45 Caliber Magnum Round
   projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}

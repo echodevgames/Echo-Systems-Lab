@@ -12,6 +12,7 @@ public class AmmoData : ScriptableObject
 
     [Header("HUD")]
     public string displayName;
+    public string hudDisplayName;
     public Sprite ammoIcon;
     public Color hudColor = Color.white;//I might not use this on the end... (mostly dark BGs)
     public string caliberLabel; // I'm thinking about using an icon here too of the profile of each ammo...

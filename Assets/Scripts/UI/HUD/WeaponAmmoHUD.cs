@@ -10,31 +10,33 @@ public class WeaponAmmoHUD : MonoBehaviour
     [SerializeField] private PlayerWeaponController weaponController;
 
     [Header("Weapon UI")]
-    //Weapon
     [SerializeField] private TMP_Text weaponNameText;
     [SerializeField] private Image weaponIconImage;
-    //Ammo
+
+    [Header("Ammo Identity UI")]
     [SerializeField] private TMP_Text ammoNameText;
     [SerializeField] private Image ammoIconImage;
 
-    [Header("Ammo UI")]
+    [Header("Ammo Count UI")]
     [SerializeField] private TMP_Text clipAmmoText;
     [SerializeField] private TMP_Text reserveAmmoText;
     [SerializeField] private TMP_Text reloadPromptText;
 
     [Header("Display")]
     [SerializeField] private string noWeaponText = "No Weapon";
+    [SerializeField] private string noAmmoText = "No Ammo";
     [SerializeField] private string infiniteReserveText = "∞";
     [SerializeField] private string reloadPromptMessage = "Press R to Reload";
 
     private void Awake()
     {
-        if (weaponController == null)
-            weaponController = FindFirstObjectByType<PlayerWeaponController>();
+        FindReferencesIfNeeded();
     }
 
     private void OnEnable()
     {
+        FindReferencesIfNeeded();
+
         if (weaponController != null)
             weaponController.OnWeaponAmmoChanged += Refresh;
 
@@ -47,10 +49,10 @@ public class WeaponAmmoHUD : MonoBehaviour
             weaponController.OnWeaponAmmoChanged -= Refresh;
     }
 
-    private void Update()
+    private void FindReferencesIfNeeded()
     {
-        // Tiny safety net for reload state changes during coroutine timing.
-        Refresh();
+        if (weaponController == null)
+            weaponController = FindFirstObjectByType<PlayerWeaponController>();
     }
 
     public void Refresh()
@@ -62,7 +64,6 @@ public class WeaponAmmoHUD : MonoBehaviour
         }
 
         WeaponData currentWeapon = weaponController.CurrentWeapon;
-        AmmoData currentAmmo = currentWeapon.defaultAmmo;
 
         if (currentWeapon == null)
         {
@@ -70,9 +71,12 @@ public class WeaponAmmoHUD : MonoBehaviour
             return;
         }
 
+        AmmoData currentAmmo = currentWeapon.defaultAmmo;
+
         RefreshWeaponName(currentWeapon);
         RefreshWeaponIcon(currentWeapon);
-        RefreshAmmo(currentWeapon);
+        RefreshAmmoIdentity(currentAmmo);
+        RefreshAmmoCounts(currentWeapon);
         RefreshReloadPrompt();
     }
 
@@ -85,6 +89,15 @@ public class WeaponAmmoHUD : MonoBehaviour
         {
             weaponIconImage.sprite = null;
             weaponIconImage.enabled = false;
+        }
+
+        if (ammoNameText != null)
+            ammoNameText.text = noAmmoText;
+
+        if (ammoIconImage != null)
+        {
+            ammoIconImage.sprite = null;
+            ammoIconImage.enabled = false;
         }
 
         if (clipAmmoText != null)
@@ -119,13 +132,33 @@ public class WeaponAmmoHUD : MonoBehaviour
         weaponIconImage.enabled = weapon.weaponIcon != null;
     }
 
-    private void RefreshAmmo(WeaponData weapon)
+    private void RefreshAmmoIdentity(AmmoData ammo)
+    {
+        if (ammoNameText != null)
+        {
+            if (ammo == null)
+                ammoNameText.text = noAmmoText;
+            else if (!string.IsNullOrWhiteSpace(ammo.hudDisplayName))
+                ammoNameText.text = ammo.hudDisplayName;
+            else if (!string.IsNullOrWhiteSpace(ammo.displayName))
+                ammoNameText.text = ammo.displayName;
+            else
+                ammoNameText.text = ammo.ammoId;
+        }
+
+        if (ammoIconImage != null)
+        {
+            Sprite icon = ammo != null ? ammo.ammoIcon : null;
+
+            ammoIconImage.sprite = icon;
+            ammoIconImage.enabled = icon != null;
+        }
+    }
+
+    private void RefreshAmmoCounts(WeaponData weapon)
     {
         if (clipAmmoText != null)
-        {
-            clipAmmoText.text =
-                $"{weaponController.CurrentAmmoInClip} / {weaponController.CurrentClipSize}";
-        }
+            clipAmmoText.text = $"{weaponController.CurrentAmmoInClip} / {weaponController.CurrentClipSize}";
 
         if (reserveAmmoText != null)
         {
@@ -138,7 +171,7 @@ public class WeaponAmmoHUD : MonoBehaviour
 
     private void RefreshReloadPrompt()
     {
-        if (reloadPromptText == null)
+        if (reloadPromptText == null || weaponController == null)
             return;
 
         bool shouldShowPrompt =
