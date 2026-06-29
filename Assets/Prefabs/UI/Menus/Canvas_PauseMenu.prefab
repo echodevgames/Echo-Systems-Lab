@@ -1020,7 +1020,7 @@ MonoBehaviour:
   playerWeaponController: {fileID: 0}
   playerWeaponLoadoutController: {fileID: 0}
   inputReader: {fileID: 0}
-  mainPausePanel: {fileID: 0}
+  mainPausePanel: {fileID: 4200235308987020859}
   keybindingsMenuUI: {fileID: 0}
   resumeButton: {fileID: 6979382569699109052}
   saveButton: {fileID: 8781500818744129012}
