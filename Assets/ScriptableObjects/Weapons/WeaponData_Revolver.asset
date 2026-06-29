@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponId: revolver_basic
   displayName: Revolver
-  weaponType: Revolver
+  hudDisplayName: Revolver
+  weaponIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
   description: "A basic Revolver\t"
+  weaponType: Revolver
   viewModelPrefab: {fileID: 5312509926983057945, guid: 1318594d3ffef6c419eb73608b52d1f7, type: 3}
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
   viewLocalEulerAngles: {x: 0, y: 0, z: 0}
@@ -26,7 +28,7 @@ MonoBehaviour:
   isAutomatic: 0
   clipSize: 6
   reloadTime: 2.2
-  infiniteReserveAmmo: 1
+  infiniteReserveAmmo: 0
   projectilesPerShot: 1
   spreadAngle: 0.5
   xpPerUse: 10

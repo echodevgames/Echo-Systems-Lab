@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponId: crossbow_basic
   displayName: Crossbow
-  weaponType: Crossbow
+  hudDisplayName: Crossbow
+  weaponIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
   description: A basic Crossbow
+  weaponType: Crossbow
   viewModelPrefab: {fileID: 3734953839413017523, guid: da18896ec915e4843b3b30970bf40810, type: 3}
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
   viewLocalEulerAngles: {x: 0, y: 0, z: 0}
@@ -26,7 +28,7 @@ MonoBehaviour:
   isAutomatic: 0
   clipSize: 1
   reloadTime: 2
-  infiniteReserveAmmo: 1
+  infiniteReserveAmmo: 0
   projectilesPerShot: 1
   spreadAngle: 0.05
   xpPerUse: 10

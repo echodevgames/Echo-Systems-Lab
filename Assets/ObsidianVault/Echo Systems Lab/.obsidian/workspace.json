@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Echo_Systems_Lab_Milestone_3B_Keybindings_Menu_Foundation.md",
+                "file": "Echo_Systems_Lab_Milestone_3C_Weapon_Ammo_HUD_And_Ammo_Pickups.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Echo_Systems_Lab_Milestone_3B_Keybindings_Menu_Foundation"
+              "title": "Echo_Systems_Lab_Milestone_3C_Weapon_Ammo_HUD_And_Ammo_Pickups"
             }
           }
         ],
@@ -200,8 +200,11 @@
   },
   "active": "6117c7b1a0b65fab",
   "lastOpenFiles": [
-    "Echo_Systems_Lab_Milestone_3A_New_Input_System_Conversion.md",
     "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
+    "Echo_Systems_Lab_Milestone_3C_Weapon_Ammo_HUD_And_Ammo_Pickups.md.meta",
+    "Echo_Systems_Lab_Milestone_3C_Weapon_Ammo_HUD_And_Ammo_Pickups.md",
+    "Echo_Systems_Lab_Milestone_3B_Keybindings_Menu_Foundation.md",
+    "Echo_Systems_Lab_Milestone_3A_New_Input_System_Conversion.md",
     "Third-Party Asset Credits.md",
     "Echo_Systems_Lab_Milestone_2C_Multi_Weapon_Loadout_And_Ammo_Data.md",
     "Echo_Systems_Lab_Milestone_2A_Save_Load_Foundation_And_Menu_Flow.md",
@@ -219,7 +222,6 @@
     "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md.meta",
     "Third-Party Asset Credits.md.meta",
     "Echo_Systems_Lab_Milestone_1_Hub_Terminal_Loop.md.meta",
-    "Echo_Systems_Lab_Master_Design_Doc.md.meta",
     "Echo_Systems_Lab_Master_Design_Doc.md",
     "Welcome.md"
   ]

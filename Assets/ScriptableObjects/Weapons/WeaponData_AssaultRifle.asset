@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponId: assault_rifle_basic
   displayName: Assault Rifle
-  weaponType: Assault Rifle
+  hudDisplayName: Assault Rifle
+  weaponIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
   description: "A basic Assault Rifle\t\t\t"
+  weaponType: Assault Rifle
   viewModelPrefab: {fileID: 19091819725372749, guid: 273ce9f127d1cac4fa3398feb0b10c08, type: 3}
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
   viewLocalEulerAngles: {x: 0, y: 0, z: 0}
@@ -26,7 +28,7 @@ MonoBehaviour:
   isAutomatic: 1
   clipSize: 30
   reloadTime: 1.25
-  infiniteReserveAmmo: 1
+  infiniteReserveAmmo: 0
   projectilesPerShot: 1
   spreadAngle: 1.25
   xpPerUse: 10

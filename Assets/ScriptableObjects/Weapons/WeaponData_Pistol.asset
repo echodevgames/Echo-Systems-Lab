@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponId: pistol_basic
   displayName: Pistol
-  weaponType: Pistol
+  hudDisplayName: Pistol
+  weaponIcon: {fileID: 0}
   description: A basic Pistol
+  weaponType: Pistol
   viewModelPrefab: {fileID: 7082093157589730192, guid: 0c6b8f3bcfd37224b8a97c447ebf1ee0, type: 3}
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
   viewLocalEulerAngles: {x: 90, y: 90, z: 0}
@@ -26,7 +28,7 @@ MonoBehaviour:
   isAutomatic: 0
   clipSize: 16
   reloadTime: 0.5
-  infiniteReserveAmmo: 1
+  infiniteReserveAmmo: 0
   projectilesPerShot: 1
   spreadAngle: 0.1
   xpPerUse: 10

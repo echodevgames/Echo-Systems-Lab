@@ -15,11 +15,17 @@ public class WeaponData : ScriptableObject
 {
     [Header("Identity")]
     public string weaponId;
+
+    [Header("HUD")]
     public string displayName;
-    public string weaponType = "Pistol";
+    public string hudDisplayName;
+    public Sprite weaponIcon;
 
     [TextArea(2, 4)]
     public string description;
+
+    public string weaponType = "Pistol";
+
 
     [Header("Visuals")]
     public GameObject viewModelPrefab;

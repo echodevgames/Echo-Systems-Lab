@@ -10,6 +10,7 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Transform weaponHolder;
     [SerializeField] private Transform fallbackMuzzlePoint;
     [SerializeField] private PlayerInputReader inputReader;
+    [SerializeField] private PlayerAmmoInventory ammoInventory;
 
     [Header("Loadout")]
     [SerializeField] private bool autoEquipSavedWeapon = true;
@@ -24,13 +25,31 @@ public class PlayerWeaponController : MonoBehaviour
     private float nextFireTime;
     private bool inputEnabled = true;
 
-    private int currentClipAmmo;
+    private int currentAmmoInClip;
     private bool isReloading;
     private bool reloadPromptShown;
 
+    public event System.Action OnWeaponAmmoChanged;
+
     public WeaponData CurrentWeapon => currentWeapon;
-    public int CurrentClipAmmo => currentClipAmmo;
+    public int CurrentAmmoInClip => currentAmmoInClip;
+    public int CurrentClipAmmo => currentAmmoInClip;
+    public int CurrentClipSize => currentWeapon != null ? currentWeapon.clipSize : 0;
     public bool IsReloading => isReloading;
+
+    public bool UsesInfiniteReserveAmmo =>
+        currentWeapon != null && currentWeapon.infiniteReserveAmmo;
+
+    public int CurrentReserveAmmo
+    {
+        get
+        {
+            if (ammoInventory == null || currentWeapon == null || currentWeapon.defaultAmmo == null)
+                return 0;
+
+            return ammoInventory.GetReserveAmmo(currentWeapon.defaultAmmo);
+        }
+    }
 
     private void Awake()
     {
@@ -39,6 +58,21 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (inputReader == null)
             inputReader = GetComponent<PlayerInputReader>();
+
+        if (ammoInventory == null)
+            ammoInventory = GetComponent<PlayerAmmoInventory>();
+    }
+
+    private void OnEnable()
+    {
+        if (ammoInventory != null)
+            ammoInventory.OnAmmoChanged += HandleAmmoInventoryChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (ammoInventory != null)
+            ammoInventory.OnAmmoChanged -= HandleAmmoInventoryChanged;
     }
 
     private void Start()
@@ -89,7 +123,11 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
+        StopAllCoroutines();
+
         currentWeapon = weaponData;
+        isReloading = false;
+        reloadPromptShown = false;
 
         PlayerProgress.SetActiveWeapon(currentWeapon.weaponId);
 
@@ -104,7 +142,9 @@ public class PlayerWeaponController : MonoBehaviour
             SaveManager.Instance.SaveGame();
 
         Debug.Log($"Equipped weapon: {currentWeapon.displayName}");
-        Debug.Log($"{currentWeapon.displayName} ammo: {currentClipAmmo}/{currentWeapon.clipSize}");
+        Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
+
+        OnWeaponAmmoChanged?.Invoke();
     }
 
     private void TryEquipSavedWeapon()
@@ -133,17 +173,9 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
-        currentWeapon = savedWeapon;
+        EquipWeapon(savedWeapon);
 
-        SpawnViewModel();
-        FillClip();
-
-        TargetRangeTracker tracker = TargetRangeTracker.Instance;
-        if (tracker != null)
-            tracker.RegisterWeaponEquipped(currentWeapon.weaponId, currentWeapon.weaponType);
-
-        Debug.Log($"Auto-equipped saved weapon: {currentWeapon.displayName}");
-        Debug.Log($"{currentWeapon.displayName} ammo: {currentClipAmmo}/{currentWeapon.clipSize}");
+        Debug.Log($"Auto-equipped saved weapon: {savedWeapon.displayName}");
     }
 
     private void TryFire()
@@ -157,9 +189,10 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
-        if (currentClipAmmo <= 0)
+        if (currentAmmoInClip <= 0)
         {
             ShowReloadPrompt();
+            OnWeaponAmmoChanged?.Invoke();
             return;
         }
 
@@ -173,7 +206,7 @@ public class PlayerWeaponController : MonoBehaviour
         if (!firedSuccessfully)
             return;
 
-        currentClipAmmo--;
+        currentAmmoInClip--;
         reloadPromptShown = false;
 
         AwardWeaponUseXp(currentWeapon.defaultAmmo);
@@ -182,10 +215,12 @@ public class PlayerWeaponController : MonoBehaviour
         if (tracker != null)
             tracker.RegisterShot(currentWeapon.weaponId, currentWeapon.weaponType);
 
-        Debug.Log($"{currentWeapon.displayName} ammo: {currentClipAmmo}/{currentWeapon.clipSize}");
+        Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 
-        if (currentClipAmmo <= 0)
+        if (currentAmmoInClip <= 0)
             ShowReloadPrompt();
+
+        OnWeaponAmmoChanged?.Invoke();
     }
 
     private bool FireProjectilePattern()
@@ -205,21 +240,32 @@ public class PlayerWeaponController : MonoBehaviour
         }
 
         int projectileCount = Mathf.Max(1, currentWeapon.projectilesPerShot);
+        bool spawnedAnyProjectile = false;
 
         Debug.Log($"Firing {currentWeapon.displayName}: {projectileCount} projectile(s) using {ammo.displayName}");
 
         for (int i = 0; i < projectileCount; i++)
-            FireSingleProjectile(ammo);
+        {
+            bool spawnedProjectile = FireSingleProjectile(ammo);
 
-        return true;
+            if (spawnedProjectile)
+                spawnedAnyProjectile = true;
+        }
+
+        return spawnedAnyProjectile;
     }
 
-    private void FireSingleProjectile(AmmoData ammo)
+    private bool FireSingleProjectile(AmmoData ammo)
     {
         Transform spawnPoint = GetMuzzlePoint();
 
-        Quaternion fireRotation = GetFireRotationWithSpread();
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning("No muzzle point or player camera available.");
+            return false;
+        }
 
+        Quaternion fireRotation = GetFireRotationWithSpread();
         Vector3 spawnPosition = spawnPoint.position + fireRotation * Vector3.forward * muzzleForwardOffset;
 
         GameObject projectileObject = Instantiate(
@@ -233,7 +279,7 @@ public class PlayerWeaponController : MonoBehaviour
         {
             Debug.LogWarning("Projectile prefab is missing Projectile script.");
             Destroy(projectileObject);
-            return;
+            return false;
         }
 
         projectile.Initialize(
@@ -243,6 +289,8 @@ public class PlayerWeaponController : MonoBehaviour
             gameObject,
             ammo.projectileSpeed,
             ammo.projectileLifetime);
+
+        return true;
     }
 
     private Quaternion GetFireRotationWithSpread()
@@ -266,7 +314,10 @@ public class PlayerWeaponController : MonoBehaviour
         if (fallbackMuzzlePoint != null)
             return fallbackMuzzlePoint;
 
-        return playerCamera.transform;
+        if (playerCamera != null)
+            return playerCamera.transform;
+
+        return null;
     }
 
     private void SpawnViewModel()
@@ -297,13 +348,16 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (currentWeapon == null)
         {
-            currentClipAmmo = 0;
+            currentAmmoInClip = 0;
+            OnWeaponAmmoChanged?.Invoke();
             return;
         }
 
-        currentClipAmmo = Mathf.Max(1, currentWeapon.clipSize);
+        currentAmmoInClip = Mathf.Max(1, currentWeapon.clipSize);
         isReloading = false;
         reloadPromptShown = false;
+
+        OnWeaponAmmoChanged?.Invoke();
     }
 
     private void TryReload()
@@ -314,28 +368,82 @@ public class PlayerWeaponController : MonoBehaviour
         if (isReloading)
             return;
 
-        if (currentClipAmmo >= currentWeapon.clipSize)
+        if (currentAmmoInClip >= currentWeapon.clipSize)
         {
             Debug.Log($"{currentWeapon.displayName} clip is already full.");
             return;
         }
 
-        StartCoroutine(ReloadRoutine());
+        if (!currentWeapon.infiniteReserveAmmo)
+        {
+            if (ammoInventory == null)
+            {
+                Debug.LogWarning("No PlayerAmmoInventory assigned.");
+                return;
+            }
+
+            if (!ammoInventory.HasAmmo(currentWeapon.defaultAmmo))
+            {
+                Debug.Log($"No reserve ammo for {currentWeapon.defaultAmmo.displayName}.");
+                ShowReloadPrompt();
+                OnWeaponAmmoChanged?.Invoke();
+                return;
+            }
+        }
+
+        StartCoroutine(ReloadRoutine(currentWeapon, currentWeapon.defaultAmmo));
     }
 
-    private IEnumerator ReloadRoutine()
+    private IEnumerator ReloadRoutine(WeaponData weaponAtReloadStart, AmmoData ammoAtReloadStart)
     {
         isReloading = true;
         reloadPromptShown = false;
 
-        Debug.Log($"Reloading {currentWeapon.displayName}...");
+        Debug.Log($"Reloading {weaponAtReloadStart.displayName}...");
 
-        yield return new WaitForSeconds(currentWeapon.reloadTime);
+        OnWeaponAmmoChanged?.Invoke();
 
-        currentClipAmmo = Mathf.Max(1, currentWeapon.clipSize);
+        yield return new WaitForSeconds(weaponAtReloadStart.reloadTime);
+
+        if (currentWeapon != weaponAtReloadStart)
+        {
+            isReloading = false;
+            OnWeaponAmmoChanged?.Invoke();
+            yield break;
+        }
+
+        int neededAmmo = weaponAtReloadStart.clipSize - currentAmmoInClip;
+
+        if (neededAmmo <= 0)
+        {
+            isReloading = false;
+            OnWeaponAmmoChanged?.Invoke();
+            yield break;
+        }
+
+        if (weaponAtReloadStart.infiniteReserveAmmo)
+        {
+            currentAmmoInClip += neededAmmo;
+        }
+        else
+        {
+            if (ammoInventory == null)
+            {
+                isReloading = false;
+                OnWeaponAmmoChanged?.Invoke();
+                yield break;
+            }
+
+            int loadedAmmo = ammoInventory.RemoveAmmo(ammoAtReloadStart, neededAmmo);
+            currentAmmoInClip += loadedAmmo;
+        }
+
+        currentAmmoInClip = Mathf.Clamp(currentAmmoInClip, 0, weaponAtReloadStart.clipSize);
         isReloading = false;
 
-        Debug.Log($"{currentWeapon.displayName} reloaded: {currentClipAmmo}/{currentWeapon.clipSize}");
+        Debug.Log($"{weaponAtReloadStart.displayName} reloaded: {currentAmmoInClip}/{weaponAtReloadStart.clipSize}");
+
+        OnWeaponAmmoChanged?.Invoke();
     }
 
     private void ShowReloadPrompt()
@@ -361,6 +469,11 @@ public class PlayerWeaponController : MonoBehaviour
         PlayerProgress.AddWeaponTypeXp(currentWeapon.weaponType, totalXp);
 
         Debug.Log($"{currentWeapon.weaponType} XP gained: {totalXp}. Total: {PlayerProgress.GetWeaponTypeXp(currentWeapon.weaponType)}");
+    }
+
+    private void HandleAmmoInventoryChanged()
+    {
+        OnWeaponAmmoChanged?.Invoke();
     }
 }
 

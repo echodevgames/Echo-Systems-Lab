@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponId: sniper_rifle_basic
   displayName: Sniper Rifle
-  weaponType: Sniper Rifle
+  hudDisplayName: Sniper Rifle
+  weaponIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
   description: A basic Sniper Rifle
+  weaponType: Sniper Rifle
   viewModelPrefab: {fileID: 6152209470405386627, guid: b9c5dd8079aeae74da94cb32d5cd04c9, type: 3}
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
   viewLocalEulerAngles: {x: 0, y: 0, z: 0}
@@ -26,7 +28,7 @@ MonoBehaviour:
   isAutomatic: 0
   clipSize: 8
   reloadTime: 0.75
-  infiniteReserveAmmo: 1
+  infiniteReserveAmmo: 0
   projectilesPerShot: 1
   spreadAngle: 0
   xpPerUse: 10
