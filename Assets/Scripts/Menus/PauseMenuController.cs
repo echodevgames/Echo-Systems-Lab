@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
+
+
     [Header("References")]
     [SerializeField] private GameObject pauseRoot;
     [SerializeField] private SimpleFirstPersonController playerController;
@@ -13,6 +15,8 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private PlayerWeaponController playerWeaponController;
     [SerializeField] private PlayerWeaponLoadoutController playerWeaponLoadoutController;
     [SerializeField] private PlayerInputReader inputReader;
+    [SerializeField] private GameObject mainPausePanel;
+    [SerializeField] private KeybindingsMenuUI keybindingsMenuUI;
 
     [Header("Buttons")]
     [SerializeField] private Button resumeButton;
@@ -25,6 +29,8 @@ public class PauseMenuController : MonoBehaviour
 
     [Header("Scenes")]
     [SerializeField] private string mainMenuSceneName = "MainMenu";
+
+
 
     private bool isPaused;
 
@@ -46,7 +52,7 @@ public class PauseMenuController : MonoBehaviour
             settingsButton.onClick.AddListener(SettingsStub);
 
         if (keybindsButton != null)
-            keybindsButton.onClick.AddListener(KeybindsStub);
+            keybindsButton.onClick.AddListener(OpenKeybindings);
 
         if (mainMenuButton != null)
             mainMenuButton.onClick.AddListener(ReturnToMainMenu);
@@ -127,12 +133,20 @@ public class PauseMenuController : MonoBehaviour
     {
         Debug.Log("Settings menu stub.");
     }
-
-    private void KeybindsStub()
+    private void OpenKeybindings()
     {
-        Debug.Log("Keybinds menu stub.");
+        if (mainPausePanel != null)
+            mainPausePanel.SetActive(false);
+
+        if (keybindingsMenuUI != null)
+            keybindingsMenuUI.Open();
     }
 
+    public void ShowMainPausePanel()
+    {
+        if (mainPausePanel != null)
+            mainPausePanel.SetActive(true);
+    }
     private void ReturnToMainMenu()
     {
         Time.timeScale = 1f;

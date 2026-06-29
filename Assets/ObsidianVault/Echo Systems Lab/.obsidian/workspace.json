@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
+                "file": "Echo_Systems_Lab_Milestone_3B_Keybindings_Menu_Foundation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Echo_Systems_Lab_Checkpoint_Build_Plan_Format"
+              "title": "Echo_Systems_Lab_Milestone_3B_Keybindings_Menu_Foundation"
             }
           }
         ],
@@ -200,12 +200,13 @@
   },
   "active": "6117c7b1a0b65fab",
   "lastOpenFiles": [
+    "Echo_Systems_Lab_Milestone_3A_New_Input_System_Conversion.md",
+    "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
     "Third-Party Asset Credits.md",
     "Echo_Systems_Lab_Milestone_2C_Multi_Weapon_Loadout_And_Ammo_Data.md",
     "Echo_Systems_Lab_Milestone_2A_Save_Load_Foundation_And_Menu_Flow.md",
     "Echo_Systems_Lab_Milestone_2C_Multi_Weapon_Loadout_And_Ammo_Data.md.meta",
     "Echo_Systems_Lab_Milestone_2B_Persistent_Loadout_And_Save_Feedback.md",
-    "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
     "Save System Notes.md.meta",
     "Echo_Systems_Lab_Milestone_2B_Persistent_Loadout_And_Save_Feedback.md.meta",
     "Echo_Systems_Lab_Milestone_1A_Hub_Terminal_Loop.md.meta",

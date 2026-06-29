@@ -1,12 +1,17 @@
 //-----PlayerInputReader.cs START-----
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputReader : MonoBehaviour
 {
     private InputSystem_Actions inputActions;
 
     private bool gameplayInputEnabled = true;
+
+    private const string BindingOverridesKey = "EchoSystemsLab_BindingOverrides";
+
+    public InputActionAsset InputActionAsset => inputActions.asset;
 
     public Vector2 MoveInput
     {
@@ -60,6 +65,7 @@ public class PlayerInputReader : MonoBehaviour
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
+        LoadBindingOverrides();
     }
 
     private void OnEnable()
@@ -78,6 +84,49 @@ public class PlayerInputReader : MonoBehaviour
     {
         gameplayInputEnabled = enabled;
     }
+
+    //-------------------------------------------------------------------------
+    //-------------------------Key Bindings Helpers----------------------------
+    //-------------------------------------------------------------------------
+
+    public InputAction FindAction(string actionPath)
+    {
+        if (inputActions == null)
+            return null;
+
+        return inputActions.asset.FindAction(actionPath, false);
+    }
+
+    public void SaveBindingOverrides()
+    {
+        string json = inputActions.asset.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString(BindingOverridesKey, json);
+        PlayerPrefs.Save();
+
+        Debug.Log("Binding overrides saved.");
+    }
+
+    public void LoadBindingOverrides()
+    {
+        if (!PlayerPrefs.HasKey(BindingOverridesKey))
+            return;
+
+        string json = PlayerPrefs.GetString(BindingOverridesKey);
+        inputActions.asset.LoadBindingOverridesFromJson(json);
+
+        Debug.Log("Binding overrides loaded.");
+    }
+
+    public void ResetBindingOverrides()
+    {
+        inputActions.asset.RemoveAllBindingOverrides();
+        PlayerPrefs.DeleteKey(BindingOverridesKey);
+        PlayerPrefs.Save();
+
+        Debug.Log("Binding overrides reset.");
+    }
+
+
 }
 
 //-----PlayerInputReader.cs END-----
