@@ -1017,6 +1017,9 @@ MonoBehaviour:
   pauseRoot: {fileID: 8998474560192014872}
   playerController: {fileID: 0}
   playerInteractor: {fileID: 0}
+  playerWeaponController: {fileID: 0}
+  playerWeaponLoadoutController: {fileID: 0}
+  inputReader: {fileID: 0}
   resumeButton: {fileID: 6979382569699109052}
   saveButton: {fileID: 8781500818744129012}
   loadButton: {fileID: 5834359824513918915}

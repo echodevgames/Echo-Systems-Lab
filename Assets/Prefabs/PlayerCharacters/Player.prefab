@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 4694872501805074040}
   - component: {fileID: 2357343401271460194}
   - component: {fileID: 2252759787046056143}
+  - component: {fileID: 2483783096219201155}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -559,9 +560,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleFirstPersonController
   playerCamera: {fileID: 3622494505354824090}
+  inputReader: {fileID: 2483783096219201155}
   moveSpeed: 5
   gravity: -20
-  mouseSensitivity: 2
+  mouseSensitivity: 0.2
   minPitch: -80
   maxPitch: 80
 --- !u!114 &4694872501805074040
@@ -578,11 +580,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   playerCamera: {fileID: 3622494505354824090}
   promptUI: {fileID: 0}
+  inputReader: {fileID: 2483783096219201155}
   interactDistance: 5
   interactMask:
     serializedVersion: 2
     m_Bits: 64
-  interactKey: 101
 --- !u!114 &2357343401271460194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,8 +600,9 @@ MonoBehaviour:
   playerCamera: {fileID: 3622494505354824090}
   weaponHolder: {fileID: 3437806447796173764}
   fallbackMuzzlePoint: {fileID: 4088175618822117598}
+  inputReader: {fileID: 2483783096219201155}
   autoEquipSavedWeapon: 1
-  fireKey: 323
+  muzzleForwardOffset: 0.15
 --- !u!114 &2252759787046056143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +616,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponLoadoutController
   weaponController: {fileID: 2357343401271460194}
-  cycleNextKey: 9
+  inputReader: {fileID: 2483783096219201155}
+--- !u!114 &2483783096219201155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793965773873358335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259f66abf31920b46a49c376f9c8eca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputReader
 --- !u!1 &5585662650559727100
 GameObject:
   m_ObjectHideFlags: 0

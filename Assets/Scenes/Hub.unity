@@ -723,11 +723,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 245402017}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1275195515 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8099873123704924047, guid: 97d75e14304273f46b3861495396acd2, type: 3}
-  m_PrefabInstance: {fileID: 2831545636721570348}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1329348732 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7025699092061811637, guid: 97d75e14304273f46b3861495396acd2, type: 3}
@@ -1149,9 +1144,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 213493441}
     - target: {fileID: 4203968950649229799, guid: 97d75e14304273f46b3861495396acd2, type: 3}
-      propertyPath: pauseRoot
+      propertyPath: inputReader
       value: 
-      objectReference: {fileID: 1275195515}
+      objectReference: {fileID: 6068231392619191008}
     - target: {fileID: 4203968950649229799, guid: 97d75e14304273f46b3861495396acd2, type: 3}
       propertyPath: playerController
       value: 
@@ -1170,7 +1165,7 @@ PrefabInstance:
       objectReference: {fileID: 1528608918}
     - target: {fileID: 8099873123704924047, guid: 97d75e14304273f46b3861495396acd2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1242,6 +1237,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2357343401271460194, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 6068231392619191008}
     - target: {fileID: 3793965773873358335, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1290,11 +1289,30 @@ PrefabInstance:
       propertyPath: promptUI
       value: 
       objectReference: {fileID: 1329348732}
+    - target: {fileID: 4694872501805074040, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 6068231392619191008}
+    - target: {fileID: 6162322501756197759, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 6068231392619191008}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+--- !u!114 &6068231392619191008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2483783096219201155, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+  m_PrefabInstance: {fileID: 6068231392619191007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259f66abf31920b46a49c376f9c8eca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputReader
 --- !u!1001 &8781505074986131304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1347,26 +1365,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ComputerDesk
       objectReference: {fileID: 0}
-    - target: {fileID: 7412600094249637319, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
-      propertyPath: terminalUI
-      value: 
-      objectReference: {fileID: 8781505074986131305}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
---- !u!114 &8781505074986131305 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 86279966290460952, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
-  m_PrefabInstance: {fileID: 8781505074986131304}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd2cf13a154fec47a6986058fee8b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalUI
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

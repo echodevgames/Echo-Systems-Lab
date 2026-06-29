@@ -1,6 +1,5 @@
 //-----PlayerWeaponLoadoutController.cs START-----
 
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +7,7 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private PlayerWeaponController weaponController;
-
-    [Header("Input")]
-    [SerializeField] private KeyCode cycleNextKey = KeyCode.Tab;
+    [SerializeField] private PlayerInputReader inputReader;
 
     private bool inputEnabled = true;
 
@@ -18,6 +15,9 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
     {
         if (weaponController == null)
             weaponController = GetComponent<PlayerWeaponController>();
+
+        if (inputReader == null)
+            inputReader = GetComponent<PlayerInputReader>();
     }
 
     private void Update()
@@ -25,8 +25,14 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
         if (!inputEnabled)
             return;
 
-        if (Input.GetKeyDown(cycleNextKey))
-            CycleNextWeapon();
+        if (inputReader == null)
+            return;
+
+        if (inputReader.CycleNextWeaponPressed)
+            CycleWeapon(1);
+
+        if (inputReader.CyclePreviousWeaponPressed)
+            CycleWeapon(-1);
     }
 
     public void SetInputEnabled(bool enabled)
@@ -35,6 +41,16 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
     }
 
     public void CycleNextWeapon()
+    {
+        CycleWeapon(1);
+    }
+
+    public void CyclePreviousWeapon()
+    {
+        CycleWeapon(-1);
+    }
+
+    private void CycleWeapon(int direction)
     {
         if (SaveManager.Instance == null)
             return;
@@ -56,7 +72,17 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
         }
 
         int currentIndex = GetCurrentWeaponIndex(ownedWeapons);
-        int nextIndex = (currentIndex + 1) % ownedWeapons.Count;
+
+        if (currentIndex < 0)
+            currentIndex = 0;
+
+        int nextIndex = currentIndex + direction;
+
+        if (nextIndex >= ownedWeapons.Count)
+            nextIndex = 0;
+
+        if (nextIndex < 0)
+            nextIndex = ownedWeapons.Count - 1;
 
         WeaponData nextWeapon = ownedWeapons[nextIndex];
 

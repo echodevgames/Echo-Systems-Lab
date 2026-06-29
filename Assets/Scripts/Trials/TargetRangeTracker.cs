@@ -12,10 +12,12 @@ public class TargetRangeTracker : MonoBehaviour
     public event Action OnStatsChanged;
     public event Action OnTrialCompleted;
 
+    [Header("References")]
+    [SerializeField] private PlayerInputReader inputReader;
+
     [Header("Mission Completion")]
     [SerializeField] private string missionIdToComplete = "TargetRangeTrial";
     [SerializeField] private string hubSceneName = "Hub";
-    [SerializeField] private KeyCode returnToHubKey = KeyCode.R;
 
     [Header("State")]
     [SerializeField] private int totalTargets;
@@ -25,7 +27,6 @@ public class TargetRangeTracker : MonoBehaviour
     [SerializeField] private int hitsLanded;
 
     private readonly List<TargetHealth> registeredTargets = new List<TargetHealth>();
-    private readonly Dictionary<string, int> weaponXp = new Dictionary<string, int>();
 
     private bool trialCompleted;
     private string currentWeaponId;
@@ -65,6 +66,9 @@ public class TargetRangeTracker : MonoBehaviour
 
     private void Start()
     {
+        if (inputReader == null)
+            inputReader = FindFirstObjectByType<PlayerInputReader>();
+
         NotifyStatsChanged();
     }
 
@@ -73,7 +77,7 @@ public class TargetRangeTracker : MonoBehaviour
         if (!trialCompleted)
             return;
 
-        if (Input.GetKeyDown(returnToHubKey))
+        if (inputReader != null && inputReader.ReloadPressed)
             ReturnToHub();
     }
 
@@ -98,8 +102,6 @@ public class TargetRangeTracker : MonoBehaviour
         currentWeaponId = weaponId;
         currentWeaponType = weaponType;
 
-        EnsureWeaponXpEntry(weaponId);
-
         Debug.Log($"Weapon equipped: {weaponId} ({weaponType})");
 
         NotifyStatsChanged();
@@ -113,6 +115,7 @@ public class TargetRangeTracker : MonoBehaviour
 
         NotifyStatsChanged();
     }
+
     public void RegisterHit(string weaponId, string weaponType)
     {
         hitsLanded++;
@@ -139,17 +142,6 @@ public class TargetRangeTracker : MonoBehaviour
         NotifyStatsChanged();
 
         CheckTrialCompletion();
-    }
-
-    public int GetWeaponXp(string weaponId)
-    {
-        if (string.IsNullOrWhiteSpace(weaponId))
-            return 0;
-
-        if (!weaponXp.ContainsKey(weaponId))
-            return 0;
-
-        return weaponXp[weaponId];
     }
 
     private void CheckTrialCompletion()
@@ -185,27 +177,6 @@ public class TargetRangeTracker : MonoBehaviour
         NotifyStatsChanged();
     }
 
-    private void AddWeaponXp(string weaponId, int amount)
-    {
-        if (string.IsNullOrWhiteSpace(weaponId))
-            return;
-
-        EnsureWeaponXpEntry(weaponId);
-
-        weaponXp[weaponId] += amount;
-
-        Debug.Log($"Weapon XP: {weaponId} = {weaponXp[weaponId]}");
-    }
-
-    private void EnsureWeaponXpEntry(string weaponId)
-    {
-        if (string.IsNullOrWhiteSpace(weaponId))
-            return;
-
-        if (!weaponXp.ContainsKey(weaponId))
-            weaponXp.Add(weaponId, 0);
-    }
-
     private void NotifyStatsChanged()
     {
         OnStatsChanged?.Invoke();
@@ -222,4 +193,5 @@ public class TargetRangeTracker : MonoBehaviour
         SceneManager.LoadScene(hubSceneName);
     }
 }
+
 //-----TargetRangeTracker.cs END-----

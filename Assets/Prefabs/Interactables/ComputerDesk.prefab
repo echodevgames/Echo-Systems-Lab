@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2981ae66a6ee82f409d2062988d3ae5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionComputer
-  terminalUI: {fileID: 0}
+  terminalUI: {fileID: 86279966290460952}
   promptText: Press E to open Mission Terminal
 --- !u!1 &4794371601446899568
 GameObject:
@@ -711,6 +711,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 833421f4690184c4881a47836596a02e, type: 3}
+--- !u!114 &86279966290460952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3600993093623792003, guid: 833421f4690184c4881a47836596a02e, type: 3}
+  m_PrefabInstance: {fileID: 3516127203101048987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd2cf13a154fec47a6986058fee8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalUI
 --- !u!224 &4851731320365391850 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8331383204198555505, guid: 833421f4690184c4881a47836596a02e, type: 3}

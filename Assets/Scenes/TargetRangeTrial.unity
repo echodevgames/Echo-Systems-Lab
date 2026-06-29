@@ -37375,6 +37375,10 @@ PrefabInstance:
       propertyPath: promptUI
       value: 
       objectReference: {fileID: 1475910752}
+    - target: {fileID: 6162322501756197759, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+      propertyPath: mouseSensitivity
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

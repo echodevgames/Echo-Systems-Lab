@@ -1,4 +1,4 @@
-//-----PlayerInteractor.cs-----
+//-----PlayerInteractor.cs START-----
 
 using UnityEngine;
 
@@ -7,11 +7,11 @@ public class PlayerInteractor : MonoBehaviour
     [Header("References")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private InteractionPromptUI promptUI;
+    [SerializeField] private PlayerInputReader inputReader;
 
     [Header("Interaction")]
     [SerializeField] private float interactDistance = 3f;
     [SerializeField] private LayerMask interactMask;
-    [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     private IInteractable currentInteractable;
 
@@ -19,19 +19,28 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (playerCamera == null)
             playerCamera = GetComponentInChildren<Camera>();
+
+        if (inputReader == null)
+            inputReader = GetComponent<PlayerInputReader>();
     }
 
     private void Update()
     {
         CheckForInteractable();
 
-        if (currentInteractable != null && Input.GetKeyDown(interactKey))
+        if (currentInteractable != null && inputReader != null && inputReader.InteractPressed)
             currentInteractable.Interact(this);
     }
 
     private void CheckForInteractable()
     {
         currentInteractable = null;
+
+        if (playerCamera == null)
+        {
+            HidePrompt();
+            return;
+        }
 
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
@@ -41,13 +50,22 @@ public class PlayerInteractor : MonoBehaviour
 
             if (currentInteractable != null)
             {
-                promptUI.Show(currentInteractable.GetPromptText());
+                if (promptUI != null)
+                    promptUI.Show(currentInteractable.GetPromptText());
+
                 return;
             }
         }
 
-        promptUI.Hide();
+        HidePrompt();
     }
+
+    private void HidePrompt()
+    {
+        if (promptUI != null)
+            promptUI.Hide();
+    }
+
     public void SetInteractionEnabled(bool isEnabled)
     {
         enabled = isEnabled;
@@ -57,4 +75,5 @@ public class PlayerInteractor : MonoBehaviour
             promptUI.Hide();
     }
 }
+
 //-----PlayerInteractor.cs END-----

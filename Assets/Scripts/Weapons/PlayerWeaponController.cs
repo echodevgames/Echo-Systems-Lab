@@ -1,4 +1,5 @@
 //-----PlayerWeaponController.cs START-----
+
 using System.Collections;
 using UnityEngine;
 
@@ -8,13 +9,10 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform weaponHolder;
     [SerializeField] private Transform fallbackMuzzlePoint;
+    [SerializeField] private PlayerInputReader inputReader;
 
     [Header("Loadout")]
     [SerializeField] private bool autoEquipSavedWeapon = true;
-
-    [Header("Input")]
-    [SerializeField] private KeyCode fireKey = KeyCode.Mouse0;
-    [SerializeField] private KeyCode reloadKey = KeyCode.R;
 
     [Header("Projectile Spawn")]
     [SerializeField] private float muzzleForwardOffset = 0.15f;
@@ -38,6 +36,9 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (playerCamera == null)
             playerCamera = GetComponentInChildren<Camera>();
+
+        if (inputReader == null)
+            inputReader = GetComponent<PlayerInputReader>();
     }
 
     private void Start()
@@ -51,10 +52,13 @@ public class PlayerWeaponController : MonoBehaviour
         if (!inputEnabled)
             return;
 
+        if (inputReader == null)
+            return;
+
         if (currentWeapon == null)
             return;
 
-        if (Input.GetKeyDown(reloadKey))
+        if (inputReader.ReloadPressed)
             TryReload();
 
         if (isReloading)
@@ -62,12 +66,12 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (currentWeapon.isAutomatic)
         {
-            if (Input.GetKey(fireKey))
+            if (inputReader.FireHeld)
                 TryFire();
         }
         else
         {
-            if (Input.GetKeyDown(fireKey))
+            if (inputReader.FirePressed)
                 TryFire();
         }
     }
@@ -359,4 +363,5 @@ public class PlayerWeaponController : MonoBehaviour
         Debug.Log($"{currentWeapon.weaponType} XP gained: {totalXp}. Total: {PlayerProgress.GetWeaponTypeXp(currentWeapon.weaponType)}");
     }
 }
+
 //-----PlayerWeaponController.cs END-----

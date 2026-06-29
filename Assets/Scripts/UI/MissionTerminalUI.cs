@@ -16,9 +16,9 @@ public class MissionTerminalUI : MonoBehaviour
 
     private SimpleFirstPersonController activePlayerController;
     private PlayerInteractor activePlayerInteractor;
-
     private PlayerWeaponController activeWeaponController;
     private PlayerWeaponLoadoutController activeWeaponLoadoutController;
+    private PlayerInputReader activeInputReader;
 
     private bool isOpen;
 
@@ -43,6 +43,7 @@ public class MissionTerminalUI : MonoBehaviour
             activePlayerController = activePlayerInteractor.GetComponent<SimpleFirstPersonController>();
             activeWeaponController = activePlayerInteractor.GetComponent<PlayerWeaponController>();
             activeWeaponLoadoutController = activePlayerInteractor.GetComponent<PlayerWeaponLoadoutController>();
+            activeInputReader = activePlayerInteractor.GetComponent<PlayerInputReader>();
         }
 
         if (activePlayerController == null)
@@ -52,6 +53,9 @@ public class MissionTerminalUI : MonoBehaviour
 
         if (terminalRoot != null)
             terminalRoot.SetActive(true);
+
+        if (activeInputReader != null)
+            activeInputReader.SetGameplayInputEnabled(false);
 
         if (activePlayerController != null)
         {
@@ -76,6 +80,9 @@ public class MissionTerminalUI : MonoBehaviour
         if (terminalRoot != null)
             terminalRoot.SetActive(false);
 
+        if (activeInputReader != null)
+            activeInputReader.SetGameplayInputEnabled(true);
+
         if (activePlayerController != null)
         {
             activePlayerController.SetInputEnabled(true);
@@ -95,6 +102,7 @@ public class MissionTerminalUI : MonoBehaviour
         activePlayerInteractor = null;
         activeWeaponController = null;
         activeWeaponLoadoutController = null;
+        activeInputReader = null;
 
         isOpen = false;
     }
@@ -135,4 +143,5 @@ public class MissionTerminalUI : MonoBehaviour
             GameSceneLoader.Instance.LoadMissionScene(mission);
     }
 }
+
 //-----MissionTerminalUI.cs END-----

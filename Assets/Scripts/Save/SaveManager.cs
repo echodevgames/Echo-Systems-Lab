@@ -88,6 +88,7 @@ public class SaveManager : MonoBehaviour
         PlayerProgress.LoadFromSaveData(currentSaveData);
 
         Debug.Log($"Game loaded from: {SavePath}");
+        OnGameLoaded?.Invoke();
         return true;
     }
 

@@ -1,4 +1,4 @@
-//-----PauseMenuController.cs START-----    
+//-----PauseMenuController.cs START-----
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +11,8 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private SimpleFirstPersonController playerController;
     [SerializeField] private PlayerInteractor playerInteractor;
     [SerializeField] private PlayerWeaponController playerWeaponController;
-[SerializeField] private PlayerWeaponLoadoutController playerWeaponLoadoutController;
+    [SerializeField] private PlayerWeaponLoadoutController playerWeaponLoadoutController;
+    [SerializeField] private PlayerInputReader inputReader;
 
     [Header("Buttons")]
     [SerializeField] private Button resumeButton;
@@ -29,6 +30,9 @@ public class PauseMenuController : MonoBehaviour
 
     private void Awake()
     {
+        if (inputReader == null)
+            inputReader = FindFirstObjectByType<PlayerInputReader>();
+
         if (resumeButton != null)
             resumeButton.onClick.AddListener(Resume);
 
@@ -55,7 +59,10 @@ public class PauseMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (inputReader == null)
+            return;
+
+        if (inputReader.PausePressed)
         {
             if (isPaused)
                 Resume();
@@ -83,6 +90,9 @@ public class PauseMenuController : MonoBehaviour
 
         Time.timeScale = paused ? 0f : 1f;
 
+        if (inputReader != null)
+            inputReader.SetGameplayInputEnabled(!paused);
+
         if (playerController != null)
         {
             playerController.SetInputEnabled(!paused);
@@ -97,7 +107,6 @@ public class PauseMenuController : MonoBehaviour
 
         if (playerWeaponLoadoutController != null)
             playerWeaponLoadoutController.SetInputEnabled(!paused);
-
     }
 
     private void Save()
@@ -127,6 +136,13 @@ public class PauseMenuController : MonoBehaviour
     private void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
+
+        if (GameSceneLoader.Instance != null)
+        {
+            GameSceneLoader.Instance.LoadMainMenu();
+            return;
+        }
+
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
@@ -141,4 +157,5 @@ public class PauseMenuController : MonoBehaviour
         Application.Quit();
     }
 }
+
 //-----PauseMenuController.cs END-----

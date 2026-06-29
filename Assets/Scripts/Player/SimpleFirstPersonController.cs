@@ -7,13 +7,14 @@ public class SimpleFirstPersonController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private PlayerInputReader inputReader;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float gravity = -20f;
 
     [Header("Look")]
-    [SerializeField] private float mouseSensitivity = 2f;
+    [SerializeField] private float mouseSensitivity = 0.2f;
     [SerializeField] private float minPitch = -80f;
     [SerializeField] private float maxPitch = 80f;
 
@@ -28,6 +29,9 @@ public class SimpleFirstPersonController : MonoBehaviour
 
         if (playerCamera == null)
             playerCamera = GetComponentInChildren<Camera>();
+
+        if (inputReader == null)
+            inputReader = GetComponent<PlayerInputReader>();
     }
 
     private void Start()
@@ -46,8 +50,13 @@ public class SimpleFirstPersonController : MonoBehaviour
 
     private void HandleLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        if (inputReader == null || playerCamera == null)
+            return;
+
+        Vector2 lookInput = inputReader.LookInput;
+
+        float mouseX = lookInput.x * mouseSensitivity;
+        float mouseY = lookInput.y * mouseSensitivity;
 
         transform.Rotate(Vector3.up * mouseX);
 
@@ -59,10 +68,12 @@ public class SimpleFirstPersonController : MonoBehaviour
 
     private void HandleMovement()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        if (inputReader == null)
+            return;
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector2 moveInput = inputReader.MoveInput;
+
+        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         move = move.normalized * moveSpeed;
 
         if (characterController.isGrounded && verticalVelocity < 0f)
@@ -88,4 +99,4 @@ public class SimpleFirstPersonController : MonoBehaviour
     }
 }
 
-//-----SimpleFirstPersonController.cs END-----  
+//-----SimpleFirstPersonController.cs END-----
