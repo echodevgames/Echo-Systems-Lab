@@ -336,6 +336,7 @@ MonoBehaviour:
   reserveAmmoText: {fileID: 3315554573305294219}
   reloadPromptText: {fileID: 7318166676940721483}
   noWeaponText: No Weapon
+  noAmmoText: No Ammo
   infiniteReserveText: "\u221E"
   reloadPromptMessage: Press R to Reload
 --- !u!1 &4543420693169592262
@@ -858,8 +859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -241.2, y: 92.1}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -344.5, y: 92.1}
+  m_SizeDelta: {x: 420, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2485593022038190067
 CanvasRenderer:
@@ -889,7 +890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RELOAD
+  m_text: Press R To Reload
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5c173d42da2a6342bd0c5234d4e544c, type: 2}
   m_sharedMaterial: {fileID: -2214287564769869706, guid: f5c173d42da2a6342bd0c5234d4e544c, type: 2}

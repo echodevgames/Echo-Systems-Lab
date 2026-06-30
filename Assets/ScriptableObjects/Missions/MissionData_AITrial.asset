@@ -19,4 +19,5 @@ MonoBehaviour:
   sceneName: AITrial
   unlockedByDefault: 0
   requiredCompletedMissionIds:
+  - TargetRangeTrial
   - CombatTrial
