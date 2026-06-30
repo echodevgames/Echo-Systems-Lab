@@ -30,6 +30,7 @@ public class PlayerWeaponController : MonoBehaviour
     private bool reloadPromptShown;
 
     public event System.Action OnWeaponAmmoChanged;
+    public event System.Action<WeaponData> OnWeaponChanged;
 
     public WeaponData CurrentWeapon => currentWeapon;
     public int CurrentAmmoInClip => currentAmmoInClip;
@@ -39,6 +40,8 @@ public class PlayerWeaponController : MonoBehaviour
 
     public bool UsesInfiniteReserveAmmo =>
         currentWeapon != null && currentWeapon.infiniteReserveAmmo;
+
+
 
     public int CurrentReserveAmmo
     {
@@ -145,6 +148,8 @@ public class PlayerWeaponController : MonoBehaviour
         Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 
         OnWeaponAmmoChanged?.Invoke();
+        OnWeaponChanged?.Invoke(currentWeapon);
+
     }
 
     private void TryEquipSavedWeapon()
@@ -174,8 +179,9 @@ public class PlayerWeaponController : MonoBehaviour
         }
 
         EquipWeapon(savedWeapon);
-
         Debug.Log($"Auto-equipped saved weapon: {savedWeapon.displayName}");
+
+        OnWeaponChanged?.Invoke(currentWeapon);
     }
 
     private void TryFire()

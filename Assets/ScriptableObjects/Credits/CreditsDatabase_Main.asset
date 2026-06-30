@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b255200ca1cd44fa25bc4d073a1e91, type: 3}
+  m_Name: CreditsDatabase_Main
+  m_EditorClassIdentifier: Assembly-CSharp::CreditsDatabase
+  creditsTitle: Credits
+  creditsIntro: Echo Systems Lab uses a mix of original systems, placeholder art,
+    third-party assets, tools, and test content.
+  entries:
+  - showInMenu: 1
+    category: 0
+    title: Echo Systems Lab
+    creator: Jesse Adams
+    roleOrUsage: Game systems portfolio project
+    sourceName: Self
+    sourceUrl: https://echodevgames.github.io/JesseAdams_Portfolio/index.html
+    licenseNotes: EchoDevGame
+    additionalNotes: This is my personal portfolio project to demonstrate systems
+      engineering skills.
+  - showInMenu: 1
+    category: 2
+    title: Unity
+    creator: Unity Technologies
+    roleOrUsage: Game Engine
+    sourceName: Unity Technologies
+    sourceUrl: https://unity.com/
+    licenseNotes: 
+    additionalNotes: 
+  - showInMenu: 1
+    category: 1
+    title: Pandazole - Lowpoly Asset Bundle
+    creator: Pandazole
+    roleOrUsage: 'Placeholder / prototype environment assets '
+    sourceName: Unity Asset Store
+    sourceUrl: https://assetstore.unity.com/packages/3d/props/pandazole-lowpoly-asset-bundle-226938
+    licenseNotes: 
+    additionalNotes: 'DISCLAIMER!: This pack is not maintained anymore, hence I''ve
+      released it for free. You can still use it for personal and commercial use!
+      :D'
+  - showInMenu: 1
+    category: 1
+    title: "Ultimate Interior Furniture Pack (Low Poly) \u2013 Household & Kitchen "
+    creator: Fries and Seagull
+    roleOrUsage: 'Placeholder / prototype environment assets '
+    sourceName: Unity Asset Store
+    sourceUrl: https://assetstore.unity.com/packages/3d/props/interior/ultimate-interior-furniture-pack-low-poly-household-kitchen-prop-316897
+    licenseNotes: 
+    additionalNotes: "Ultimate Interior Furniture Pack (Low Poly) \u2013 Household
+      & Kitchen Props\r\nThis asset has been deprecated from the Unity Asset Store.
+      It is no longer available for purchase and will no longer be supported by the
+      publisher."
+  - showInMenu: 1
+    category: 1
+    title: RPG Poly Pack - Lite
+    creator: Gigel3d
+    roleOrUsage: 'Placeholder / prototype environment assets '
+    sourceName: Unity Asset Store
+    sourceUrl: https://assetstore.unity.com/packages/3d/environments/landscapes/rpg-poly-pack-lite-148410
+    licenseNotes: 
+    additionalNotes: 'If you have any questions, bug reports or suggestions, you
+      can contact me on Discord or via email: gigel3d@gmail.com'
+  - showInMenu: 1
+    category: 1
+    title: Skybox Series Free
+    creator: Avionx
+    roleOrUsage: 'Placeholder / prototype environment assets '
+    sourceName: Unity Asset Store
+    sourceUrl: https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633
+    licenseNotes: 
+    additionalNotes: 
+  - showInMenu: 1
+    category: 1
+    title: Yughues Free Ground Materials
+    creator: Nobiax / Yughues
+    roleOrUsage: 'Placeholder / prototype environment assets '
+    sourceName: Unity Asset Store
+    sourceUrl: https://assetstore.unity.com/packages/2d/textures-materials/nature/yughues-free-ground-materials-13001
+    licenseNotes: 
+    additionalNotes: 
+  - showInMenu: 1
+    category: 1
+    title: Weapons FREE - Low Poly 3D Models Pack
+    creator: ithappy
+    roleOrUsage: 'Placeholder / prototype environment assets '
+    sourceName: Unity Asset Store
+    sourceUrl: https://assetstore.unity.com/packages/3d/props/weapons/weapons-free-low-poly-3d-models-pack-260492
+    licenseNotes: 
+    additionalNotes: 

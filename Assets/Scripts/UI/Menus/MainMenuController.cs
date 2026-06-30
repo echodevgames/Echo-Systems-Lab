@@ -12,6 +12,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button creditsButton;
     [SerializeField] private Button quitButton;
 
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private CreditsMenuUI creditsMenuUI;
+
     [Header("Scenes")]
     [SerializeField] private string hubSceneName = "Hub";
 
@@ -27,7 +30,7 @@ public class MainMenuController : MonoBehaviour
             settingsButton.onClick.AddListener(OpenSettingsStub);
 
         if (creditsButton != null)
-            creditsButton.onClick.AddListener(OpenCreditsStub);
+            creditsButton.onClick.AddListener(OpenCredits);
 
         if (quitButton != null)
             quitButton.onClick.AddListener(QuitGame);
@@ -60,9 +63,10 @@ public class MainMenuController : MonoBehaviour
         Debug.Log("Settings menu stub.");
     }
 
-    private void OpenCreditsStub()
+    private void OpenCredits()
     {
-        Debug.Log("Credits menu stub.");
+        if (creditsMenuUI != null)
+            creditsMenuUI.OpenFrom(mainMenuPanel);
     }
 
     private void QuitGame()

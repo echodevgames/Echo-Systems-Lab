@@ -17,6 +17,7 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private PlayerInputReader inputReader;
     [SerializeField] private GameObject mainPausePanel;
     [SerializeField] private KeybindingsMenuUI keybindingsMenuUI;
+    [SerializeField] private CreditsMenuUI creditsMenuUI;
 
     [Header("Buttons")]
     [SerializeField] private Button resumeButton;
@@ -25,6 +26,7 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button keybindsButton;
     [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button creditsButton;
     [SerializeField] private Button quitButton;
 
     [Header("Scenes")]
@@ -56,6 +58,9 @@ public class PauseMenuController : MonoBehaviour
 
         if (mainMenuButton != null)
             mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+
+        if (creditsButton != null)
+            creditsButton.onClick.AddListener(OpenCredits);
 
         if (quitButton != null)
             quitButton.onClick.AddListener(QuitGame);
@@ -140,6 +145,11 @@ public class PauseMenuController : MonoBehaviour
 
         if (keybindingsMenuUI != null)
             keybindingsMenuUI.Open();
+    }
+    private void OpenCredits()
+    {
+        if (creditsMenuUI != null)
+            creditsMenuUI.OpenFrom(mainPausePanel);
     }
 
     public void ShowMainPausePanel()

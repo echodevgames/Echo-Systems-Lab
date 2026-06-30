@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1621130525142156409
 Transform:
   m_ObjectHideFlags: 0
@@ -41,6 +41,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1621130525142156409}
     m_Modifications:
+    - target: {fileID: 1295146538492802556, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295146538492802556, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713041497947980201, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713041497947980201, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1761840406542925208, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
       propertyPath: pauseMenuController
       value: 
@@ -125,9 +141,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4153781930570933585, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153781930570933585, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6236899625832936370, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
       propertyPath: m_Name
       value: Canvas_KeybindingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307276661385214701, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307276661385214701, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307276661385214701, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307276661385214701, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6616189923558579759, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147557708280516095, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147557708280516095, guid: 00088ba0943ecb048982345c00acd19a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

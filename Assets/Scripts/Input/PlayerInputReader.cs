@@ -11,6 +11,15 @@ public class PlayerInputReader : MonoBehaviour
 
     private const string BindingOverridesKey = "EchoSystemsLab_BindingOverrides";
 
+    public bool BandolierHeld =>
+    gameplayInputEnabled &&
+    inputActions.Player.BandolierHold.IsPressed();
+
+    public float BandolierScroll =>
+        gameplayInputEnabled
+            ? inputActions.Player.BandolierScroll.ReadValue<float>()
+            : 0f;
+
     public InputActionAsset InputActionAsset => inputActions.asset;
 
     public Vector2 MoveInput
@@ -38,6 +47,9 @@ public class PlayerInputReader : MonoBehaviour
     public bool InteractPressed =>
         gameplayInputEnabled &&
         inputActions.Player.Interact.WasPressedThisFrame();
+    public bool DropPressed =>
+    gameplayInputEnabled &&
+    inputActions.Player.Drop.WasPressedThisFrame();
 
     public bool FirePressed =>
         gameplayInputEnabled &&
@@ -126,7 +138,14 @@ public class PlayerInputReader : MonoBehaviour
         Debug.Log("Binding overrides reset.");
     }
 
+    //-------------------------------------------------------------------------
+    //-------------------------Optional Helpers----------------------------
+    //-------------------------------------------------------------------------
 
+    public bool HasBandolierScrollInput(float threshold = 0.01f)
+    {
+        return Mathf.Abs(BandolierScroll) > threshold;
+    }
 }
 
 //-----PlayerInputReader.cs END-----
