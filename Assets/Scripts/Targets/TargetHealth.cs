@@ -1,4 +1,5 @@
 //-----TargetHealth.cs START-----
+
 using UnityEngine;
 
 public class TargetHealth : MonoBehaviour, IDamageable
@@ -28,17 +29,22 @@ public class TargetHealth : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        currentHealth = maxHealth;
-
         if (string.IsNullOrWhiteSpace(targetId))
             targetId = gameObject.name;
+
+        ResetTargetHealthOnly();
     }
 
-    private void Start()
+    public void ResetTarget()
     {
-        TargetRangeTracker tracker = TargetRangeTracker.Instance;
-        if (tracker != null)
-            tracker.RegisterTarget(this);
+        ResetTargetHealthOnly();
+        gameObject.SetActive(true);
+    }
+
+    private void ResetTargetHealthOnly()
+    {
+        currentHealth = maxHealth;
+        isDestroyed = false;
     }
 
     public void TakeDamage(DamageInfo damageInfo)
@@ -52,10 +58,6 @@ public class TargetHealth : MonoBehaviour, IDamageable
         AwardWeaponTypeXp(damageInfo, weaponTypeXpOnHit, "Target hit");
 
         Debug.Log($"{name} health: {currentHealth}/{maxHealth}");
-
-        TargetRangeTracker tracker = TargetRangeTracker.Instance;
-        if (tracker != null)
-            tracker.RegisterTargetDamaged(this, damageInfo);
 
         if (currentHealth <= 0)
             DestroyTarget(damageInfo);
@@ -73,9 +75,14 @@ public class TargetHealth : MonoBehaviour, IDamageable
         if (destroyEffect != null)
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
-        TargetRangeTracker tracker = TargetRangeTracker.Instance;
-        if (tracker != null)
-            tracker.RegisterTargetDestroyed(this, damageInfo);
+        TargetRangeMissionTarget missionTarget = GetComponent<TargetRangeMissionTarget>();
+
+        if (missionTarget != null)
+        {
+            missionTarget.NotifyDestroyed(this, damageInfo);
+            gameObject.SetActive(false);
+            return;
+        }
 
         if (destroyOnDeath)
             Destroy(gameObject);
@@ -96,4 +103,5 @@ public class TargetHealth : MonoBehaviour, IDamageable
         Debug.Log($"{reason}: +{amount} {damageInfo.weaponType} XP. Total: {PlayerProgress.GetWeaponTypeXp(damageInfo.weaponType)}");
     }
 }
+
 //-----TargetHealth.cs END-----

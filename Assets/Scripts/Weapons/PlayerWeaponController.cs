@@ -121,6 +121,16 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void EquipWeapon(WeaponData weaponData)
     {
+        EquipWeaponInternal(weaponData, true, true);
+    }
+
+    public void EquipTemporaryWeapon(WeaponData weaponData)
+    {
+        EquipWeaponInternal(weaponData, false, false);
+    }
+
+    private void EquipWeaponInternal(WeaponData weaponData, bool addToInventory, bool saveAfterEquip)
+    {
         if (weaponData == null)
         {
             Debug.LogWarning("Tried to equip null weapon data.");
@@ -133,26 +143,29 @@ public class PlayerWeaponController : MonoBehaviour
         isReloading = false;
         reloadPromptShown = false;
 
-        PlayerProgress.SetActiveWeapon(currentWeapon.weaponId);
+        if (addToInventory)
+            PlayerProgress.SetActiveWeapon(currentWeapon.weaponId);
 
         SpawnViewModel();
         FillClip();
 
-        TargetRangeTracker tracker = TargetRangeTracker.Instance;
-        if (tracker != null)
-            tracker.RegisterWeaponEquipped(currentWeapon.weaponId, currentWeapon.weaponType);
+        TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
 
-        if (SaveManager.Instance != null)
+        if (missionController != null)
+            missionController.RegisterMissionWeaponEquipped(currentWeapon.weaponId, currentWeapon.weaponType);
+
+        if (addToInventory && saveAfterEquip && SaveManager.Instance != null)
             SaveManager.Instance.SaveGame();
 
-        Debug.Log($"Equipped weapon: {currentWeapon.displayName}");
+        Debug.Log(addToInventory
+            ? $"Equipped owned weapon: {currentWeapon.displayName}"
+            : $"Equipped temporary mission weapon: {currentWeapon.displayName}");
+
         Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 
         OnWeaponAmmoChanged?.Invoke();
         OnWeaponChanged?.Invoke(currentWeapon);
-
     }
-
     private void TryEquipSavedWeapon()
     {
         if (SaveManager.Instance == null)
@@ -179,12 +192,10 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
-        EquipWeapon(savedWeapon);
+        EquipWeaponInternal(savedWeapon, true, false);
+
         Debug.Log($"Auto-equipped saved weapon: {savedWeapon.displayName}");
-
-        OnWeaponChanged?.Invoke(currentWeapon);
     }
-
     private void TryFire()
     {
         if (Time.time < nextFireTime)
@@ -218,9 +229,9 @@ public class PlayerWeaponController : MonoBehaviour
 
         AwardWeaponUseXp(currentWeapon.defaultAmmo);
 
-        TargetRangeTracker tracker = TargetRangeTracker.Instance;
-        if (tracker != null)
-            tracker.RegisterShot(currentWeapon.weaponId, currentWeapon.weaponType);
+        TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
+        if (missionController != null)
+            missionController.RegisterMissionShot(currentWeapon.weaponId, currentWeapon.weaponType);
 
         Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 

@@ -68,9 +68,9 @@ public class Projectile : MonoBehaviour
 
             damageable.TakeDamage(damageInfo);
 
-            TargetRangeTracker tracker = TargetRangeTracker.Instance;
-            if (tracker != null)
-                tracker.RegisterHit(weaponId, weaponType);
+            TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
+            if (missionController != null)
+                missionController.RegisterMissionHit(weaponId, weaponType);
         }
 
         Destroy(gameObject);

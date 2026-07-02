@@ -1,95 +1,209 @@
 //-----TargetRangeHUD.cs START-----
 
 using TMPro;
-
-
 using UnityEngine;
 
 public class TargetRangeHUD : MonoBehaviour
 {
-    [Header("Text References")]
-    [SerializeField] private TMP_Text weaponText;
-    [SerializeField] private TMP_Text targetsText;
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text shotsText;
-    [SerializeField] private TMP_Text hitsText;
-    [SerializeField] private TMP_Text accuracyText;
-    [SerializeField] private TMP_Text weaponXpText;
+    [Header("Mission HUD Root")]
+    [SerializeField] private GameObject missionHudRoot;
+
+    [Header("Mission Text References")]
+    [SerializeField] private TMP_Text missionTitleText;
+    [SerializeField] private TMP_Text missionGoalText;
+    [SerializeField] private TMP_Text missionTimerText;
+    [SerializeField] private TMP_Text missionStatusText;
+
+    [Header("Mission Feedback Text References")]
+    [SerializeField] private TMP_Text missionScoreText;
+    [SerializeField] private TMP_Text missionShotsText;
+    [SerializeField] private TMP_Text missionHitsText;
+    [SerializeField] private TMP_Text missionAccuracyText;
+    [SerializeField] private TMP_Text missionWeaponText;
+
+    [Header("Completion")]
     [SerializeField] private TMP_Text completionText;
 
-    private TargetRangeTracker tracker;
+    private TargetRangeMissionController missionController;
 
     private void Start()
     {
-        tracker = TargetRangeTracker.Instance;
+        missionController = TargetRangeMissionController.Instance;
 
-        if (tracker == null)
+        if (missionController == null)
+            missionController = FindFirstObjectByType<TargetRangeMissionController>();
+
+        if (missionController != null)
         {
-            Debug.LogWarning("TargetRangeHUD could not find TargetRangeTracker.");
-            return;
+            missionController.OnMissionStateChanged += RefreshMission;
+            missionController.OnMissionCompleted += ShowMissionComplete;
+            missionController.OnMissionFailed += ShowMissionFailed;
         }
-
-        tracker.OnStatsChanged += Refresh;
-        tracker.OnTrialCompleted += ShowCompletion;
+        else
+        {
+            Debug.LogWarning("TargetRangeHUD could not find TargetRangeMissionController.");
+        }
 
         if (completionText != null)
             completionText.gameObject.SetActive(false);
 
-        Refresh();
+        RefreshMission();
     }
 
     private void OnDestroy()
     {
-        if (tracker == null)
-            return;
-
-        tracker.OnStatsChanged -= Refresh;
-        tracker.OnTrialCompleted -= ShowCompletion;
-    }
-
-    private void Refresh()
-    {
-        if (tracker == null)
-            return;
-
-        string weaponName = string.IsNullOrWhiteSpace(tracker.CurrentWeaponId)
-            ? "None"
-            : tracker.CurrentWeaponId;
-
-        if (weaponText != null)
-            weaponText.text = $"Weapon: {weaponName}";
-
-        if (targetsText != null)
-            targetsText.text = $"Targets: {tracker.TargetsRemaining} / {tracker.TotalTargets}";
-
-        if (scoreText != null)
-            scoreText.text = $"Score: {tracker.Score}";
-
-        if (shotsText != null)
-            shotsText.text = $"Shots: {tracker.ShotsFired}";
-
-        if (hitsText != null)
-            hitsText.text = $"Hits: {tracker.HitsLanded}";
-
-        if (accuracyText != null)
-            accuracyText.text = $"Accuracy: {tracker.AccuracyPercent:0.0}%";
-
-        if (weaponXpText != null)
+        if (missionController != null)
         {
-            int xp = PlayerProgress.GetWeaponTypeXp(tracker.CurrentWeaponType);
-            weaponXpText.text = $"Weapon XP: {xp}";
+            missionController.OnMissionStateChanged -= RefreshMission;
+            missionController.OnMissionCompleted -= ShowMissionComplete;
+            missionController.OnMissionFailed -= ShowMissionFailed;
         }
     }
 
-    private void ShowCompletion()
+    private void RefreshMission()
+    {
+        if (missionController == null)
+        {
+            SetMissionHudVisible(false);
+            return;
+        }
+
+        TargetRangeMissionData mission = missionController.ActiveMission;
+
+        if (mission == null)
+        {
+            SetMissionHudVisible(false);
+            ClearText();
+            return;
+        }
+
+        SetMissionHudVisible(true);
+
+        if (missionTitleText != null)
+            missionTitleText.text = mission.displayName;
+
+        if (missionGoalText != null)
+            missionGoalText.text =
+                $"Targets: {missionController.DestroyedTargetCount} / {missionController.RequiredDestroyedTargets}";
+
+        if (missionTimerText != null)
+        {
+            float displayTime = missionController.IsMissionRunning
+                ? missionController.RemainingTime
+                : missionController.TimeLimitSeconds;
+
+            missionTimerText.text = $"Time: {displayTime:0.0}";
+        }
+
+        if (missionScoreText != null)
+            missionScoreText.text = $"Score: {missionController.MissionScore}";
+
+        if (missionShotsText != null)
+            missionShotsText.text = $"Shots: {missionController.ShotsFired}";
+
+        if (missionHitsText != null)
+            missionHitsText.text = $"Hits: {missionController.HitsLanded}";
+
+        if (missionAccuracyText != null)
+            missionAccuracyText.text = $"Accuracy: {missionController.AccuracyPercent:0.0}%";
+
+        if (missionWeaponText != null)
+        {
+            string weaponName = string.IsNullOrWhiteSpace(missionController.CurrentWeaponId)
+                ? "No Weapon"
+                : missionController.CurrentWeaponId;
+
+            missionWeaponText.text = $"Weapon: {weaponName}";
+        }
+
+        RefreshStatusText();
+    }
+
+    private void RefreshStatusText()
+    {
+        if (missionStatusText == null || missionController == null)
+            return;
+
+        switch (missionController.MissionState)
+        {
+            case TargetRangeMissionRuntimeState.Armed:
+                missionStatusText.text = "PICK UP WEAPON TO BEGIN";
+                break;
+
+            case TargetRangeMissionRuntimeState.Running:
+                missionStatusText.text = "MISSION ACTIVE";
+                break;
+
+            case TargetRangeMissionRuntimeState.Completed:
+                missionStatusText.text = "MISSION COMPLETE";
+                break;
+
+            case TargetRangeMissionRuntimeState.Failed:
+                missionStatusText.text = "MISSION FAILED";
+                break;
+
+            default:
+                missionStatusText.text = "";
+                break;
+        }
+    }
+
+    private void ShowMissionComplete()
     {
         if (completionText != null)
         {
             completionText.gameObject.SetActive(true);
-            completionText.text = "TRIAL COMPLETE\nPress R to return to Hub";
+            completionText.text = "MISSION COMPLETE";
         }
 
-        Refresh();
+        RefreshMission();
+    }
+
+    private void ShowMissionFailed()
+    {
+        if (completionText != null)
+        {
+            completionText.gameObject.SetActive(true);
+            completionText.text = "MISSION FAILED";
+        }
+
+        RefreshMission();
+    }
+
+    private void SetMissionHudVisible(bool visible)
+    {
+        if (missionHudRoot != null)
+            missionHudRoot.SetActive(visible);
+    }
+
+    private void ClearText()
+    {
+        if (missionTitleText != null)
+            missionTitleText.text = "";
+
+        if (missionGoalText != null)
+            missionGoalText.text = "";
+
+        if (missionTimerText != null)
+            missionTimerText.text = "";
+
+        if (missionStatusText != null)
+            missionStatusText.text = "";
+
+        if (missionScoreText != null)
+            missionScoreText.text = "";
+
+        if (missionShotsText != null)
+            missionShotsText.text = "";
+
+        if (missionHitsText != null)
+            missionHitsText.text = "";
+
+        if (missionAccuracyText != null)
+            missionAccuracyText.text = "";
+
+        if (missionWeaponText != null)
+            missionWeaponText.text = "";
     }
 }
 

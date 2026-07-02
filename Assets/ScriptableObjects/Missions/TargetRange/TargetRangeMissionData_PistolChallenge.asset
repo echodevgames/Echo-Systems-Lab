@@ -20,8 +20,10 @@ MonoBehaviour:
   unlockedByDefault: 1
   requiredCompletedMissionIds: []
   weaponReward: {fileID: 11400000, guid: ef320e83e2b1b4448bfe9e7e73905f1c, type: 2}
+  equipWeaponRewardOnStart: 0
   targetGroupId: pistol_targets
   timeLimitSeconds: 60
   requiredDestroyedTargets: 10
-  targetRespawnDelay: 3
+  maxActiveTargets: 2
+  targetRespawnDelay: 2
   countsTowardTargetRangeTrialCompletion: 1

@@ -210,7 +210,7 @@ public class MissionTerminalUI : MonoBehaviour
             return;
         }
 
-        controller.StartMission(targetRangeMission);
+        controller.ArmMission(targetRangeMission);
 
         Close();
     }

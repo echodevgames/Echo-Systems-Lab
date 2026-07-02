@@ -9,6 +9,7 @@ public class TargetRangeMissionData : MissionData
 {
     [Header("Target Range Mission")]
     public WeaponData weaponReward;
+    public bool equipWeaponRewardOnStart = true;
 
     [Tooltip("The target group this mission should activate. Example: pistol_targets")]
     public string targetGroupId = "pistol_targets";
@@ -16,6 +17,10 @@ public class TargetRangeMissionData : MissionData
     [Header("Challenge Rules")]
     public float timeLimitSeconds = 60f;
     public int requiredDestroyedTargets = 10;
+
+    [Tooltip("How many targets from this group should be active at the same time.")]
+    public int maxActiveTargets = 2;
+
     public float targetRespawnDelay = 3f;
 
     [Header("Trial Completion")]
