@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class MissionComputer : MonoBehaviour, IInteractable
 {
+    [Header("Terminal")]
+    [SerializeField] private MissionTerminalData terminalData;
     [SerializeField] private MissionTerminalUI terminalUI;
-    [SerializeField] private string promptText = "Press E to open Mission Terminal";
+
+    [Header("Fallback Prompt")]
+    [SerializeField] private string fallbackPromptText = "Press E to open Mission Terminal";
 
     private void Awake()
     {
@@ -15,7 +19,10 @@ public class MissionComputer : MonoBehaviour, IInteractable
 
     public string GetPromptText()
     {
-        return promptText;
+        if (terminalData != null && !string.IsNullOrWhiteSpace(terminalData.promptText))
+            return terminalData.promptText;
+
+        return fallbackPromptText;
     }
 
     public void Interact(PlayerInteractor interactor)
@@ -26,7 +33,8 @@ public class MissionComputer : MonoBehaviour, IInteractable
             return;
         }
 
-        terminalUI.Open(interactor);
+        //terminalUI.Open(interactor, terminalData);
     }
 }
+
 //-----MissionComputer.cs END-----

@@ -189,6 +189,8 @@ GameObject:
   - component: {fileID: 2252759787046056143}
   - component: {fileID: 2483783096219201155}
   - component: {fileID: 8679630083994812437}
+  - component: {fileID: 2383899858594531466}
+  - component: {fileID: 2334497088955609946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -388,6 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponLoadoutController
   weaponController: {fileID: 2357343401271460194}
   inputReader: {fileID: 2483783096219201155}
+  scrollCooldown: 0.12
+  scrollThreshold: 0.01
 --- !u!114 &2483783096219201155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +416,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc514a83a1883f4e80e81359df7dd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAmmoInventory
+--- !u!114 &2383899858594531466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793965773873358335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3ccf7ddb1090540820a377dd604c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsController
+  profileData: {fileID: 11400000, guid: 0cd3d1e3a2cad4548becc7febddc4ee0, type: 2}
+  currentHealth: 0
+  currentStamina: 0
+  currentMana: 0
+  currentLevel: 0
+  currentExperience: 0
+  experienceToNextLevel: 0
+  currentScore: 0
+--- !u!114 &2334497088955609946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793965773873358335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ad4507a98446b4bbf280939f015a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponDropController
+  inputReader: {fileID: 2483783096219201155}
+  weaponController: {fileID: 2357343401271460194}
+  playerCamera: {fileID: 3622494505354824090}
+  dropPoint: {fileID: 0}
+  weaponPickupPrefab: {fileID: 5037875089660763958, guid: 3597ca8f3f6940743b37f492b6a1d708, type: 3}
+  dropForwardOffset: 1.25
+  dropUpOffset: 0.25
+  dropForce: 3
+  dropUpForceMultiplier: 0.35
 --- !u!1 &5585662650559727100
 GameObject:
   m_ObjectHideFlags: 0

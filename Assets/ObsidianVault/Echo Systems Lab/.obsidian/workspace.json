@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
+                "file": "Echo_Systems_Lab_Milestone_3G_PickupSpawner_Setup_Methods.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Echo_Systems_Lab_Checkpoint_Build_Plan_Format"
+              "title": "Echo_Systems_Lab_Milestone_3G_PickupSpawner_Setup_Methods"
             }
           }
         ],
@@ -200,15 +200,20 @@
   },
   "active": "6117c7b1a0b65fab",
   "lastOpenFiles": [
-    "Milestone_3G_Weapon_Drop_Pickup_And_Flexible_Spawner.md",
+    "Echo_Systems_Lab_Milestone_3F_Weapon_Bandolier_HUD.md.meta",
+    "Echo_Systems_Lab_Milestone_3E_Credits_Menu_Foundation.md.meta",
+    "Echo_Systems_Lab_Milestone_3G_PickupSpawner_Setup_Methods.md.meta",
+    "Echo_Systems_Lab_Milestone_3G_Weapon_Drop_Pickup_And_Flexible_Spawner.md.meta",
+    "Echo_Systems_Lab_Milestone_3G_Weapon_Drop_Pickup_And_Flexible_Spawner.md",
+    "Echo_Systems_Lab_Milestone_3D_Player_Core_HUD_Foundation.md",
+    "Echo_Systems_Lab_Milestone_3F_Weapon_Bandolier_HUD.md",
+    "Echo_Systems_Lab_Milestone_3E_Credits_Menu_Foundation.md",
     "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
+    "Echo_Systems_Lab_Milestone_3G_PickupSpawner_Setup_Methods.md",
     "Milestone_3F_Weapon_Bandolier_HUD.md.meta",
     "Milestone_3E_Credits_Menu_Foundation.md.meta",
     "Milestone_3G_Weapon_Drop_Pickup_And_Flexible_Spawner.md.meta",
-    "Milestone_3E_Credits_Menu_Foundation.md",
-    "Milestone_3F_Weapon_Bandolier_HUD.md",
     "Echo_Systems_Lab_Master_Design_Doc.md",
-    "Echo_Systems_Lab_Milestone_3D_Player_Core_HUD_Foundation.md",
     "Echo_Systems_Lab_Milestone_3C_Weapon_Ammo_HUD_And_Ammo_Pickups.md",
     "Echo_Systems_Lab_Milestone_3D_Player_Core_HUD_Foundation.md.meta",
     "Echo_Systems_Lab_Milestone_3C_Weapon_Ammo_HUD_And_Ammo_Pickups.md.meta",
@@ -220,11 +225,8 @@
     "Echo_Systems_Lab_Milestone_2C_Multi_Weapon_Loadout_And_Ammo_Data.md.meta",
     "Echo_Systems_Lab_Milestone_2B_Persistent_Loadout_And_Save_Feedback.md",
     "Save System Notes.md.meta",
-    "Echo_Systems_Lab_Milestone_2B_Persistent_Loadout_And_Save_Feedback.md.meta",
-    "Echo_Systems_Lab_Milestone_1A_Hub_Terminal_Loop.md.meta",
     "Echo_Systems_Lab_Milestone_1A_Hub_Terminal_Loop.md",
     "Save System Notes.md",
-    "Echo_Systems_Lab_Milestone_2A_Save_Load_Foundation_And_Menu_Flow.md.meta",
     "Echo_Systems_Lab_Milestone_1C_Target_Range_HUD_And_Feedback.md",
     "Echo_Systems_Lab_Milestone_1B_Target_Range_Trial_Plan.md",
     "Welcome.md"

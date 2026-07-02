@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02575923d3aa8a04d9d0b4817c68b7cf, type: 3}
+  m_Name: MissionTerminalData_HUB
+  m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalData
+  terminalId: HUB_Mission_Terminal
+  displayName: HUB Mission Terminal
+  description: Terminal for the core HUB
+  promptText: Press E to open Mission Terminal
+  missions:
+  - {fileID: 11400000, guid: 14b78b68e161d11429b3d8b192b12166, type: 2}
+  - {fileID: 11400000, guid: bf1614f3a8cb7ac40a4671fa0960a33c, type: 2}
+  - {fileID: 11400000, guid: 0a5458fa446505d4bb54983b536a29a6, type: 2}
+  - {fileID: 11400000, guid: eb8d3cf011855ec4fb3b14d4173fcfa9, type: 2}
+  - {fileID: 11400000, guid: 5ccbf0290627d7946ba28e256d32c807, type: 2}
+  - {fileID: 11400000, guid: 1e6b04b9d8a8b1e489a08dd53713da17, type: 2}
+  - {fileID: 11400000, guid: 65629094382dcb64aa479e4b7ae05e55, type: 2}

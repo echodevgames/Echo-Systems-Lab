@@ -1,5 +1,6 @@
 //-----MissionTerminalUI.cs START-----
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +8,15 @@ public class MissionTerminalUI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject terminalRoot;
+    [SerializeField] private TMP_Text terminalTitleText;
     [SerializeField] private Transform missionButtonParent;
     [SerializeField] private MissionButtonUI missionButtonPrefab;
     [SerializeField] private Button closeButton;
 
-    [Header("Mission List")]
-    [SerializeField] private MissionData[] missions;
+    [Header("Default Terminal Data")]
+    [SerializeField] private MissionTerminalData defaultTerminalData;
+
+    private MissionTerminalData activeTerminalData;
 
     private SimpleFirstPersonController activePlayerController;
     private PlayerInteractor activePlayerInteractor;
@@ -33,8 +37,15 @@ public class MissionTerminalUI : MonoBehaviour
 
     public void Open(PlayerInteractor interactor)
     {
+        Open(interactor, defaultTerminalData);
+    }
+
+    public void Open(PlayerInteractor interactor, MissionTerminalData terminalData)
+    {
         if (isOpen)
             return;
+
+        activeTerminalData = terminalData != null ? terminalData : defaultTerminalData;
 
         activePlayerInteractor = interactor;
 
@@ -98,6 +109,7 @@ public class MissionTerminalUI : MonoBehaviour
         if (activeWeaponLoadoutController != null)
             activeWeaponLoadoutController.SetInputEnabled(true);
 
+        activeTerminalData = null;
         activePlayerController = null;
         activePlayerInteractor = null;
         activeWeaponController = null;
@@ -111,7 +123,23 @@ public class MissionTerminalUI : MonoBehaviour
     {
         ClearMissionButtons();
 
-        foreach (MissionData mission in missions)
+        if (terminalTitleText != null)
+        {
+            terminalTitleText.text = activeTerminalData != null
+                ? activeTerminalData.displayName
+                : "Mission Terminal";
+        }
+
+        if (activeTerminalData == null)
+        {
+            Debug.LogWarning($"{name} has no active MissionTerminalData.");
+            return;
+        }
+
+        if (activeTerminalData.missions == null)
+            return;
+
+        foreach (MissionData mission in activeTerminalData.missions)
         {
             if (mission == null)
                 continue;
@@ -139,8 +167,52 @@ public class MissionTerminalUI : MonoBehaviour
 
     private void OnMissionClicked(MissionData mission)
     {
-        if (GameSceneLoader.Instance != null)
-            GameSceneLoader.Instance.LoadMissionScene(mission);
+        if (mission == null)
+            return;
+
+        if (mission.executionMode == MissionExecutionMode.LoadScene)
+        {
+            if (GameSceneLoader.Instance != null)
+            {
+                GameSceneLoader.Instance.LoadMissionScene(mission);
+                return;
+            }
+
+            Debug.LogWarning("No GameSceneLoader found.");
+            return;
+        }
+
+        if (mission.executionMode == MissionExecutionMode.StartInCurrentScene)
+        {
+            StartInSceneMission(mission);
+            return;
+        }
+    }
+
+    private void StartInSceneMission(MissionData mission)
+    {
+        TargetRangeMissionData targetRangeMission = mission as TargetRangeMissionData;
+
+        if (targetRangeMission == null)
+        {
+            Debug.LogWarning($"Mission '{mission.displayName}' is set to StartInCurrentScene but is not a TargetRangeMissionData.");
+            return;
+        }
+
+        TargetRangeMissionController controller = TargetRangeMissionController.Instance;
+
+        if (controller == null)
+            controller = FindFirstObjectByType<TargetRangeMissionController>();
+
+        if (controller == null)
+        {
+            Debug.LogWarning("No TargetRangeMissionController found in scene.");
+            return;
+        }
+
+        controller.StartMission(targetRangeMission);
+
+        Close();
     }
 }
 

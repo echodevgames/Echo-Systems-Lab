@@ -351,8 +351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2981ae66a6ee82f409d2062988d3ae5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionComputer
+  terminalData: {fileID: 0}
   terminalUI: {fileID: 86279966290460952}
-  promptText: Press E to open Mission Terminal
+  fallbackPromptText: Press E to open Mission Terminal
 --- !u!1 &4794371601446899568
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +623,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4967528202130087613}
     m_Modifications:
+    - target: {fileID: 5412301146973388400, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: terminalUI
+      value: 
+      objectReference: {fileID: 86279966290460952}
+    - target: {fileID: 5412301146973388400, guid: 833421f4690184c4881a47836596a02e, type: 3}
+      propertyPath: terminalData
+      value: 
+      objectReference: {fileID: 11400000, guid: 84524809ea00f59448ac6b08ba54efb0, type: 2}
     - target: {fileID: 7524018128480541283, guid: 833421f4690184c4881a47836596a02e, type: 3}
       propertyPath: m_Name
       value: Canvas_MissionTerminal

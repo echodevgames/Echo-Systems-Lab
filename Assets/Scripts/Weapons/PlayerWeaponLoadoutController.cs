@@ -18,7 +18,6 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
     private bool inputEnabled = true;
 
     public event System.Action OnLoadoutChanged;
-    public event System.Action<WeaponData> OnWeaponChanged;
 
     private void Awake()
     {

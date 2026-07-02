@@ -15,6 +15,7 @@ MonoBehaviour:
   missionId: InventoryTrial
   displayName: Inventory Trial
   description: A trial of the inventory system
+  executionMode: 0
   sceneName: 
   unlockedByDefault: 0
   requiredCompletedMissionIds:

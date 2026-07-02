@@ -157,7 +157,10 @@ public class TargetRangeTracker : MonoBehaviour
 
         CompleteTrial();
     }
-
+    public void CompleteTrialFromMissionSystem()
+    {
+        CompleteTrial();
+    }
     private void CompleteTrial()
     {
         trialCompleted = true;

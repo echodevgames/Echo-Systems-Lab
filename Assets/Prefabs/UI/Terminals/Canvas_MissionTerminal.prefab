@@ -1056,6 +1056,7 @@ GameObject:
   - component: {fileID: 20013852853309328}
   - component: {fileID: 2878058860819854221}
   - component: {fileID: 3600993093623792003}
+  - component: {fileID: 5412301146973388400}
   m_Layer: 5
   m_Name: Canvas_MissionTerminal
   m_TagString: Untagged
@@ -1170,6 +1171,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0a5458fa446505d4bb54983b536a29a6, type: 2}
   - {fileID: 11400000, guid: 1e6b04b9d8a8b1e489a08dd53713da17, type: 2}
   - {fileID: 11400000, guid: 65629094382dcb64aa479e4b7ae05e55, type: 2}
+--- !u!114 &5412301146973388400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524018128480541283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2981ae66a6ee82f409d2062988d3ae5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionComputer
+  terminalData: {fileID: 0}
+  terminalUI: {fileID: 0}
+  fallbackPromptText: Press E to open Mission Terminal
 --- !u!1 &8061424724271172349
 GameObject:
   m_ObjectHideFlags: 0

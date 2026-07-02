@@ -11,6 +11,9 @@ public static class PlayerProgress
 
     public static string ActiveWeaponId => activeWeaponId;
 
+    public static event System.Action OnWeaponsChanged;
+    public static event System.Action<string> OnActiveWeaponChanged;
+
     public static int GetWeaponTypeXp(string weaponType)
     {
         if (string.IsNullOrWhiteSpace(weaponType))
@@ -39,12 +42,20 @@ public static class PlayerProgress
                ownedWeaponIds.Contains(weaponId);
     }
 
+    public static List<string> GetOwnedWeaponIds()
+    {
+        return new List<string>(ownedWeaponIds);
+    }
+
     public static void AddOwnedWeapon(string weaponId)
     {
         if (string.IsNullOrWhiteSpace(weaponId))
             return;
 
-        ownedWeaponIds.Add(weaponId);
+        bool added = ownedWeaponIds.Add(weaponId);
+
+        if (added)
+            OnWeaponsChanged?.Invoke();
     }
 
     public static void SetActiveWeapon(string weaponId)
@@ -53,14 +64,36 @@ public static class PlayerProgress
             return;
 
         AddOwnedWeapon(weaponId);
+
+        if (activeWeaponId == weaponId)
+            return;
+
         activeWeaponId = weaponId;
+        OnActiveWeaponChanged?.Invoke(activeWeaponId);
     }
 
-    public static List<string> GetOwnedWeaponIds()
+    public static void RemoveOwnedWeapon(string weaponId)
     {
-        return new List<string>(ownedWeaponIds);
+        if (string.IsNullOrWhiteSpace(weaponId))
+            return;
+
+        bool removed = ownedWeaponIds.Remove(weaponId);
+
+        if (activeWeaponId == weaponId)
+        {
+            activeWeaponId = null;
+            OnActiveWeaponChanged?.Invoke(activeWeaponId);
+        }
+
+        if (removed)
+            OnWeaponsChanged?.Invoke();
     }
 
+    public static void ClearActiveWeapon()
+    {
+        activeWeaponId = null;
+        OnActiveWeaponChanged?.Invoke(activeWeaponId);
+    }
     public static void LoadFromSaveData(SaveData saveData)
     {
         weaponTypeXp.Clear();
@@ -92,7 +125,8 @@ public static class PlayerProgress
 
         activeWeaponId = saveData.activeWeaponId;
     }
-
+   
+   
     public static void WriteToSaveData(SaveData saveData)
     {
         if (saveData == null)
@@ -112,6 +146,9 @@ public static class PlayerProgress
         weaponTypeXp.Clear();
         ownedWeaponIds.Clear();
         activeWeaponId = null;
+
+        OnWeaponsChanged?.Invoke();
+        OnActiveWeaponChanged?.Invoke(activeWeaponId);
     }
 }
 //-----PlayerProgress.cs END-----

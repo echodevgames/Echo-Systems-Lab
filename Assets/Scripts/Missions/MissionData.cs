@@ -2,6 +2,12 @@
 
 using UnityEngine;
 
+public enum MissionExecutionMode
+{
+    LoadScene,
+    StartInCurrentScene
+}
+
 [CreateAssetMenu(
     fileName = "MissionData_NewMission",
     menuName = "Echo Systems Lab/Missions/Mission Data")]
@@ -14,6 +20,9 @@ public class MissionData : ScriptableObject
     [TextArea(3, 6)]
     public string description;
 
+    [Header("Execution")]
+    public MissionExecutionMode executionMode = MissionExecutionMode.LoadScene;
+
     [Header("Scene")]
     public string sceneName;
 
@@ -21,4 +30,5 @@ public class MissionData : ScriptableObject
     public bool unlockedByDefault;
     public string[] requiredCompletedMissionIds;
 }
+
 //-----MissionData.cs END-----

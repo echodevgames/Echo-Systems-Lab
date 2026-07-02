@@ -1022,12 +1022,14 @@ MonoBehaviour:
   inputReader: {fileID: 0}
   mainPausePanel: {fileID: 4200235308987020859}
   keybindingsMenuUI: {fileID: 0}
+  creditsMenuUI: {fileID: 0}
   resumeButton: {fileID: 6979382569699109052}
   saveButton: {fileID: 8781500818744129012}
   loadButton: {fileID: 5834359824513918915}
   settingsButton: {fileID: 6492156478226676329}
   keybindsButton: {fileID: 5984063705373117462}
   mainMenuButton: {fileID: 6795998603700103327}
+  creditsButton: {fileID: 0}
   quitButton: {fileID: 7982643753087898918}
   mainMenuSceneName: MainMenu
 --- !u!1 &5090256494099857329
@@ -2282,7 +2284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5688003052794409015
 RectTransform:
   m_ObjectHideFlags: 0

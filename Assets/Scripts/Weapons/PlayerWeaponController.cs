@@ -31,6 +31,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     public event System.Action OnWeaponAmmoChanged;
     public event System.Action<WeaponData> OnWeaponChanged;
+    public bool HasWeapon => currentWeapon != null;
 
     public WeaponData CurrentWeapon => currentWeapon;
     public int CurrentAmmoInClip => currentAmmoInClip;
@@ -480,6 +481,31 @@ public class PlayerWeaponController : MonoBehaviour
     private void HandleAmmoInventoryChanged()
     {
         OnWeaponAmmoChanged?.Invoke();
+    }
+
+    public void UnequipCurrentWeapon(bool clearProgress = true)
+    {
+        StopAllCoroutines();
+
+        currentWeapon = null;
+        currentAmmoInClip = 0;
+        isReloading = false;
+        reloadPromptShown = false;
+        nextFireTime = 0f;
+
+        if (currentViewModel != null)
+        {
+            Destroy(currentViewModel);
+            currentViewModel = null;
+        }
+
+        currentMuzzlePoint = null;
+
+        if (clearProgress)
+            PlayerProgress.ClearActiveWeapon();
+
+        OnWeaponAmmoChanged?.Invoke();
+        OnWeaponChanged?.Invoke(null);
     }
 }
 
