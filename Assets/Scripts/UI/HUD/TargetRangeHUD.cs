@@ -19,12 +19,20 @@ public class TargetRangeHUD : MonoBehaviour
     [SerializeField] private TMP_Text missionShotsText;
     [SerializeField] private TMP_Text missionHitsText;
     [SerializeField] private TMP_Text missionAccuracyText;
-    [SerializeField] private TMP_Text missionWeaponText;
 
     [Header("Completion")]
     [SerializeField] private TMP_Text completionText;
 
+    [Header("Auto Wiring")]
+    [SerializeField] private bool autoFindMissingReferences = true;
+
     private TargetRangeMissionController missionController;
+
+    private void Awake()
+    {
+        if (autoFindMissingReferences)
+            AutoFindMissingReferences();
+    }
 
     private void Start()
     {
@@ -106,15 +114,6 @@ public class TargetRangeHUD : MonoBehaviour
 
         if (missionAccuracyText != null)
             missionAccuracyText.text = $"Accuracy: {missionController.AccuracyPercent:0.0}%";
-
-        if (missionWeaponText != null)
-        {
-            string weaponName = string.IsNullOrWhiteSpace(missionController.CurrentWeaponId)
-                ? "No Weapon"
-                : missionController.CurrentWeaponId;
-
-            missionWeaponText.text = $"Weapon: {weaponName}";
-        }
 
         RefreshStatusText();
     }
@@ -202,8 +201,75 @@ public class TargetRangeHUD : MonoBehaviour
         if (missionAccuracyText != null)
             missionAccuracyText.text = "";
 
-        if (missionWeaponText != null)
-            missionWeaponText.text = "";
+        if (completionText != null)
+            completionText.gameObject.SetActive(false);
+    }
+
+    private void AutoFindMissingReferences()
+    {
+        if (missionHudRoot == null)
+        {
+            Transform rootTransform = FindChildRecursive(transform, "TargetRangeHUDRoot");
+
+            if (rootTransform != null)
+                missionHudRoot = rootTransform.gameObject;
+        }
+
+        if (missionTitleText == null)
+            missionTitleText = FindTMPText("MissionTitleText");
+
+        if (missionGoalText == null)
+            missionGoalText = FindTMPText("MissionGoalText");
+
+        if (missionTimerText == null)
+            missionTimerText = FindTMPText("MissionTimerText");
+
+        if (missionStatusText == null)
+            missionStatusText = FindTMPText("MissionStatusText");
+
+        if (missionScoreText == null)
+            missionScoreText = FindTMPText("ScoreText");
+
+        if (missionShotsText == null)
+            missionShotsText = FindTMPText("ShotsText");
+
+        if (missionHitsText == null)
+            missionHitsText = FindTMPText("HitsText");
+
+        if (missionAccuracyText == null)
+            missionAccuracyText = FindTMPText("AccuracyText");
+
+        if (completionText == null)
+            completionText = FindTMPText("CompletionText");
+    }
+
+    private TMP_Text FindTMPText(string childName)
+    {
+        Transform foundTransform = FindChildRecursive(transform, childName);
+
+        if (foundTransform == null)
+            return null;
+
+        return foundTransform.GetComponent<TMP_Text>();
+    }
+
+    private Transform FindChildRecursive(Transform parent, string childName)
+    {
+        if (parent == null)
+            return null;
+
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName)
+                return child;
+
+            Transform found = FindChildRecursive(child, childName);
+
+            if (found != null)
+                return found;
+        }
+
+        return null;
     }
 }
 

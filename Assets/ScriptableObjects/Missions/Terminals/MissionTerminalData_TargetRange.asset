@@ -18,3 +18,9 @@ MonoBehaviour:
   promptText: Press E to open Target Range Mission Terminal
   missions:
   - {fileID: 11400000, guid: d4c5bbc1dc46c2f48b7b6b3bbb3152be, type: 2}
+  - {fileID: 11400000, guid: 15d1ef8c33d25e9458d81025edb79e98, type: 2}
+  - {fileID: 11400000, guid: 4e3c5390f2ae4de47ac74da68f7b0cf9, type: 2}
+  - {fileID: 11400000, guid: 22901b238de7d9045b4f9d2b99cf68af, type: 2}
+  - {fileID: 11400000, guid: b734258ae7d154442b9e4e166c3d7c92, type: 2}
+  - {fileID: 11400000, guid: ff2c8d592cae63a4b875e75acd8ac32f, type: 2}
+  - {fileID: 11400000, guid: cb9d7f05ad704d74a945e564a90aee1e, type: 2}

@@ -20,9 +20,10 @@ public class TargetHealth : MonoBehaviour, IDamageable
     private int currentHealth;
     private bool isDestroyed;
 
+    private TargetRangeMissionTarget missionTarget;
+
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
-
     public string TargetId => targetId;
     public int ScoreValue => scoreValue;
     public bool IsDestroyed => isDestroyed;
@@ -35,10 +36,25 @@ public class TargetHealth : MonoBehaviour, IDamageable
         ResetTargetHealthOnly();
     }
 
+    public void SetMissionTarget(TargetRangeMissionTarget newMissionTarget)
+    {
+        missionTarget = newMissionTarget;
+
+        if (missionTarget != null)
+            Debug.Log($"{name} linked to mission target: {missionTarget.name}");
+    }
+
+    public void ClearMissionTarget(TargetRangeMissionTarget targetToClear)
+    {
+        if (missionTarget == targetToClear)
+            missionTarget = null;
+    }
+
     public void ResetTarget()
     {
         ResetTargetHealthOnly();
-        gameObject.SetActive(true);
+
+        Debug.Log($"{name} reset: {currentHealth}/{maxHealth}");
     }
 
     private void ResetTargetHealthOnly()
@@ -50,14 +66,17 @@ public class TargetHealth : MonoBehaviour, IDamageable
     public void TakeDamage(DamageInfo damageInfo)
     {
         if (isDestroyed)
+        {
+            Debug.Log($"{name} ignored damage because it is already destroyed.");
             return;
+        }
 
         currentHealth -= damageInfo.damageAmount;
         currentHealth = Mathf.Max(0, currentHealth);
 
         AwardWeaponTypeXp(damageInfo, weaponTypeXpOnHit, "Target hit");
 
-        Debug.Log($"{name} health: {currentHealth}/{maxHealth}");
+        Debug.Log($"{name} took {damageInfo.damageAmount} damage. Health: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
             DestroyTarget(damageInfo);
@@ -75,21 +94,32 @@ public class TargetHealth : MonoBehaviour, IDamageable
         if (destroyEffect != null)
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
-        TargetRangeMissionTarget missionTarget = GetComponent<TargetRangeMissionTarget>();
+        TargetRangeMissionTarget foundMissionTarget = missionTarget;
 
-        if (missionTarget != null)
+        if (foundMissionTarget == null)
+            foundMissionTarget = GetComponent<TargetRangeMissionTarget>();
+
+        if (foundMissionTarget == null)
+            foundMissionTarget = GetComponentInParent<TargetRangeMissionTarget>();
+
+        if (foundMissionTarget == null)
+            foundMissionTarget = GetComponentInChildren<TargetRangeMissionTarget>(true);
+
+        if (foundMissionTarget != null)
         {
+            Debug.Log($"{name} destroyed through mission target route: {foundMissionTarget.name}");
+            missionTarget = foundMissionTarget;
             missionTarget.NotifyDestroyed(this, damageInfo);
-            gameObject.SetActive(false);
             return;
         }
+
+        Debug.LogWarning($"{name} destroyed through non-mission fallback route. This target is not connected to TargetRangeTargetGroup.");
 
         if (destroyOnDeath)
             Destroy(gameObject);
         else
             gameObject.SetActive(false);
     }
-
     private void AwardWeaponTypeXp(DamageInfo damageInfo, int amount, string reason)
     {
         if (amount <= 0)
@@ -102,6 +132,7 @@ public class TargetHealth : MonoBehaviour, IDamageable
 
         Debug.Log($"{reason}: +{amount} {damageInfo.weaponType} XP. Total: {PlayerProgress.GetWeaponTypeXp(damageInfo.weaponType)}");
     }
+
 }
 
 //-----TargetHealth.cs END-----

@@ -28,7 +28,7 @@ MonoBehaviour:
   isAutomatic: 0
   clipSize: 16
   reloadTime: 0.5
-  infiniteReserveAmmo: 0
+  infiniteReserveAmmo: 1
   projectilesPerShot: 1
   spreadAngle: 0.1
   xpPerUse: 10

@@ -41,9 +41,9 @@ public class TargetRangeTargetGroup : MonoBehaviour
 
         PrepareTargetSlots();
         StopRespawnRoutines();
-        HideAllTargets();
 
         activeTargets.Clear();
+        HideAllTargets();
 
         int startingTargetCount = Mathf.Min(GetMaxActiveTargets(), allMissionTargets.Count);
 
@@ -73,18 +73,38 @@ public class TargetRangeTargetGroup : MonoBehaviour
         TargetHealth targetHealth,
         DamageInfo damageInfo)
     {
-        if (missionTarget != null)
+        if (missionTarget == null)
+        {
+            Debug.LogWarning($"{name} received destroyed target event with null missionTarget.");
+            return;
+        }
+
+        Debug.Log($"{name} received target destroyed event from {missionTarget.name}.");
+
+        if (activeTargets.Contains(missionTarget))
             activeTargets.Remove(missionTarget);
 
         TargetRangeMissionController controller = activeController;
 
-        if (controller != null)
-            controller.RegisterMissionTargetDestroyed(targetHealth, damageInfo);
+        if (controller == null)
+        {
+            Debug.LogWarning($"{name} has no active TargetRangeMissionController while target was destroyed.");
+            missionTarget.HideForMission();
+            return;
+        }
+
+        if (!controller.IsMissionRunning)
+        {
+            Debug.LogWarning($"{name} received destroyed target event, but mission is not running.");
+            missionTarget.HideForMission();
+            return;
+        }
+
+        controller.RegisterMissionTargetDestroyed(targetHealth, damageInfo);
+
+        missionTarget.HideForMission();
 
         if (!groupActive)
-            return;
-
-        if (controller == null || !controller.IsMissionRunning)
             return;
 
         Coroutine routine = StartCoroutine(RespawnAfterDelay());
@@ -95,41 +115,62 @@ public class TargetRangeTargetGroup : MonoBehaviour
     {
         float delay = GetRespawnDelay();
 
+        Debug.Log($"Respawning target from group {targetGroupId} in {delay:0.00} seconds.");
+
         yield return new WaitForSeconds(delay);
 
         if (!groupActive)
+        {
+            Debug.Log($"Respawn cancelled because group {targetGroupId} is inactive.");
             yield break;
+        }
 
         if (activeController == null || !activeController.IsMissionRunning)
+        {
+            Debug.Log($"Respawn cancelled because mission is no longer running.");
             yield break;
+        }
 
-        if (activeTargets.Count < GetMaxActiveTargets())
-            ActivateNextTarget();
+        if (activeTargets.Count >= GetMaxActiveTargets())
+        {
+            Debug.Log($"Respawn skipped because active target cap is already full.");
+            yield break;
+        }
+
+        ActivateNextTarget();
     }
 
     private void PrepareTargetSlots()
     {
         allMissionTargets.Clear();
 
-        if (targetSlots == null)
+        if (targetSlots == null || targetSlots.Length == 0)
+        {
+            Debug.LogWarning($"{name} has no target slots assigned.");
             return;
+        }
 
         foreach (TargetHealth target in targetSlots)
         {
             if (target == null)
                 continue;
 
+            GameObject targetObject = target.gameObject;
+            targetObject.SetActive(true);
+
             TargetRangeMissionTarget missionTarget =
-                target.GetComponent<TargetRangeMissionTarget>();
+                targetObject.GetComponent<TargetRangeMissionTarget>();
 
             if (missionTarget == null)
-                missionTarget = target.gameObject.AddComponent<TargetRangeMissionTarget>();
+                missionTarget = targetObject.AddComponent<TargetRangeMissionTarget>();
 
-            missionTarget.Initialize(this);
+            missionTarget.Initialize(this, target);
 
             if (!allMissionTargets.Contains(missionTarget))
                 allMissionTargets.Add(missionTarget);
         }
+
+        Debug.Log($"{name} prepared {allMissionTargets.Count} target slot(s).");
     }
 
     private void ActivateNextTarget()
@@ -145,21 +186,12 @@ public class TargetRangeTargetGroup : MonoBehaviour
         int index = Random.Range(0, availableTargets.Count);
         TargetRangeMissionTarget targetToActivate = availableTargets[index];
 
-        TargetHealth targetHealth = targetToActivate.GetComponent<TargetHealth>();
+        targetToActivate.ActivateForMission();
 
-        if (targetHealth != null)
-        {
-            targetHealth.ResetTarget();
-            SetTargetColliders(targetHealth, true);
-        }
-        else
-        {
-            targetToActivate.gameObject.SetActive(true);
-        }
+        if (!activeTargets.Contains(targetToActivate))
+            activeTargets.Add(targetToActivate);
 
-        activeTargets.Add(targetToActivate);
-
-        Debug.Log($"Activated mission target slot: {targetToActivate.name}");
+        Debug.Log($"Activated mission target slot: {targetToActivate.name}. Active count: {activeTargets.Count}/{GetMaxActiveTargets()}");
     }
 
     private List<TargetRangeMissionTarget> GetAvailableTargets()
@@ -174,7 +206,7 @@ public class TargetRangeTargetGroup : MonoBehaviour
             if (activeTargets.Contains(missionTarget))
                 continue;
 
-            if (missionTarget.gameObject.activeSelf)
+            if (missionTarget.IsActiveInMission)
                 continue;
 
             availableTargets.Add(missionTarget);
@@ -190,7 +222,7 @@ public class TargetRangeTargetGroup : MonoBehaviour
             if (missionTarget == null)
                 continue;
 
-            missionTarget.gameObject.SetActive(false);
+            missionTarget.HideForMission();
         }
     }
 
@@ -201,35 +233,8 @@ public class TargetRangeTargetGroup : MonoBehaviour
             if (missionTarget == null)
                 continue;
 
-            TargetHealth targetHealth = missionTarget.GetComponent<TargetHealth>();
-
-            if (targetHealth == null)
-            {
-                missionTarget.gameObject.SetActive(showTargetsBeforeMission);
-                continue;
-            }
-
-            if (showTargetsBeforeMission)
-            {
-                targetHealth.ResetTarget();
-                SetTargetColliders(targetHealth, previewTargetsAreShootable);
-            }
-            else
-            {
-                missionTarget.gameObject.SetActive(false);
-            }
+            missionTarget.SetPreviewState(showTargetsBeforeMission, previewTargetsAreShootable);
         }
-    }
-
-    private void SetTargetColliders(TargetHealth targetHealth, bool enabled)
-    {
-        if (targetHealth == null)
-            return;
-
-        Collider[] colliders = targetHealth.GetComponentsInChildren<Collider>(true);
-
-        foreach (Collider collider in colliders)
-            collider.enabled = enabled;
     }
 
     private int GetMaxActiveTargets()

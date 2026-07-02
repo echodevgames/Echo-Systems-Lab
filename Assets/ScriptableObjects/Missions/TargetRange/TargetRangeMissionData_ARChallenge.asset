@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c0f9fc99e64cdd468b8a820425b74a8, type: 3}
-  m_Name: TargetRangeMissionData_PistolChallenge
+  m_Name: TargetRangeMissionData_ARChallenge
   m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionData
-  missionId: target_range_pistol_challenge
-  displayName: Pistol Drill
-  description: Destroy 3 Pistol targets before the time runs out.
+  missionId: target_range_ar_challenge
+  displayName: AR Drill
+  description: Destroy 3 AR targets before the time runs out.
   executionMode: 1
   sceneName: 
   unlockedByDefault: 1
   requiredCompletedMissionIds: []
-  weaponReward: {fileID: 11400000, guid: ef320e83e2b1b4448bfe9e7e73905f1c, type: 2}
+  weaponReward: {fileID: 11400000, guid: cfd96011820eb934ba24989ae7dbd41d, type: 2}
   equipWeaponRewardOnStart: 0
-  targetGroupId: pistol_targets
+  targetGroupId: ar_targets
   timeLimitSeconds: 60
   requiredDestroyedTargets: 3
   maxActiveTargets: 2

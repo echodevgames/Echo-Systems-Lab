@@ -1,4 +1,5 @@
 //-----Projectile.cs START-----
+
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -53,25 +54,32 @@ public class Projectile : MonoBehaviour
         if (IsOtherProjectile(other))
             return;
 
-        hasHit = true;
-
         IDamageable damageable = other.GetComponentInParent<IDamageable>();
 
-        if (damageable != null)
+        if (damageable == null)
+            damageable = other.GetComponentInChildren<IDamageable>();
+
+        if (damageable == null)
         {
-            DamageInfo damageInfo = new DamageInfo(
-                damage,
-                weaponId,
-                weaponType,
-                owner,
-                transform.position);
-
-            damageable.TakeDamage(damageInfo);
-
-            TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
-            if (missionController != null)
-                missionController.RegisterMissionHit(weaponId, weaponType);
+            Destroy(gameObject);
+            return;
         }
+
+        hasHit = true;
+
+        TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
+
+        if (missionController != null)
+            missionController.RegisterMissionHit(weaponId, weaponType);
+
+        DamageInfo damageInfo = new DamageInfo(
+            damage,
+            weaponId,
+            weaponType,
+            owner,
+            transform.position);
+
+        damageable.TakeDamage(damageInfo);
 
         Destroy(gameObject);
     }
@@ -95,4 +103,5 @@ public class Projectile : MonoBehaviour
         return other.GetComponentInParent<Projectile>() != null;
     }
 }
+
 //-----Projectile.cs END-----
