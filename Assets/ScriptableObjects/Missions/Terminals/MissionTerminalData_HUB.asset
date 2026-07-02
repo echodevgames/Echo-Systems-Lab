@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02575923d3aa8a04d9d0b4817c68b7cf, type: 3}
   m_Name: MissionTerminalData_HUB
   m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalData
-  terminalId: HUB_Mission_Terminal
+  terminalId: hub_mission_terminal
   displayName: HUB Mission Terminal
   description: Terminal for the core HUB
-  promptText: Press E to open Mission Terminal
+  promptText: Press E to open HUB Mission Terminal
   missions:
   - {fileID: 11400000, guid: 14b78b68e161d11429b3d8b192b12166, type: 2}
   - {fileID: 11400000, guid: bf1614f3a8cb7ac40a4671fa0960a33c, type: 2}

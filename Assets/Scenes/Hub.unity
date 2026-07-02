@@ -481,6 +481,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &481259698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3680594862862180694, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+  m_PrefabInstance: {fileID: 8781505074986131304}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &481259704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481259698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2981ae66a6ee82f409d2062988d3ae5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionComputer
+  terminalData: {fileID: 11400000, guid: 84524809ea00f59448ac6b08ba54efb0, type: 2}
+  terminalUI: {fileID: 1069148673}
+  fallbackPromptText: Press E to open Mission Terminal
 --- !u!1 &604044459
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +696,17 @@ Transform:
   - {fileID: 1643382054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1069148673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 86279966290460952, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+  m_PrefabInstance: {fileID: 8781505074986131304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd2cf13a154fec47a6986058fee8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalUI
 --- !u!1 &1215750896
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +831,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f982292cb37d9b4493d90f921ec33d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptUI
+--- !u!114 &1340432514 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5239158370644644799, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+  m_PrefabInstance: {fileID: 8781505074986131304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &1528608913 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2357343401271460194, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
@@ -1402,6 +1444,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 86279966290460952, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: terminalTitleText
+      value: 
+      objectReference: {fileID: 1340432514}
+    - target: {fileID: 86279966290460952, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: defaultTerminalData
+      value: 
+      objectReference: {fileID: 11400000, guid: 84524809ea00f59448ac6b08ba54efb0, type: 2}
     - target: {fileID: 4967528202130087613, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1446,10 +1496,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: ComputerDesk
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8923759758715174635, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      propertyPath: terminalData
+      value: 
+      objectReference: {fileID: 11400000, guid: 84524809ea00f59448ac6b08ba54efb0, type: 2}
+    m_RemovedComponents:
+    - {fileID: 8923759758715174635, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+    - {fileID: 7412600094249637319, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3680594862862180694, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 481259704}
   m_SourcePrefab: {fileID: 100100000, guid: 554a280a26d34f345b488741fe2aa610, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

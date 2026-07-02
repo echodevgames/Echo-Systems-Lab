@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02575923d3aa8a04d9d0b4817c68b7cf, type: 3}
   m_Name: MissionTerminalData_TargetRange
   m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalData
-  terminalId: Target_Range_Mission_Terminal
+  terminalId: target_range_mission_terminal
   displayName: Target Range Mission Terminal
   description: Terminal for the Target Range
   promptText: Press E to open Target Range Mission Terminal
-  missions: []
+  missions:
+  - {fileID: 11400000, guid: d4c5bbc1dc46c2f48b7b6b3bbb3152be, type: 2}

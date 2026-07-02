@@ -33,7 +33,7 @@ public class MissionComputer : MonoBehaviour, IInteractable
             return;
         }
 
-        //terminalUI.Open(interactor, terminalData);
+        terminalUI.Open(interactor, terminalData);
     }
 }
 
