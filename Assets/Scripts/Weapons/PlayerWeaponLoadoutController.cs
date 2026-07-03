@@ -9,15 +9,7 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
     [SerializeField] private PlayerWeaponController weaponController;
     [SerializeField] private PlayerInputReader inputReader;
 
-    [Header("Bandolier Scroll")]
-    [SerializeField] private float scrollCooldown = 0.12f;
-    [SerializeField] private float scrollThreshold = 0.01f;
-
-    private float nextScrollTime;
-
     private bool inputEnabled = true;
-
-    public event System.Action OnLoadoutChanged;
 
     private void Awake()
     {
@@ -36,20 +28,27 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
         if (inputReader == null)
             return;
 
+        if (!CanCycleWeapons())
+            return;
+
         if (inputReader.CycleNextWeaponPressed)
             CycleWeapon(1);
 
         if (inputReader.CyclePreviousWeaponPressed)
             CycleWeapon(-1);
-
-        HandleBandolierScroll();
-
-
     }
 
     public void SetInputEnabled(bool enabled)
     {
         inputEnabled = enabled;
+    }
+
+    public bool CanCycleWeapons()
+    {
+        if (!inputEnabled)
+            return false;
+
+        return !IsWeaponSelectionLocked();
     }
 
     public void CycleNextWeapon()
@@ -64,6 +63,9 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
 
     private void CycleWeapon(int direction)
     {
+        if (!CanCycleWeapons())
+            return;
+
         if (SaveManager.Instance == null)
             return;
 
@@ -99,32 +101,9 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
         WeaponData nextWeapon = ownedWeapons[nextIndex];
 
         if (weaponController != null)
-        {
             weaponController.EquipWeapon(nextWeapon);
-            OnLoadoutChanged?.Invoke();
-        }
     }
-    private void HandleBandolierScroll()
-    {
-        if (!inputReader.BandolierHeld)
-            return;
 
-        if (Time.unscaledTime < nextScrollTime)
-            return;
-
-        float scroll = inputReader.BandolierScroll;
-
-        if (Mathf.Abs(scroll) < scrollThreshold)
-            return;
-
-        int direction = scroll > 0f ? -1 : 1; //or int direction = scroll > 0f ? 1 : -1; to flip direction
-
-        CycleWeapon(direction);
-
-        nextScrollTime = Time.unscaledTime + scrollCooldown;
-
-
-    }
     private int GetCurrentWeaponIndex(List<WeaponData> ownedWeapons)
     {
         string activeWeaponId = PlayerProgress.ActiveWeaponId;
@@ -139,6 +118,14 @@ public class PlayerWeaponLoadoutController : MonoBehaviour
         }
 
         return -1;
+    }
+
+    private bool IsWeaponSelectionLocked()
+    {
+        TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
+
+        return missionController != null &&
+               missionController.IsWeaponSelectionLocked;
     }
 }
 

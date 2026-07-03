@@ -46,6 +46,7 @@ public class TargetRangeHUD : MonoBehaviour
             missionController.OnMissionStateChanged += RefreshMission;
             missionController.OnMissionCompleted += ShowMissionComplete;
             missionController.OnMissionFailed += ShowMissionFailed;
+            missionController.OnTargetTrialCompleted += ShowTargetTrialComplete;
         }
         else
         {
@@ -65,6 +66,7 @@ public class TargetRangeHUD : MonoBehaviour
             missionController.OnMissionStateChanged -= RefreshMission;
             missionController.OnMissionCompleted -= ShowMissionComplete;
             missionController.OnMissionFailed -= ShowMissionFailed;
+            missionController.OnTargetTrialCompleted -= ShowTargetTrialComplete;
         }
     }
 
@@ -78,7 +80,7 @@ public class TargetRangeHUD : MonoBehaviour
 
         TargetRangeMissionData mission = missionController.ActiveMission;
 
-        if (mission == null)
+        if (mission == null && !missionController.IsTargetRangeTrialCompleted)
         {
             SetMissionHudVisible(false);
             ClearText();
@@ -88,19 +90,40 @@ public class TargetRangeHUD : MonoBehaviour
         SetMissionHudVisible(true);
 
         if (missionTitleText != null)
-            missionTitleText.text = mission.displayName;
+        {
+            if (missionController.IsTargetRangeTrialCompleted)
+                missionTitleText.text = "Target Range Trial Complete";
+            else
+                missionTitleText.text = mission != null ? mission.displayName : "";
+        }
 
         if (missionGoalText != null)
-            missionGoalText.text =
-                $"Targets: {missionController.DestroyedTargetCount} / {missionController.RequiredDestroyedTargets}";
+        {
+            if (mission != null)
+            {
+                missionGoalText.text =
+                    $"Targets: {missionController.DestroyedTargetCount} / {missionController.RequiredDestroyedTargets}";
+            }
+            else
+            {
+                missionGoalText.text = "";
+            }
+        }
 
         if (missionTimerText != null)
         {
-            float displayTime = missionController.IsMissionRunning
-                ? missionController.RemainingTime
-                : missionController.TimeLimitSeconds;
+            if (mission != null)
+            {
+                float displayTime = missionController.IsMissionRunning
+                    ? missionController.RemainingTime
+                    : missionController.TimeLimitSeconds;
 
-            missionTimerText.text = $"Time: {displayTime:0.0}";
+                missionTimerText.text = $"Time: {displayTime:0.0}";
+            }
+            else
+            {
+                missionTimerText.text = "";
+            }
         }
 
         if (missionScoreText != null)
@@ -122,6 +145,12 @@ public class TargetRangeHUD : MonoBehaviour
     {
         if (missionStatusText == null || missionController == null)
             return;
+
+        if (missionController.IsTargetRangeTrialCompleted)
+        {
+            missionStatusText.text = "PRESS R TO RETURN TO HUB";
+            return;
+        }
 
         switch (missionController.MissionState)
         {
@@ -149,6 +178,12 @@ public class TargetRangeHUD : MonoBehaviour
 
     private void ShowMissionComplete()
     {
+        if (missionController != null && missionController.IsTargetRangeTrialCompleted)
+        {
+            ShowTargetTrialComplete();
+            return;
+        }
+
         if (completionText != null)
         {
             completionText.gameObject.SetActive(true);
@@ -165,6 +200,22 @@ public class TargetRangeHUD : MonoBehaviour
             completionText.gameObject.SetActive(true);
             completionText.text = "MISSION FAILED";
         }
+
+        RefreshMission();
+    }
+
+    private void ShowTargetTrialComplete()
+    {
+        SetMissionHudVisible(true);
+
+        if (completionText != null)
+        {
+            completionText.gameObject.SetActive(true);
+            completionText.text = "TARGET RANGE TRIAL COMPLETE\nPRESS R TO RETURN TO HUB";
+        }
+
+        if (missionStatusText != null)
+            missionStatusText.text = "PRESS R TO RETURN TO HUB";
 
         RefreshMission();
     }

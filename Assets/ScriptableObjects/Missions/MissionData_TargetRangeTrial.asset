@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f9538b3c061244fac103a3179e9c7b, type: 3}
   m_Name: MissionData_TargetRangeTrial
   m_EditorClassIdentifier: Assembly-CSharp::MissionData
-  missionId: TargetRangeTrial
+  missionId: target_range_trial
   displayName: Target Range Trial
   description: "Defeat all targets in the target range trial\t"
+  executionMode: 0
   sceneName: TargetRangeTrial
   unlockedByDefault: 1
   requiredCompletedMissionIds:
-  - 
+  - target_range_pistol_challenge
+  - target_range_revolver_challenge
+  - target_range_shotgun_challenge
+  - target_range_ar_challenge
+  - target_range_crossbow_challenge
+  - target_range_sniper_challenge

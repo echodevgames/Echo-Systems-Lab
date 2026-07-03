@@ -2,6 +2,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum TargetRangeMissionRuntimeState
 {
@@ -19,10 +20,18 @@ public class TargetRangeMissionController : MonoBehaviour
     public event Action OnMissionStateChanged;
     public event Action OnMissionCompleted;
     public event Action OnMissionFailed;
+    public event Action OnTargetTrialCompleted;
 
     [Header("Trial Completion")]
-    [SerializeField] private string targetRangeTrialMissionId = "TargetRangeTrial";
+    [SerializeField] private string targetRangeTrialMissionId = "target_range_trial";
     [SerializeField] private MissionData[] requiredMissionsForTrialCompletion;
+
+    [Header("Scenes")]
+    [SerializeField] private string hubSceneName = "Hub";
+
+    [Header("Return To Hub")]
+    [SerializeField] private PlayerInputReader inputReader;
+    [SerializeField] private bool allowReloadInputReturnToHubAfterTrialComplete = true;
 
     [Header("Optional Player Score")]
     [SerializeField] private bool addMissionScoreToPlayerStats = true;
@@ -31,6 +40,7 @@ public class TargetRangeMissionController : MonoBehaviour
     [Header("Runtime Debug")]
     [SerializeField] private TargetRangeMissionData activeMission;
     [SerializeField] private TargetRangeMissionRuntimeState missionState;
+    [SerializeField] private bool targetRangeTrialCompleted;
     [SerializeField] private float remainingTime;
     [SerializeField] private int destroyedTargetCount;
     [SerializeField] private int missionScore;
@@ -56,6 +66,9 @@ public class TargetRangeMissionController : MonoBehaviour
 
     public bool IsMissionRunning => missionState == TargetRangeMissionRuntimeState.Running;
     public bool IsMissionArmed => missionState == TargetRangeMissionRuntimeState.Armed;
+    public bool IsTargetRangeTrialCompleted => targetRangeTrialCompleted;
+
+    public bool IsWeaponSelectionLocked => IsMissionArmed || IsMissionRunning;
 
     public int RequiredDestroyedTargets
     {
@@ -102,10 +115,24 @@ public class TargetRangeMissionController : MonoBehaviour
 
         if (playerStatsController == null)
             playerStatsController = FindFirstObjectByType<PlayerStatsController>();
+
+        if (inputReader == null)
+            inputReader = FindFirstObjectByType<PlayerInputReader>();
+
+        targetRangeTrialCompleted = MissionProgress.IsCompleted(targetRangeTrialMissionId);
     }
 
     private void Update()
     {
+        if (targetRangeTrialCompleted &&
+            allowReloadInputReturnToHubAfterTrialComplete &&
+            inputReader != null &&
+            inputReader.ReloadPressed)
+        {
+            ReturnToHub();
+            return;
+        }
+
         if (!IsMissionRunning)
             return;
 
@@ -187,6 +214,20 @@ public class TargetRangeMissionController : MonoBehaviour
         Debug.Log($"Goal: Destroy {activeMission.requiredDestroyedTargets} targets in {activeMission.timeLimitSeconds:0} seconds.");
 
         OnMissionStateChanged?.Invoke();
+    }
+
+    public bool IsWeaponAllowedForActiveMission(WeaponData weaponData)
+    {
+        if (!IsWeaponSelectionLocked)
+            return true;
+
+        if (weaponData == null)
+            return false;
+
+        if (activeMission == null || activeMission.weaponReward == null)
+            return false;
+
+        return weaponData.weaponId == activeMission.weaponReward.weaponId;
     }
 
     public void RegisterMissionWeaponEquipped(string weaponId, string weaponType)
@@ -373,6 +414,9 @@ public class TargetRangeMissionController : MonoBehaviour
 
     private void CheckTargetRangeTrialCompletion()
     {
+        if (targetRangeTrialCompleted)
+            return;
+
         if (requiredMissionsForTrialCompletion == null ||
             requiredMissionsForTrialCompletion.Length == 0)
             return;
@@ -387,8 +431,28 @@ public class TargetRangeMissionController : MonoBehaviour
         }
 
         MissionProgress.MarkCompleted(targetRangeTrialMissionId);
+        targetRangeTrialCompleted = true;
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveGame();
 
         Debug.Log($"Completed parent trial mission: {targetRangeTrialMissionId}");
+
+        OnTargetTrialCompleted?.Invoke();
+        OnMissionStateChanged?.Invoke();
+    }
+
+    public void ReturnToHub()
+    {
+        Time.timeScale = 1f;
+
+        if (GameSceneLoader.Instance != null)
+        {
+            GameSceneLoader.Instance.LoadHub();
+            return;
+        }
+
+        SceneManager.LoadScene(hubSceneName);
     }
 }
 

@@ -31,8 +31,8 @@ public class PlayerWeaponController : MonoBehaviour
 
     public event System.Action OnWeaponAmmoChanged;
     public event System.Action<WeaponData> OnWeaponChanged;
-    public bool HasWeapon => currentWeapon != null;
 
+    public bool HasWeapon => currentWeapon != null;
     public WeaponData CurrentWeapon => currentWeapon;
     public int CurrentAmmoInClip => currentAmmoInClip;
     public int CurrentClipAmmo => currentAmmoInClip;
@@ -41,8 +41,6 @@ public class PlayerWeaponController : MonoBehaviour
 
     public bool UsesInfiniteReserveAmmo =>
         currentWeapon != null && currentWeapon.infiniteReserveAmmo;
-
-
 
     public int CurrentReserveAmmo
     {
@@ -121,12 +119,72 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void EquipWeapon(WeaponData weaponData)
     {
+        if (!CanEquipOwnedWeapon(weaponData))
+            return;
+
         EquipWeaponInternal(weaponData, true, true);
     }
 
     public void EquipTemporaryWeapon(WeaponData weaponData)
     {
+        if (!CanEquipTemporaryWeapon(weaponData))
+            return;
+
         EquipWeaponInternal(weaponData, false, false);
+    }
+
+    private bool CanEquipOwnedWeapon(WeaponData weaponData)
+    {
+        if (weaponData == null)
+            return false;
+
+        TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
+
+        if (missionController == null)
+            return true;
+
+        if (!missionController.IsWeaponSelectionLocked)
+            return true;
+
+        Debug.Log($"Cannot equip owned weapon '{weaponData.displayName}' while target range mission weapon is locked.");
+        return false;
+    }
+
+    private bool CanEquipTemporaryWeapon(WeaponData weaponData)
+    {
+        if (weaponData == null)
+            return false;
+
+        TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
+
+        if (missionController == null)
+            return true;
+
+        if (!missionController.IsWeaponSelectionLocked)
+            return true;
+
+        bool allowed = missionController.IsWeaponAllowedForActiveMission(weaponData);
+
+        if (!allowed)
+            Debug.Log($"Temporary weapon '{weaponData.displayName}' is not allowed for the active target range mission.");
+
+        return allowed;
+    }
+
+    private bool CanUseCurrentWeapon()
+    {
+        if (currentWeapon == null)
+            return false;
+
+        TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
+
+        if (missionController == null)
+            return true;
+
+        if (!missionController.IsWeaponSelectionLocked)
+            return true;
+
+        return missionController.IsWeaponAllowedForActiveMission(currentWeapon);
     }
 
     private void EquipWeaponInternal(WeaponData weaponData, bool addToInventory, bool saveAfterEquip)
@@ -166,6 +224,7 @@ public class PlayerWeaponController : MonoBehaviour
         OnWeaponAmmoChanged?.Invoke();
         OnWeaponChanged?.Invoke(currentWeapon);
     }
+
     private void TryEquipSavedWeapon()
     {
         if (SaveManager.Instance == null)
@@ -196,8 +255,15 @@ public class PlayerWeaponController : MonoBehaviour
 
         Debug.Log($"Auto-equipped saved weapon: {savedWeapon.displayName}");
     }
+
     private void TryFire()
     {
+        if (!CanUseCurrentWeapon())
+        {
+            Debug.Log("Current weapon cannot be used during this target range mission.");
+            return;
+        }
+
         if (Time.time < nextFireTime)
             return;
 
@@ -386,6 +452,12 @@ public class PlayerWeaponController : MonoBehaviour
         if (isReloading)
             return;
 
+        if (!CanUseCurrentWeapon())
+        {
+            Debug.Log("Current weapon cannot be reloaded during this target range mission.");
+            return;
+        }
+
         if (currentAmmoInClip >= currentWeapon.clipSize)
         {
             Debug.Log($"{currentWeapon.displayName} clip is already full.");
@@ -506,6 +578,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (currentViewModel != null)
         {
+
             Destroy(currentViewModel);
             currentViewModel = null;
         }

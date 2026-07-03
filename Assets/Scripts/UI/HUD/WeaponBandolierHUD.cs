@@ -1,5 +1,4 @@
-//-----WeaponBandoolierHUD.cs START-----
-
+//-----WeaponBandolierHUD.cs START-----
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +12,17 @@ public class WeaponBandolierHUD : MonoBehaviour
     [SerializeField] private WeaponBandolierSlotUI slotPrefab;
     [SerializeField] private PlayerInputReader inputReader;
     [SerializeField] private PlayerWeaponController weaponController;
+    [SerializeField] private PlayerWeaponLoadoutController loadoutController;
+
+    [Header("Scroll Selection")]
+    [SerializeField] private float scrollThreshold = 0.01f;
+    [SerializeField] private float scrollCooldown = 0.12f;
+    [SerializeField] private bool invertScrollDirection = false;
 
     private readonly List<WeaponBandolierSlotUI> spawnedSlots = new List<WeaponBandolierSlotUI>();
+
     private bool isVisible;
+    private float nextScrollTime;
 
     private void Awake()
     {
@@ -24,6 +31,9 @@ public class WeaponBandolierHUD : MonoBehaviour
 
         if (weaponController == null)
             weaponController = FindFirstObjectByType<PlayerWeaponController>();
+
+        if (loadoutController == null)
+            loadoutController = FindFirstObjectByType<PlayerWeaponLoadoutController>();
 
         SetVisible(false);
     }
@@ -55,8 +65,39 @@ public class WeaponBandolierHUD : MonoBehaviour
                 Refresh();
         }
 
-        if (isVisible)
-            RefreshSelectionOnly();
+        if (!isVisible)
+            return;
+
+        HandleScrollInput();
+        RefreshSelectionOnly();
+    }
+
+    private void HandleScrollInput()
+    {
+        if (loadoutController == null)
+            return;
+
+        if (Time.unscaledTime < nextScrollTime)
+            return;
+
+        float scrollValue = inputReader.BandolierScroll;
+
+        if (Mathf.Abs(scrollValue) <= scrollThreshold)
+            return;
+
+        int direction = scrollValue > 0f ? 1 : -1;
+
+        if (invertScrollDirection)
+            direction *= -1;
+
+        if (direction > 0)
+            loadoutController.CycleNextWeapon();
+        else
+            loadoutController.CyclePreviousWeapon();
+
+        nextScrollTime = Time.unscaledTime + scrollCooldown;
+
+        RefreshSelectionOnly();
     }
 
     private void HandleWeaponChanged(WeaponData weaponData)
@@ -93,8 +134,10 @@ public class WeaponBandolierHUD : MonoBehaviour
                 continue;
 
             WeaponBandolierSlotUI slot = Instantiate(slotPrefab, slotParent);
+
             bool isSelected = weapon.weaponId == activeWeaponId;
             slot.Setup(weapon, isSelected);
+
             spawnedSlots.Add(slot);
         }
 
@@ -134,4 +177,5 @@ public class WeaponBandolierHUD : MonoBehaviour
             Destroy(slotParent.GetChild(i).gameObject);
     }
 }
+
 //-----WeaponBandolierHUD.cs END-----

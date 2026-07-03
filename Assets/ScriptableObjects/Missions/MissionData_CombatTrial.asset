@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f9538b3c061244fac103a3179e9c7b, type: 3}
   m_Name: MissionData_CombatTrial
   m_EditorClassIdentifier: Assembly-CSharp::MissionData
-  missionId: CombatTrial
+  missionId: combat_trial
   displayName: Combat Trial
   description: "Defeat all training drones in the combat simulation\t\t"
+  executionMode: 0
   sceneName: CombatTrial
   unlockedByDefault: 0
   requiredCompletedMissionIds:
-  - TargetRangeTrial
+  - target_range_trial
