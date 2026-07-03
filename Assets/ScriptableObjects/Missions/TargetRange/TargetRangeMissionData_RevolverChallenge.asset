@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionData
   missionId: target_range_revolver_challenge
   displayName: Revolver Drill
-  description: Destroy 3 revolver targets before the time runs out.
+  description: Destroy 25 revolver targets before the time runs out. Ammo is unlimited.
   executionMode: 1
   sceneName: 
   unlockedByDefault: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   equipWeaponRewardOnStart: 0
   targetGroupId: revolver_targets
   timeLimitSeconds: 60
-  requiredDestroyedTargets: 3
-  maxActiveTargets: 2
+  requiredDestroyedTargets: 25
+  maxActiveTargets: 6
   targetRespawnDelay: 2
   countsTowardTargetRangeTrialCompletion: 1

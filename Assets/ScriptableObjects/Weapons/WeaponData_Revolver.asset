@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponId: revolver_basic
   displayName: Revolver
   hudDisplayName: Revolver
-  weaponIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
+  weaponIcon: {fileID: 21300000, guid: c2ceac474250783478aef2223099c075, type: 3}
   description: "A basic Revolver\t"
   weaponType: Revolver
   viewModelPrefab: {fileID: 5312509926983057945, guid: 1318594d3ffef6c419eb73608b52d1f7, type: 3}
