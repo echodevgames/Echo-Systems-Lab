@@ -108,34 +108,14 @@ PrefabInstance:
     - {fileID: 7054987816488546253, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1432094971738779726, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5229129467716815673}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
---- !u!1 &6269368335615003287 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1432094971738779726, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
-  m_PrefabInstance: {fileID: 4962570427927296729}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5229129467716815673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269368335615003287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb18edcf269c3449b2dac13f1f624b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionTarget
 --- !u!114 &6938995727385071972 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2635402221114321853, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
   m_PrefabInstance: {fileID: 4962570427927296729}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269368335615003287}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ded2e5c3253aace4cba070baad83c5df, type: 3}
@@ -202,17 +182,14 @@ PrefabInstance:
     - {fileID: 7054987816488546253, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1432094971738779726, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8266940329786066438}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
 --- !u!114 &5018900399729773503 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2635402221114321853, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
   m_PrefabInstance: {fileID: 7004332214754140162}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280907794788520012}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ded2e5c3253aace4cba070baad83c5df, type: 3}
@@ -223,20 +200,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4285672001437203121, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
   m_PrefabInstance: {fileID: 7004332214754140162}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8280907794788520012 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1432094971738779726, guid: fbbefdf8ad974d6418b27a456d8aae98, type: 3}
-  m_PrefabInstance: {fileID: 7004332214754140162}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8266940329786066438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280907794788520012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb18edcf269c3449b2dac13f1f624b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionTarget

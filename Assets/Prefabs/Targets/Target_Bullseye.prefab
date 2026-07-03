@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4285672001437203121}
   - component: {fileID: 2635402221114321853}
+  - component: {fileID: 8465832141832980902}
   m_Layer: 0
   m_Name: Target_Bullseye
   m_TagString: Untagged
@@ -46,13 +47,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded2e5c3253aace4cba070baad83c5df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetHealth
-  targetId: 
+  targetId: target_range_mission_target
   maxHealth: 30
   scoreValue: 100
   weaponTypeXpOnHit: 10
   weaponTypeXpOnDestroyed: 25
   destroyEffect: {fileID: 0}
   destroyOnDeath: 1
+--- !u!114 &8465832141832980902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432094971738779726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb18edcf269c3449b2dac13f1f624b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionTarget
 --- !u!1 &8036280642380494872
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,52 +194,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7705743548999295023, guid: d029fd3df6996fb42a03b510a445abd8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7054987816488546253}
-    - targetCorrespondingSourceObject: {fileID: 7705743548999295023, guid: d029fd3df6996fb42a03b510a445abd8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7021686524291557269}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d029fd3df6996fb42a03b510a445abd8, type: 3}
 --- !u!4 &7371315366103985738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7042394252875938453, guid: d029fd3df6996fb42a03b510a445abd8, type: 3}
   m_PrefabInstance: {fileID: 574121023888004319}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7856526156364903664 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7705743548999295023, guid: d029fd3df6996fb42a03b510a445abd8, type: 3}
-  m_PrefabInstance: {fileID: 574121023888004319}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7054987816488546253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7856526156364903664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ded2e5c3253aace4cba070baad83c5df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargetHealth
-  targetId: 
-  maxHealth: 50
-  scoreValue: 100
-  weaponTypeXpOnHit: 10
-  weaponTypeXpOnDestroyed: 25
-  destroyEffect: {fileID: 0}
-  destroyOnDeath: 1
---- !u!114 &7021686524291557269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7856526156364903664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb18edcf269c3449b2dac13f1f624b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionTarget
