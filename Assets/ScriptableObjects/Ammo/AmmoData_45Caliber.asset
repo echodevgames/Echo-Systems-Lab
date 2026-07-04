@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoData
   ammoId: ammo_44
   displayName: .45 Round
-  hudDisplayName: 
+  hudDisplayName: 45 Cal.
   ammoIcon: {fileID: 21300000, guid: 8734d867d2cb0264d84f8576e35b172d, type: 3}
   hudColor: {r: 1, g: 1, b: 1, a: 1}
   caliberLabel: .45

@@ -25,5 +25,10 @@ MonoBehaviour:
   timeLimitSeconds: 60
   requiredDestroyedTargets: 25
   maxActiveTargets: 6
+  respawnTargetsAfterDestroyed: 1
+  activateAllTargetsAtStart: 1
+  useTargetSlotCountAsGoal: 0
   targetRespawnDelay: 2
+  hideDestroyedTargetVisual: 1
+  disableDestroyedTargetColliders: 1
   countsTowardTargetRangeTrialCompletion: 1

@@ -22,5 +22,5 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
   damage: 50
   projectileSpeed: 150
-  projectileLifetime: 15
+  projectileLifetime: 20
   xpPerUse: 10

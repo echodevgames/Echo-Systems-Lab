@@ -33,6 +33,9 @@ public class WeaponData : ScriptableObject
     public Vector3 viewLocalEulerAngles;
     public Vector3 viewLocalScale = Vector3.one;
 
+    [Header("Handling")]
+    public WeaponHandlingData handlingData;
+
     [Header("Firing")]
     public WeaponFireMode fireMode = WeaponFireMode.Projectile;
     public AmmoData defaultAmmo;

@@ -22,6 +22,7 @@ MonoBehaviour:
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
   viewLocalEulerAngles: {x: 0, y: 0, z: 0}
   viewLocalScale: {x: 1, y: 1, z: 1}
+  handlingData: {fileID: 11400000, guid: bda44ebf6a9238f4a9381df6ce1a2fab, type: 2}
   fireMode: 0
   defaultAmmo: {fileID: 11400000, guid: 8d58d81e150ac314e951f86199e3cc40, type: 2}
   fireRate: 0.12

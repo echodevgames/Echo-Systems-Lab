@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 2895414092782475178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35, y: -0.25, z: 0.55}
+  m_LocalPosition: {x: 0.35, y: -0.2, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 8679630083994812437}
   - component: {fileID: 2383899858594531466}
   - component: {fileID: 2334497088955609946}
+  - component: {fileID: 2292471376596136282}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -374,8 +375,14 @@ MonoBehaviour:
   fallbackMuzzlePoint: {fileID: 4088175618822117598}
   inputReader: {fileID: 2483783096219201155}
   ammoInventory: {fileID: 8679630083994812437}
+  viewModelController: {fileID: 0}
   autoEquipSavedWeapon: 1
   muzzleForwardOffset: 0.15
+  aimMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  aimDistance: 1000
+  debugAimRays: 0
 --- !u!114 &2252759787046056143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,8 +397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponLoadoutController
   weaponController: {fileID: 2357343401271460194}
   inputReader: {fileID: 2483783096219201155}
-  scrollCooldown: 0.12
-  scrollThreshold: 0.01
 --- !u!114 &2483783096219201155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +462,32 @@ MonoBehaviour:
   dropUpOffset: 0.25
   dropForce: 3
   dropUpForceMultiplier: 0.35
+--- !u!114 &2292471376596136282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793965773873358335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9271b3f4a6565574498d346c6c2d56ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponViewModelController
+  fallbackFirePositionKick: {x: 0, y: -0.015, z: -0.08}
+  fallbackFireRotationKick: {x: -4, y: 0, z: 0}
+  fallbackRandomRotationKick: {x: 1, y: 0.75, z: 1.25}
+  fallbackMaxPositionOffset: {x: 0.08, y: 0.08, z: 0.18}
+  fallbackMaxRotationOffset: {x: 12, y: 6, z: 8}
+  fallbackPositionSnappiness: 24
+  fallbackRotationSnappiness: 24
+  fallbackPositionReturnSpeed: 12
+  fallbackRotationReturnSpeed: 12
+  fallbackUseAnimatorTriggers: 1
+  fallbackFireTriggerName: Fire
+  fallbackReloadTriggerName: Reload
+  fallbackEquipTriggerName: Equip
+  debugLogs: 0
 --- !u!1 &5585662650559727100
 GameObject:
   m_ObjectHideFlags: 0

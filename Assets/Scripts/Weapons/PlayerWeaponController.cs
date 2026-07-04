@@ -11,6 +11,7 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Transform fallbackMuzzlePoint;
     [SerializeField] private PlayerInputReader inputReader;
     [SerializeField] private PlayerAmmoInventory ammoInventory;
+    [SerializeField] private PlayerWeaponViewModelController viewModelController;
 
     [Header("Loadout")]
     [SerializeField] private bool autoEquipSavedWeapon = true;
@@ -68,6 +69,9 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (ammoInventory == null)
             ammoInventory = GetComponent<PlayerAmmoInventory>();
+
+        if (viewModelController == null)
+            viewModelController = GetComponent<PlayerWeaponViewModelController>();
     }
 
     private void OnEnable()
@@ -304,6 +308,9 @@ public class PlayerWeaponController : MonoBehaviour
         if (missionController != null)
             missionController.RegisterMissionShot(currentWeapon.weaponId, currentWeapon.weaponType);
 
+        if (viewModelController != null)
+            viewModelController.PlayFireFeedback();
+
         Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 
         if (currentAmmoInClip <= 0)
@@ -458,18 +465,7 @@ public class PlayerWeaponController : MonoBehaviour
         return otherObject.transform.IsChildOf(transform);
     }
 
-    private Quaternion GetFireRotationWithSpread()
-    {
-        Quaternion baseRotation = playerCamera.transform.rotation;
 
-        if (currentWeapon.spreadAngle <= 0f)
-            return baseRotation;
-
-        float randomYaw = Random.Range(-currentWeapon.spreadAngle, currentWeapon.spreadAngle);
-        float randomPitch = Random.Range(-currentWeapon.spreadAngle, currentWeapon.spreadAngle);
-
-        return baseRotation * Quaternion.Euler(randomPitch, randomYaw, 0f);
-    }
 
     private Transform GetMuzzlePoint()
     {
@@ -490,16 +486,27 @@ public class PlayerWeaponController : MonoBehaviour
         currentMuzzlePoint = null;
 
         if (currentViewModel != null)
+        {
             Destroy(currentViewModel);
+            currentViewModel = null;
+        }
 
         if (currentWeapon.viewModelPrefab == null || weaponHolder == null)
+        {
+            if (viewModelController != null)
+                viewModelController.ClearActiveViewModel();
+
             return;
+        }
 
         currentViewModel = Instantiate(currentWeapon.viewModelPrefab, weaponHolder);
 
         currentViewModel.transform.localPosition = currentWeapon.viewLocalPosition;
         currentViewModel.transform.localEulerAngles = currentWeapon.viewLocalEulerAngles;
         currentViewModel.transform.localScale = currentWeapon.viewLocalScale;
+
+        if (viewModelController != null)
+            viewModelController.SetActiveViewModel(currentViewModel.transform, currentWeapon.handlingData);
 
         Transform muzzle = currentViewModel.transform.Find("MuzzlePoint");
 
@@ -569,6 +576,9 @@ public class PlayerWeaponController : MonoBehaviour
     {
         isReloading = true;
         reloadPromptShown = false;
+
+        if (viewModelController != null)
+            viewModelController.PlayReloadFeedback();
 
         Debug.Log($"Reloading {weaponAtReloadStart.displayName}...");
 
@@ -659,12 +669,14 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (currentViewModel != null)
         {
-
             Destroy(currentViewModel);
             currentViewModel = null;
         }
 
         currentMuzzlePoint = null;
+
+        if (viewModelController != null)
+            viewModelController.ClearActiveViewModel();
 
         if (clearProgress)
             PlayerProgress.ClearActiveWeapon();

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoData
   ammoId: ammo_crossbow_bolt
   displayName: Crossbow Bolt
-  hudDisplayName: 
+  hudDisplayName: Bolt
   ammoIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   hudColor: {r: 1, g: 1, b: 1, a: 1}
   caliberLabel: Bolt
@@ -22,5 +22,5 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
   damage: 100
   projectileSpeed: 20
-  projectileLifetime: 30
+  projectileLifetime: 40
   xpPerUse: 10
