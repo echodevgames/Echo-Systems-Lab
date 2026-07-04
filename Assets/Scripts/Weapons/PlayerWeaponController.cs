@@ -18,6 +18,11 @@ public class PlayerWeaponController : MonoBehaviour
     [Header("Projectile Spawn")]
     [SerializeField] private float muzzleForwardOffset = 0.15f;
 
+    [Header("Aim Accuracy")]
+    [SerializeField] private LayerMask aimMask = ~0;
+    [SerializeField] private float aimDistance = 1000f;
+    [SerializeField] private bool debugAimRays = false;
+
     private WeaponData currentWeapon;
     private GameObject currentViewModel;
     private Transform currentMuzzlePoint;
@@ -349,8 +354,18 @@ public class PlayerWeaponController : MonoBehaviour
             return false;
         }
 
-        Quaternion fireRotation = GetFireRotationWithSpread();
-        Vector3 spawnPosition = spawnPoint.position + fireRotation * Vector3.forward * muzzleForwardOffset;
+        Vector3 spawnPosition = spawnPoint.position;
+        Quaternion fireRotation = GetAccurateFireRotation(spawnPosition);
+
+        fireRotation = ApplyWeaponSpread(fireRotation);
+
+        spawnPosition += fireRotation * Vector3.forward * muzzleForwardOffset;
+
+        if (debugAimRays)
+        {
+            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * 100f, Color.green, 1f);
+            Debug.DrawRay(spawnPosition, fireRotation * Vector3.forward * 100f, Color.red, 1f);
+        }
 
         GameObject projectileObject = Instantiate(
             ammo.projectilePrefab,
@@ -375,6 +390,72 @@ public class PlayerWeaponController : MonoBehaviour
             ammo.projectileLifetime);
 
         return true;
+    }
+
+    private Quaternion GetAccurateFireRotation(Vector3 projectileSpawnPosition)
+    {
+        if (playerCamera == null)
+            return transform.rotation;
+
+        Vector3 aimPoint = playerCamera.transform.position + playerCamera.transform.forward * aimDistance;
+
+        Ray aimRay = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        RaycastHit[] hits = Physics.RaycastAll(
+            aimRay,
+            aimDistance,
+            aimMask,
+            QueryTriggerInteraction.Collide);
+
+        if (hits != null && hits.Length > 0)
+        {
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.collider == null)
+                    continue;
+
+                if (IsOwnerOrOwnerChild(hit.collider.gameObject))
+                    continue;
+
+                Projectile projectile = hit.collider.GetComponentInParent<Projectile>();
+
+                if (projectile != null)
+                    continue;
+
+                aimPoint = hit.point;
+                break;
+            }
+        }
+
+        Vector3 direction = aimPoint - projectileSpawnPosition;
+
+        if (direction.sqrMagnitude <= 0.0001f)
+            direction = playerCamera.transform.forward;
+
+        return Quaternion.LookRotation(direction.normalized, Vector3.up);
+    }
+
+    private Quaternion ApplyWeaponSpread(Quaternion baseRotation)
+    {
+        if (currentWeapon == null || currentWeapon.spreadAngle <= 0f)
+            return baseRotation;
+
+        float randomYaw = Random.Range(-currentWeapon.spreadAngle, currentWeapon.spreadAngle);
+        float randomPitch = Random.Range(-currentWeapon.spreadAngle, currentWeapon.spreadAngle);
+
+        return baseRotation * Quaternion.Euler(randomPitch, randomYaw, 0f);
+    }
+
+    private bool IsOwnerOrOwnerChild(GameObject otherObject)
+    {
+        if (otherObject == null)
+            return false;
+
+        if (otherObject == gameObject)
+            return true;
+
+        return otherObject.transform.IsChildOf(transform);
     }
 
     private Quaternion GetFireRotationWithSpread()

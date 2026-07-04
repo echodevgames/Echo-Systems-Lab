@@ -44,27 +44,46 @@ public class TargetRangeMissionTarget : MonoBehaviour
         Debug.Log($"Mission target activated: {name}");
     }
 
-    public void HideForMission()
+    public void HideForMission(bool hideVisual, bool disableColliders)
     {
         isActiveInMission = false;
 
-        SetCollidersEnabled(false);
-        SetRenderersEnabled(false);
+        if (disableColliders)
+            SetCollidersEnabled(false);
+
+        if (hideVisual)
+            SetRenderersEnabled(false);
 
         Debug.Log($"Mission target hidden: {name}");
     }
 
-    public void SetPreviewState(bool visible, bool shootable)
+    public void ResetToInactivePreview(bool visible, bool shootable)
     {
         gameObject.SetActive(true);
 
         isActiveInMission = false;
 
         if (targetHealth != null)
+        {
+            targetHealth.ClearSpawnedDestroyEffect();
             targetHealth.ResetTarget();
+        }
 
         SetRenderersEnabled(visible);
         SetCollidersEnabled(visible && shootable);
+    }
+
+    public void PreserveDestroyedState(bool hideVisual, bool disableColliders)
+    {
+        isActiveInMission = false;
+
+        if (disableColliders)
+            SetCollidersEnabled(false);
+
+        if (hideVisual)
+            SetRenderersEnabled(false);
+
+        Debug.Log($"Mission target preserved after completion: {name}");
     }
 
     public void NotifyDestroyed(TargetHealth destroyedTargetHealth, DamageInfo damageInfo)

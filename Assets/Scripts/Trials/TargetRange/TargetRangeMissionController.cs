@@ -77,10 +77,12 @@ public class TargetRangeMissionController : MonoBehaviour
             if (activeMission == null)
                 return 0;
 
-            return activeMission.requiredDestroyedTargets;
+            if (activeTargetGroup != null)
+                return activeTargetGroup.GetGoalTargetCount(activeMission);
+
+            return Mathf.Max(1, activeMission.requiredDestroyedTargets);
         }
     }
-
     public float TimeLimitSeconds
     {
         get
@@ -290,7 +292,7 @@ public class TargetRangeMissionController : MonoBehaviour
     public void StopActiveMission()
     {
         if (activeTargetGroup != null)
-            activeTargetGroup.DeactivateGroup();
+            activeTargetGroup.DeactivateGroup(false);
 
         if (armedWeaponPedestal != null)
             armedWeaponPedestal.Disarm();
@@ -332,7 +334,13 @@ public class TargetRangeMissionController : MonoBehaviour
         Debug.Log($"Target range mission completed: {activeMission.displayName}");
 
         if (activeTargetGroup != null)
-            activeTargetGroup.DeactivateGroup();
+        {
+            bool preserveDestroyedState =
+                activeMission != null &&
+                !activeMission.respawnTargetsAfterDestroyed;
+
+            activeTargetGroup.DeactivateGroup(preserveDestroyedState);
+        }
 
         OnMissionStateChanged?.Invoke();
         OnMissionCompleted?.Invoke();
@@ -348,7 +356,7 @@ public class TargetRangeMissionController : MonoBehaviour
         Debug.Log($"Target range mission failed: {activeMission.displayName}");
 
         if (activeTargetGroup != null)
-            activeTargetGroup.DeactivateGroup();
+            activeTargetGroup.DeactivateGroup(false);
 
         OnMissionStateChanged?.Invoke();
         OnMissionFailed?.Invoke();

@@ -30,5 +30,5 @@ MonoBehaviour:
   reloadTime: 1.25
   infiniteReserveAmmo: 1
   projectilesPerShot: 1
-  spreadAngle: 1.25
+  spreadAngle: 0
   xpPerUse: 10

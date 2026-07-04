@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoData
   ammoId: ammo_9mm
   displayName: 9mm Round
+  hudDisplayName: 
   ammoIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
   hudColor: {r: 1, g: 1, b: 1, a: 1}
   caliberLabel: 9mm
   description: 9mm Pistol Round
   projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
   damage: 10
-  projectileSpeed: 35
+  projectileSpeed: 50
   projectileLifetime: 10
   xpPerUse: 10

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionData
   missionId: target_range_ar_challenge
   displayName: AR Drill
-  description: Destroy 3 AR targets before the time runs out.
+  description: Destroy  AR targets before the time runs out.
   executionMode: 1
   sceneName: 
   unlockedByDefault: 1
@@ -23,7 +23,12 @@ MonoBehaviour:
   equipWeaponRewardOnStart: 0
   targetGroupId: ar_targets
   timeLimitSeconds: 60
-  requiredDestroyedTargets: 3
-  maxActiveTargets: 2
-  targetRespawnDelay: 2
+  requiredDestroyedTargets: 25
+  maxActiveTargets: 100
+  respawnTargetsAfterDestroyed: 0
+  activateAllTargetsAtStart: 1
+  useTargetSlotCountAsGoal: 1
+  targetRespawnDelay: 999
+  hideDestroyedTargetVisual: 1
+  disableDestroyedTargetColliders: 1
   countsTowardTargetRangeTrialCompletion: 1

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7286757601976577595}
   - component: {fileID: 8570704006256038760}
   - component: {fileID: 5545952354340131035}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2354654465897526320}
   - component: {fileID: 7797982174301995824}
   - component: {fileID: 1419129249867275962}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Projectile_PistolRound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 5583968047184097160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.121, y: 1.69, z: -8.97}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -140,12 +140,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.02
-  m_Center: {x: 0.0285, y: 0, z: 0}
+  m_Radius: 0.022
+  m_Center: {x: 0, y: 0, z: 0.03}
 --- !u!54 &7797982174301995824
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5583968047184097160}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -168,11 +168,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &1419129249867275962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +185,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd9a73472259f24f9b30925d86ad796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  useSweepDetection: 1
+  sweepRadius: 0.04
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 65
+  destroyOnNonDamageableSolidHit: 0
+  missBehavior: 1
+  activeFlightTimeBeforeDrop: 0.2
+  destroyAfterDropTime: 8
+  droppedVelocityMultiplier: 0.15
+  makeColliderSolidWhenDropped: 1
 --- !u!1 &9199579066632090733
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +207,8 @@ GameObject:
   - component: {fileID: 8070906625433050916}
   - component: {fileID: 6630662488234792279}
   - component: {fileID: 15167826200952211}
-  m_Layer: 0
+  - component: {fileID: 2012577422465144109}
+  m_Layer: 7
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,3 +288,26 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &2012577422465144109
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9199579066632090733}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2.380664
+  m_Direction: 1
+  m_Center: {x: 0.000000042332843, y: 0.041253187, z: -0.000000084665686}

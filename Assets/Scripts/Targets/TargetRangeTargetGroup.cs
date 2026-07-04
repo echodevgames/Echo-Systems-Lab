@@ -26,7 +26,37 @@ public class TargetRangeTargetGroup : MonoBehaviour
     private bool groupActive;
 
     public string TargetGroupId => targetGroupId;
+    public int TargetSlotCount => GetAssignedTargetSlotCount();
 
+    public int GetGoalTargetCount(TargetRangeMissionData mission)
+    {
+        if (mission == null)
+            return Mathf.Max(1, GetAssignedTargetSlotCount());
+
+        if (mission.useTargetSlotCountAsGoal)
+            return Mathf.Max(1, GetAssignedTargetSlotCount());
+
+        return Mathf.Max(1, mission.requiredDestroyedTargets);
+    }
+
+    private int GetAssignedTargetSlotCount()
+    {
+        int count = 0;
+
+        if (targetSlots != null)
+        {
+            foreach (TargetHealth target in targetSlots)
+            {
+                if (target != null)
+                    count++;
+            }
+        }
+
+        if (count <= 0)
+            count = allMissionTargets.Count;
+
+        return count;
+    }
     private void Awake()
     {
         PrepareTargetSlots();
@@ -43,9 +73,9 @@ public class TargetRangeTargetGroup : MonoBehaviour
         StopRespawnRoutines();
 
         activeTargets.Clear();
-        HideAllTargets();
+        ResetAndHideAllTargets();
 
-        int startingTargetCount = Mathf.Min(GetMaxActiveTargets(), allMissionTargets.Count);
+        int startingTargetCount = GetStartingTargetCount();
 
         for (int i = 0; i < startingTargetCount; i++)
             ActivateNextTarget();
@@ -53,19 +83,26 @@ public class TargetRangeTargetGroup : MonoBehaviour
         Debug.Log($"Activated target group: {targetGroupId} with {startingTargetCount}/{allMissionTargets.Count} active targets.");
     }
 
-    public void DeactivateGroup()
+    public void DeactivateGroup(bool preserveDestroyedState)
     {
         groupActive = false;
 
         StopRespawnRoutines();
         activeTargets.Clear();
 
-        ApplyInactiveVisibility();
+        if (preserveDestroyedState)
+        {
+            PreserveDestroyedTargets();
+        }
+        else
+        {
+            ApplyInactiveVisibility();
+        }
 
         activeController = null;
         activeMission = null;
 
-        Debug.Log($"Deactivated target group: {targetGroupId}");
+        Debug.Log($"Deactivated target group: {targetGroupId}. Preserve destroyed state: {preserveDestroyedState}");
     }
 
     public void HandleTargetDestroyed(
@@ -89,22 +126,28 @@ public class TargetRangeTargetGroup : MonoBehaviour
         if (controller == null)
         {
             Debug.LogWarning($"{name} has no active TargetRangeMissionController while target was destroyed.");
-            missionTarget.HideForMission();
+            missionTarget.HideForMission(true, true);
             return;
         }
 
         if (!controller.IsMissionRunning)
         {
             Debug.LogWarning($"{name} received destroyed target event, but mission is not running.");
-            missionTarget.HideForMission();
+            missionTarget.HideForMission(true, true);
             return;
         }
 
         controller.RegisterMissionTargetDestroyed(targetHealth, damageInfo);
 
-        missionTarget.HideForMission();
+        bool hideVisual = activeMission != null && activeMission.hideDestroyedTargetVisual;
+        bool disableColliders = activeMission == null || activeMission.disableDestroyedTargetColliders;
+
+        missionTarget.HideForMission(hideVisual, disableColliders);
 
         if (!groupActive)
+            return;
+
+        if (activeMission == null || !activeMission.respawnTargetsAfterDestroyed)
             return;
 
         Coroutine routine = StartCoroutine(RespawnAfterDelay());
@@ -127,13 +170,13 @@ public class TargetRangeTargetGroup : MonoBehaviour
 
         if (activeController == null || !activeController.IsMissionRunning)
         {
-            Debug.Log($"Respawn cancelled because mission is no longer running.");
+            Debug.Log("Respawn cancelled because mission is no longer running.");
             yield break;
         }
 
         if (activeTargets.Count >= GetMaxActiveTargets())
         {
-            Debug.Log($"Respawn skipped because active target cap is already full.");
+            Debug.Log("Respawn skipped because active target cap is already full.");
             yield break;
         }
 
@@ -215,14 +258,14 @@ public class TargetRangeTargetGroup : MonoBehaviour
         return availableTargets;
     }
 
-    private void HideAllTargets()
+    private void ResetAndHideAllTargets()
     {
         foreach (TargetRangeMissionTarget missionTarget in allMissionTargets)
         {
             if (missionTarget == null)
                 continue;
 
-            missionTarget.HideForMission();
+            missionTarget.ResetToInactivePreview(false, false);
         }
     }
 
@@ -233,8 +276,33 @@ public class TargetRangeTargetGroup : MonoBehaviour
             if (missionTarget == null)
                 continue;
 
-            missionTarget.SetPreviewState(showTargetsBeforeMission, previewTargetsAreShootable);
+            missionTarget.ResetToInactivePreview(showTargetsBeforeMission, previewTargetsAreShootable);
         }
+    }
+
+    private void PreserveDestroyedTargets()
+    {
+        bool hideVisual = activeMission != null && activeMission.hideDestroyedTargetVisual;
+        bool disableColliders = activeMission == null || activeMission.disableDestroyedTargetColliders;
+
+        foreach (TargetRangeMissionTarget missionTarget in allMissionTargets)
+        {
+            if (missionTarget == null)
+                continue;
+
+            missionTarget.PreserveDestroyedState(hideVisual, disableColliders);
+        }
+    }
+
+    private int GetStartingTargetCount()
+    {
+        if (activeMission == null)
+            return Mathf.Min(1, allMissionTargets.Count);
+
+        if (activeMission.activateAllTargetsAtStart)
+            return allMissionTargets.Count;
+
+        return Mathf.Min(GetMaxActiveTargets(), allMissionTargets.Count);
     }
 
     private int GetMaxActiveTargets()

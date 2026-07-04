@@ -15,12 +15,16 @@ public class TargetHealth : MonoBehaviour, IDamageable
 
     [Header("Visual Feedback")]
     [SerializeField] private GameObject destroyEffect;
+    [SerializeField] private Vector3 destroyEffectOffset;
+    [SerializeField] private Vector3 destroyEffectEulerOffset;
+    [SerializeField] private bool parentDestroyEffectToTarget = false;
     [SerializeField] private bool destroyOnDeath = true;
 
     private int currentHealth;
     private bool isDestroyed;
 
     private TargetRangeMissionTarget missionTarget;
+    private GameObject spawnedDestroyEffect;
 
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
@@ -52,9 +56,18 @@ public class TargetHealth : MonoBehaviour, IDamageable
 
     public void ResetTarget()
     {
+        ClearSpawnedDestroyEffect();
         ResetTargetHealthOnly();
 
         Debug.Log($"{name} reset: {currentHealth}/{maxHealth}");
+    }
+
+    public void ClearSpawnedDestroyEffect()
+    {
+        if (spawnedDestroyEffect != null)
+            Destroy(spawnedDestroyEffect);
+
+        spawnedDestroyEffect = null;
     }
 
     private void ResetTargetHealthOnly()
@@ -91,8 +104,7 @@ public class TargetHealth : MonoBehaviour, IDamageable
 
         AwardWeaponTypeXp(damageInfo, weaponTypeXpOnDestroyed, "Target destroyed");
 
-        if (destroyEffect != null)
-            Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        SpawnDestroyEffect();
 
         TargetRangeMissionTarget foundMissionTarget = missionTarget;
 
@@ -120,6 +132,26 @@ public class TargetHealth : MonoBehaviour, IDamageable
         else
             gameObject.SetActive(false);
     }
+
+    private void SpawnDestroyEffect()
+    {
+        if (destroyEffect == null)
+            return;
+
+        ClearSpawnedDestroyEffect();
+
+        Vector3 spawnPosition = transform.position + transform.TransformDirection(destroyEffectOffset);
+        Quaternion spawnRotation = transform.rotation * Quaternion.Euler(destroyEffectEulerOffset);
+
+        Transform effectParent = parentDestroyEffectToTarget ? transform : null;
+
+        spawnedDestroyEffect = Instantiate(
+            destroyEffect,
+            spawnPosition,
+            spawnRotation,
+            effectParent);
+    }
+
     private void AwardWeaponTypeXp(DamageInfo damageInfo, int amount, string reason)
     {
         if (amount <= 0)
@@ -132,7 +164,6 @@ public class TargetHealth : MonoBehaviour, IDamageable
 
         Debug.Log($"{reason}: +{amount} {damageInfo.weaponType} XP. Total: {PlayerProgress.GetWeaponTypeXp(damageInfo.weaponType)}");
     }
-
 }
 
 //-----TargetHealth.cs END-----

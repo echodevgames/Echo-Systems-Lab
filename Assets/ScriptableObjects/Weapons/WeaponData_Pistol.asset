@@ -18,16 +18,16 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
   description: A basic Pistol
   weaponType: Pistol
-  viewModelPrefab: {fileID: 7082093157589730192, guid: 0c6b8f3bcfd37224b8a97c447ebf1ee0, type: 3}
+  viewModelPrefab: {fileID: 132593515715709520, guid: a7d05a5da5deaf64eac97ec77986ccb0, type: 3}
   viewLocalPosition: {x: 0, y: -0.25, z: 0.15}
-  viewLocalEulerAngles: {x: 90, y: 90, z: 0}
-  viewLocalScale: {x: 1, y: 1, z: 1}
+  viewLocalEulerAngles: {x: 0, y: 180, z: 0}
+  viewLocalScale: {x: 2, y: 2, z: 2}
   fireMode: 0
   defaultAmmo: {fileID: 11400000, guid: a45279fe36f6a6d42b814c50dc2c673d, type: 2}
-  fireRate: 0.25
+  fireRate: 0.2
   isAutomatic: 0
   clipSize: 16
-  reloadTime: 0.5
+  reloadTime: 0.4
   infiniteReserveAmmo: 1
   projectilesPerShot: 1
   spreadAngle: 0.1

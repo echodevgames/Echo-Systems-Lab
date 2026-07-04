@@ -23,7 +23,7 @@ MonoBehaviour:
   equipWeaponRewardOnStart: 0
   targetGroupId: pistol_targets
   timeLimitSeconds: 60
-  requiredDestroyedTargets: 50
-  maxActiveTargets: 15
-  targetRespawnDelay: 1
+  requiredDestroyedTargets: 25
+  maxActiveTargets: 40
+  targetRespawnDelay: 4
   countsTowardTargetRangeTrialCompletion: 1

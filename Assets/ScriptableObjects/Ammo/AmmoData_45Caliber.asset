@@ -21,6 +21,6 @@ MonoBehaviour:
   description: .45 Caliber Magnum Round
   projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
   damage: 30
-  projectileSpeed: 30
-  projectileLifetime: 10
+  projectileSpeed: 60
+  projectileLifetime: 20
   xpPerUse: 10
