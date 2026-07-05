@@ -25,10 +25,15 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     [SerializeField] private string fallbackReloadTriggerName = "Reload";
     [SerializeField] private string fallbackEquipTriggerName = "Equip";
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource weaponAudioSource;
+    [SerializeField] private bool autoCreateAudioSource = true;
+
     [Header("Debug")]
     [SerializeField] private bool debugLogs;
 
     private Transform activeViewModel;
+    private Transform activeMuzzlePoint;
     private Animator activeAnimator;
     private WeaponHandlingData activeHandlingData;
 
@@ -41,6 +46,11 @@ public class PlayerWeaponViewModelController : MonoBehaviour
 
     private Vector3 currentPositionOffset;
     private Vector3 currentRotationOffset;
+
+    private void Awake()
+    {
+        SetupAudioSource();
+    }
 
     private void Update()
     {
@@ -78,6 +88,7 @@ public class PlayerWeaponViewModelController : MonoBehaviour
         activeHandlingData = handlingData;
 
         activeAnimator = null;
+        activeMuzzlePoint = null;
 
         targetPositionOffset = Vector3.zero;
         targetRotationOffset = Vector3.zero;
@@ -92,6 +103,10 @@ public class PlayerWeaponViewModelController : MonoBehaviour
         baseLocalScale = activeViewModel.localScale;
 
         activeAnimator = activeViewModel.GetComponentInChildren<Animator>(true);
+        activeMuzzlePoint = FindChildRecursive(activeViewModel, GetMuzzlePointName());
+
+        if (activeMuzzlePoint == null && debugLogs)
+            Debug.LogWarning($"{activeViewModel.name} has no child named {GetMuzzlePointName()}.");
 
         ApplyViewModelTransform();
         PlayEquipFeedback();
@@ -103,6 +118,7 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     public void ClearActiveViewModel()
     {
         activeViewModel = null;
+        activeMuzzlePoint = null;
         activeAnimator = null;
         activeHandlingData = null;
 
@@ -116,6 +132,9 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     {
         AddPositionKick(GetFirePositionKick());
         AddRotationKick(GetFireRotationKick() + GetRandomRotationKick());
+
+        SpawnMuzzleFlash();
+        PlayFireAudio();
 
         TrySetAnimatorTrigger(GetFireTriggerName());
 
@@ -137,6 +156,91 @@ public class PlayerWeaponViewModelController : MonoBehaviour
 
         if (debugLogs)
             Debug.Log("View model equip feedback played.");
+    }
+
+    private void SpawnMuzzleFlash()
+    {
+        GameObject muzzleFlashPrefab = GetMuzzleFlashPrefab();
+
+        if (muzzleFlashPrefab == null)
+            return;
+
+        Transform muzzleTransform = activeMuzzlePoint != null
+            ? activeMuzzlePoint
+            : activeViewModel;
+
+        if (muzzleTransform == null)
+            return;
+
+        Vector3 localPositionOffset = GetMuzzleFlashLocalPositionOffset();
+        Quaternion localRotationOffset = Quaternion.Euler(GetMuzzleFlashLocalEulerOffset());
+
+        GameObject spawnedFlash;
+
+        if (ShouldParentMuzzleFlashToMuzzle())
+        {
+            spawnedFlash = Instantiate(muzzleFlashPrefab, muzzleTransform);
+            spawnedFlash.transform.localPosition = localPositionOffset;
+            spawnedFlash.transform.localRotation = localRotationOffset;
+        }
+        else
+        {
+            Vector3 spawnPosition = muzzleTransform.TransformPoint(localPositionOffset);
+            Quaternion spawnRotation = muzzleTransform.rotation * localRotationOffset;
+
+            spawnedFlash = Instantiate(
+                muzzleFlashPrefab,
+                spawnPosition,
+                spawnRotation);
+        }
+
+        float lifetime = GetMuzzleFlashLifetime();
+
+        if (lifetime > 0f)
+            Destroy(spawnedFlash, lifetime);
+    }
+
+    private void PlayFireAudio()
+    {
+        AudioClip[] clips = GetFireAudioClips();
+
+        if (clips == null || clips.Length == 0)
+            return;
+
+        AudioClip clip = clips[Random.Range(0, clips.Length)];
+
+        if (clip == null)
+            return;
+
+        if (weaponAudioSource == null)
+            SetupAudioSource();
+
+        if (weaponAudioSource == null)
+            return;
+
+        Vector2 pitchRange = GetFireAudioPitchRange();
+        float minPitch = Mathf.Min(pitchRange.x, pitchRange.y);
+        float maxPitch = Mathf.Max(pitchRange.x, pitchRange.y);
+
+        weaponAudioSource.pitch = Random.Range(minPitch, maxPitch);
+        weaponAudioSource.PlayOneShot(clip, GetFireAudioVolume());
+    }
+
+    private void SetupAudioSource()
+    {
+        if (weaponAudioSource != null)
+            return;
+
+        weaponAudioSource = GetComponent<AudioSource>();
+
+        if (weaponAudioSource == null && autoCreateAudioSource)
+            weaponAudioSource = gameObject.AddComponent<AudioSource>();
+
+        if (weaponAudioSource == null)
+            return;
+
+        weaponAudioSource.playOnAwake = false;
+        weaponAudioSource.spatialBlend = 0f;
     }
 
     private void AddPositionKick(Vector3 kick)
@@ -192,6 +296,25 @@ public class PlayerWeaponViewModelController : MonoBehaviour
             return;
 
         activeAnimator.SetTrigger(triggerName);
+    }
+
+    private Transform FindChildRecursive(Transform parent, string childName)
+    {
+        if (parent == null || string.IsNullOrWhiteSpace(childName))
+            return null;
+
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName)
+                return child;
+
+            Transform found = FindChildRecursive(child, childName);
+
+            if (found != null)
+                return found;
+        }
+
+        return null;
     }
 
     private Vector3 GetFirePositionKick()
@@ -283,6 +406,69 @@ public class PlayerWeaponViewModelController : MonoBehaviour
         return activeHandlingData != null
             ? activeHandlingData.equipTriggerName
             : fallbackEquipTriggerName;
+    }
+
+    private GameObject GetMuzzleFlashPrefab()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.muzzleFlashPrefab
+            : null;
+    }
+
+    private string GetMuzzlePointName()
+    {
+        return activeHandlingData != null &&
+               !string.IsNullOrWhiteSpace(activeHandlingData.muzzlePointName)
+            ? activeHandlingData.muzzlePointName
+            : "MuzzlePoint";
+    }
+
+    private Vector3 GetMuzzleFlashLocalPositionOffset()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.muzzleFlashLocalPositionOffset
+            : Vector3.zero;
+    }
+
+    private Vector3 GetMuzzleFlashLocalEulerOffset()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.muzzleFlashLocalEulerOffset
+            : Vector3.zero;
+    }
+
+    private float GetMuzzleFlashLifetime()
+    {
+        return activeHandlingData != null
+            ? Mathf.Max(0f, activeHandlingData.muzzleFlashLifetime)
+            : 0.08f;
+    }
+
+    private bool ShouldParentMuzzleFlashToMuzzle()
+    {
+        return activeHandlingData == null ||
+               activeHandlingData.parentMuzzleFlashToMuzzle;
+    }
+
+    private AudioClip[] GetFireAudioClips()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.fireAudioClips
+            : null;
+    }
+
+    private float GetFireAudioVolume()
+    {
+        return activeHandlingData != null
+            ? Mathf.Clamp01(activeHandlingData.fireAudioVolume)
+            : 1f;
+    }
+
+    private Vector2 GetFireAudioPitchRange()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.fireAudioPitchRange
+            : new Vector2(1f, 1f);
     }
 }
 

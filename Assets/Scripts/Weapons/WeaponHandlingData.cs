@@ -24,6 +24,44 @@ public class WeaponHandlingData : ScriptableObject
     public float positionReturnSpeed = 12f;
     public float rotationReturnSpeed = 12f;
 
+    [Header("Muzzle Flash")]
+    public GameObject muzzleFlashPrefab;
+    public string muzzlePointName = "MuzzlePoint";
+    public Vector3 muzzleFlashLocalPositionOffset;
+    public Vector3 muzzleFlashLocalEulerOffset;
+    public float muzzleFlashLifetime = 0.08f;
+    public bool parentMuzzleFlashToMuzzle = true;
+
+    [Header("Fire Audio")]
+    public AudioClip[] fireAudioClips;
+    [Range(0f, 1f)] public float fireAudioVolume = 1f;
+    public Vector2 fireAudioPitchRange = new Vector2(0.96f, 1.04f);
+
+    [Header("Reticle Recoil")]
+    public bool useReticleRecoil = true;
+
+    [Tooltip("Horizontal UI kick in pixels. Negative = left, positive = right.")]
+    public Vector2 reticleKickXRange = new Vector2(-4f, 4f);
+
+    [Tooltip("Vertical UI kick in pixels. Positive = up.")]
+    public Vector2 reticleKickYRange = new Vector2(6f, 12f);
+
+    [Tooltip("Maximum distance the reticle can be pushed away from center.")]
+    public float maxReticleKickOffset = 22f;
+
+    [Tooltip("How quickly the reticle catches up to the kick target.")]
+    public float reticleKickSnappiness = 28f;
+
+    [Tooltip("How quickly the reticle returns to center.")]
+    public float reticleReturnSpeed = 16f;
+
+    [Header("Reticle Pulse")]
+    public bool useReticleScalePulse = true;
+    public float reticleScaleKick = 0.12f;
+    public float maxReticleScaleKick = 0.25f;
+    public float reticleScaleSnappiness = 32f;
+    public float reticleScaleReturnSpeed = 18f;
+
     [Header("Animator Triggers")]
     public bool useAnimatorTriggers = true;
     public string fireTriggerName = "Fire";

@@ -249,6 +249,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitRedVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 6158178126222161996, guid: 16715e3393500fc4188117a7444559d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8634194124796097977, guid: 16715e3393500fc4188117a7444559d0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1

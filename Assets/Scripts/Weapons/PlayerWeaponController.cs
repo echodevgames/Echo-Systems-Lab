@@ -12,6 +12,7 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private PlayerInputReader inputReader;
     [SerializeField] private PlayerAmmoInventory ammoInventory;
     [SerializeField] private PlayerWeaponViewModelController viewModelController;
+    [SerializeField] private PlayerReticleRecoilUI reticleRecoilUI;
 
     [Header("Loadout")]
     [SerializeField] private bool autoEquipSavedWeapon = true;
@@ -72,6 +73,9 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (viewModelController == null)
             viewModelController = GetComponent<PlayerWeaponViewModelController>();
+
+        if (reticleRecoilUI == null)
+            reticleRecoilUI = FindFirstObjectByType<PlayerReticleRecoilUI>();
     }
 
     private void OnEnable()
@@ -310,6 +314,9 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (viewModelController != null)
             viewModelController.PlayFireFeedback();
+
+        if (reticleRecoilUI != null)
+            reticleRecoilUI.PlayFireFeedback(currentWeapon.handlingData);
 
         Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 

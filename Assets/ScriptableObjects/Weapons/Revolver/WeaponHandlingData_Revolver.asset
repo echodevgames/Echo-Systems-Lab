@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d31819e8a3042964fa355e5294192371, type: 3}
-  m_Name: WeaponHandlingData_Sniper
+  m_Name: WeaponHandlingData_Revolver
   m_EditorClassIdentifier: Assembly-CSharp::WeaponHandlingData
   firePositionKick: {x: 0.5, y: 0.48, z: 0}
   fireRotationKick: {x: -135, y: 90, z: -33}
@@ -21,6 +21,20 @@ MonoBehaviour:
   rotationSnappiness: 12
   positionReturnSpeed: 8
   rotationReturnSpeed: 8
+  muzzleFlashPrefab: {fileID: 6705112573345771371, guid: 42e3e231f6aa39d458a72d58468807a1, type: 3}
+  muzzlePointName: MuzzlePoint
+  muzzleFlashLocalPositionOffset: {x: 0, y: 0, z: 0}
+  muzzleFlashLocalEulerOffset: {x: 0, y: 0, z: 0}
+  muzzleFlashLifetime: 0.08
+  parentMuzzleFlashToMuzzle: 1
+  fireAudioClips:
+  - {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
+  - {fileID: 8300000, guid: 4d6281aa604094f04839cffa502096c0, type: 3}
+  - {fileID: 8300000, guid: 0dbe91efb8ee94e6695ef0f552d202ce, type: 3}
+  - {fileID: 8300000, guid: b33e2cff5225f4437a43a11d35763d46, type: 3}
+  - {fileID: 8300000, guid: b2d159f7e00d44d9bbc2d50a0c4fef59, type: 3}
+  fireAudioVolume: 1
+  fireAudioPitchRange: {x: 0.23, y: 0.4}
   useAnimatorTriggers: 1
   fireTriggerName: Fire
   reloadTriggerName: Reload

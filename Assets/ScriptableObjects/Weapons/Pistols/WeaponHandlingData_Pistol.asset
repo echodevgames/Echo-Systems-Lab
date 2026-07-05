@@ -10,17 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d31819e8a3042964fa355e5294192371, type: 3}
-  m_Name: WeaponHandlingData_Revolver
+  m_Name: WeaponHandlingData_Pistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponHandlingData
   firePositionKick: {x: 0.5, y: 0.48, z: 0}
-  fireRotationKick: {x: -135, y: 90, z: -33}
+  fireRotationKick: {x: 135, y: 25, z: -33}
   randomRotationKick: {x: 33, y: 33, z: 33}
   maxPositionOffset: {x: 10, y: 10, z: 10}
   maxRotationOffset: {x: 145, y: 100, z: 45}
   positionSnappiness: 12
   rotationSnappiness: 12
-  positionReturnSpeed: 8
-  rotationReturnSpeed: 8
+  positionReturnSpeed: 16
+  rotationReturnSpeed: 16
+  muzzleFlashPrefab: {fileID: 6705112573345771371, guid: 42e3e231f6aa39d458a72d58468807a1, type: 3}
+  muzzlePointName: MuzzlePoint
+  muzzleFlashLocalPositionOffset: {x: 0, y: 0, z: 0}
+  muzzleFlashLocalEulerOffset: {x: 0, y: 0, z: 0}
+  muzzleFlashLifetime: 0.08
+  parentMuzzleFlashToMuzzle: 1
+  fireAudioClips:
+  - {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
+  fireAudioVolume: 1
+  fireAudioPitchRange: {x: 0.5, y: 0.5}
   useAnimatorTriggers: 1
   fireTriggerName: Fire
   reloadTriggerName: Reload

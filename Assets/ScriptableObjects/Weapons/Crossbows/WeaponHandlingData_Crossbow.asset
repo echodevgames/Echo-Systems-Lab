@@ -21,6 +21,20 @@ MonoBehaviour:
   rotationSnappiness: 22
   positionReturnSpeed: 22
   rotationReturnSpeed: 22
+  muzzleFlashPrefab: {fileID: 6705112573345771371, guid: 42e3e231f6aa39d458a72d58468807a1, type: 3}
+  muzzlePointName: MuzzlePoint
+  muzzleFlashLocalPositionOffset: {x: 0, y: 0, z: 0}
+  muzzleFlashLocalEulerOffset: {x: 0, y: 0, z: 0}
+  muzzleFlashLifetime: 0.08
+  parentMuzzleFlashToMuzzle: 1
+  fireAudioClips:
+  - {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
+  - {fileID: 8300000, guid: 4d6281aa604094f04839cffa502096c0, type: 3}
+  - {fileID: 8300000, guid: 0dbe91efb8ee94e6695ef0f552d202ce, type: 3}
+  - {fileID: 8300000, guid: b33e2cff5225f4437a43a11d35763d46, type: 3}
+  - {fileID: 8300000, guid: b2d159f7e00d44d9bbc2d50a0c4fef59, type: 3}
+  fireAudioVolume: 1
+  fireAudioPitchRange: {x: 0.5, y: 0.5}
   useAnimatorTriggers: 1
   fireTriggerName: Fire
   reloadTriggerName: Reload
