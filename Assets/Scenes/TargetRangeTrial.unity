@@ -13968,7 +13968,7 @@ GameObject:
   - component: {fileID: 506822546}
   - component: {fileID: 506822545}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ReticleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13981,17 +13981,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506822543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1981975199}
+  m_Father: {fileID: 2092202916}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &506822545
 MonoBehaviour:
@@ -53627,7 +53627,7 @@ GameObject:
   - component: {fileID: 1981975201}
   - component: {fileID: 1981975200}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ReticleCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53645,7 +53645,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 506822544}
+  - {fileID: 2092202916}
   m_Father: {fileID: 1106670158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -57343,6 +57343,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1669781109300623314, guid: e41f2185f1c11a8409ff3cd219f789a1, type: 3}
   m_PrefabInstance: {fileID: 2092114526}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2092202915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2092202916}
+  - component: {fileID: 2092202917}
+  m_Layer: 5
+  m_Name: ReticleRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2092202916
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092202915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 506822544}
+  m_Father: {fileID: 1981975199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2092202917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092202915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf0860a5351d2e4883c48a8f048e93b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerReticleRecoilUI
+  reticleRoot: {fileID: 2092202916}
+  inputReader: {fileID: 0}
+  characterController: {fileID: 0}
+  fallbackUseReticleRecoil: 1
+  fallbackUseWeaponKickForReticle: 1
+  fallbackKickXRange: {x: -4, y: 4}
+  fallbackKickYRange: {x: 6, y: 12}
+  fallbackPixelsPerWeaponRotationDegree: {x: 2.2, y: 2.8}
+  fallbackRollToHorizontalInfluence: 0.35
+  fallbackMaxKickOffset: 22
+  fallbackKickSnappiness: 28
+  fallbackReturnSpeed: 16
+  fallbackUsePassiveMotion: 1
+  fallbackUseLookSway: 1
+  fallbackLookSwayAmount: {x: 1.5, y: 1.25}
+  fallbackUseMovementBob: 1
+  fallbackMovementBobAmount: {x: 1.4, y: 0.8}
+  fallbackMovementBobFrequency: 8
+  fallbackMovementInputThreshold: 0.1
+  fallbackUseIdleBob: 1
+  fallbackIdleBobAmount: {x: 0, y: 0.35}
+  fallbackIdleBobFrequency: 1.6
+  fallbackMaxPassiveOffset: 6
+  fallbackPassiveSnappiness: 18
+  fallbackUseScalePulse: 1
+  fallbackScaleKick: 0.12
+  fallbackMaxScaleKick: 0.25
+  fallbackScaleSnappiness: 32
+  fallbackScaleReturnSpeed: 18
+  debugLogs: 0
 --- !u!1001 &2093271180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57744,6 +57823,14 @@ PrefabInstance:
       propertyPath: debugAimRays
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2357343401271460194, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+      propertyPath: reticleRecoilUI
+      value: 
+      objectReference: {fileID: 2092202917}
+    - target: {fileID: 2357343401271460194, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+      propertyPath: viewModelController
+      value: 
+      objectReference: {fileID: 2120182970}
     - target: {fileID: 3793965773873358335, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
       propertyPath: m_Name
       value: Player
@@ -57867,6 +57954,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3ccf7ddb1090540820a377dd604c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsController
+--- !u!114 &2120182970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2292471376596136282, guid: c3f894ba46d4a9c4cad6a20f9f3520ad, type: 3}
+  m_PrefabInstance: {fileID: 2120182961}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9271b3f4a6565574498d346c6c2d56ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponViewModelController
 --- !u!1 &2122665298
 GameObject:
   m_ObjectHideFlags: 0

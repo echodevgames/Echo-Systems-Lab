@@ -220,6 +220,9 @@ public class PlayerWeaponController : MonoBehaviour
         SpawnViewModel();
         FillClip();
 
+        if (reticleRecoilUI != null)
+            reticleRecoilUI.SetActiveHandlingData(currentWeapon.handlingData);
+
         TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
 
         if (missionController != null)
@@ -311,12 +314,22 @@ public class PlayerWeaponController : MonoBehaviour
         TargetRangeMissionController missionController = TargetRangeMissionController.Instance;
         if (missionController != null)
             missionController.RegisterMissionShot(currentWeapon.weaponId, currentWeapon.weaponType);
+        Vector3 sharedWeaponRotationKick = Vector3.zero;
+        bool hasSharedWeaponRotationKick = false;
 
         if (viewModelController != null)
-            viewModelController.PlayFireFeedback();
+        {
+            sharedWeaponRotationKick = viewModelController.PlayFireFeedback();
+            hasSharedWeaponRotationKick = true;
+        }
 
         if (reticleRecoilUI != null)
-            reticleRecoilUI.PlayFireFeedback(currentWeapon.handlingData);
+        {
+            reticleRecoilUI.PlayFireFeedback(
+                currentWeapon.handlingData,
+                sharedWeaponRotationKick,
+                hasSharedWeaponRotationKick);
+        }
 
         Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 
@@ -684,6 +697,9 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (viewModelController != null)
             viewModelController.ClearActiveViewModel();
+
+        if (reticleRecoilUI != null)
+            reticleRecoilUI.ClearActiveHandlingData();
 
         if (clearProgress)
             PlayerProgress.ClearActiveWeapon();

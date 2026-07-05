@@ -21,6 +21,25 @@ MonoBehaviour:
   rotationSnappiness: 24
   positionReturnSpeed: 12
   rotationReturnSpeed: 12
+  useLookSway: 1
+  lookSwayPositionAmount: {x: 0.015, y: 0.015, z: 0}
+  lookSwayRotationAmount: {x: 1.5, y: 2.5, z: 1}
+  maxLookSwayPosition: {x: 0.06, y: 0.06, z: 0.02}
+  maxLookSwayRotation: {x: 6, y: 8, z: 5}
+  lookSwaySnappiness: 14
+  lookSwayReturnSpeed: 10
+  useMovementBob: 1
+  movementBobPositionAmount: {x: 0.025, y: 0.018, z: 0.01}
+  movementBobRotationAmount: {x: 1.2, y: 0.8, z: 1.6}
+  movementBobFrequency: 8
+  movementBobSnappiness: 12
+  movementBobReturnSpeed: 10
+  movementInputThreshold: 0.1
+  useIdleBob: 1
+  idleBobPositionAmount: {x: 0, y: 0.006, z: 0}
+  idleBobRotationAmount: {x: 0.25, y: 0.15, z: 0.15}
+  idleBobFrequency: 1.6
+  idleBobSnappiness: 8
   muzzleFlashPrefab: {fileID: 6705112573345771371, guid: 42e3e231f6aa39d458a72d58468807a1, type: 3}
   muzzlePointName: MuzzlePoint
   muzzleFlashLocalPositionOffset: {x: 0, y: 0, z: 0}
@@ -29,12 +48,34 @@ MonoBehaviour:
   parentMuzzleFlashToMuzzle: 1
   fireAudioClips:
   - {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
-  - {fileID: 8300000, guid: 4d6281aa604094f04839cffa502096c0, type: 3}
-  - {fileID: 8300000, guid: 0dbe91efb8ee94e6695ef0f552d202ce, type: 3}
-  - {fileID: 8300000, guid: b33e2cff5225f4437a43a11d35763d46, type: 3}
-  - {fileID: 8300000, guid: b2d159f7e00d44d9bbc2d50a0c4fef59, type: 3}
   fireAudioVolume: 1
-  fireAudioPitchRange: {x: 0.5, y: 0.5}
+  fireAudioPitchRange: {x: 0.9, y: 1.4}
+  useReticleRecoil: 1
+  useWeaponKickForReticle: 1
+  reticleKickXRange: {x: -5, y: 5}
+  reticleKickYRange: {x: 8, y: 14}
+  reticlePixelsPerWeaponRotationDegree: {x: 2.2, y: 2.8}
+  reticleRollToHorizontalInfluence: 0.35
+  maxReticleKickOffset: 22
+  reticleKickSnappiness: 28
+  reticleReturnSpeed: 16
+  useReticlePassiveMotion: 1
+  useReticleLookSway: 1
+  reticleLookSwayAmount: {x: 1.5, y: 1.25}
+  useReticleMovementBob: 1
+  reticleMovementBobAmount: {x: 1.4, y: 0.8}
+  reticleMovementBobFrequency: 8
+  reticleMovementInputThreshold: 0.1
+  useReticleIdleBob: 1
+  reticleIdleBobAmount: {x: 0, y: 0.35}
+  reticleIdleBobFrequency: 1.6
+  maxReticlePassiveOffset: 6
+  reticlePassiveSnappiness: 18
+  useReticleScalePulse: 1
+  reticleScaleKick: 0.12
+  maxReticleScaleKick: 0.25
+  reticleScaleSnappiness: 32
+  reticleScaleReturnSpeed: 18
   useAnimatorTriggers: 1
   fireTriggerName: Fire
   reloadTriggerName: Reload
