@@ -22,8 +22,13 @@ MonoBehaviour:
   weaponReward: {fileID: 11400000, guid: 2bc831d53d13f9746a59788ebfe9e019, type: 2}
   equipWeaponRewardOnStart: 0
   targetGroupId: shotgun_targets
-  timeLimitSeconds: 60
-  requiredDestroyedTargets: 3
-  maxActiveTargets: 2
+  timeLimitSeconds: 45
+  requiredDestroyedTargets: 99
+  maxActiveTargets: 99
+  respawnTargetsAfterDestroyed: 0
+  activateAllTargetsAtStart: 1
+  useTargetSlotCountAsGoal: 1
   targetRespawnDelay: 2
+  hideDestroyedTargetVisual: 1
+  disableDestroyedTargetColliders: 1
   countsTowardTargetRangeTrialCompletion: 1

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7908458394402254366}
   m_Layer: 0
-  m_Name: MagicPoof
+  m_Name: MagicPoofVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

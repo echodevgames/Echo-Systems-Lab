@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 7797982174301995824}
   - component: {fileID: 1419129249867275962}
   m_Layer: 7
-  m_Name: Projectile_PistolRound
+  m_Name: Projectile_Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

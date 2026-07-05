@@ -6296,7 +6296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8495782396863233846, guid: 479541673bafcfb42afa35a6af4f5feb, type: 3}
       propertyPath: m_Name
-      value: PoisonCloud
+      value: PoisonCloudVFX
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6313,7 +6313,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7420610660377752486, guid: 724428d970f44c446bdb515f2cb18fba, type: 3}
       propertyPath: m_Name
-      value: MagicPoof
+      value: MagicPoofVFX
       objectReference: {fileID: 0}
     - target: {fileID: 7908458394402254366, guid: 724428d970f44c446bdb515f2cb18fba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6360,6 +6360,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 724428d970f44c446bdb515f2cb18fba, type: 3}
+--- !u!1001 &9128640470433278573
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 36.35057
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27508
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.43334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358574271960366229, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705112573345771371, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
+      propertyPath: m_Name
+      value: HitFireVFX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4f62bac5737c2d14fb00e6f2521e169f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6374,3 +6431,4 @@ SceneRoots:
   - {fileID: 1363512562}
   - {fileID: 5192411312212885901}
   - {fileID: 1777426579436503489}
+  - {fileID: 9128640470433278573}

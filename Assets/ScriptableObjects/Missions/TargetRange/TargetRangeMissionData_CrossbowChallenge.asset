@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionData
   missionId: target_range_crossbow_challenge
   displayName: Crossbow Drill
-  description: Destroy 3 Crossbow targets before the time runs out.
+  description: Destroy 10 Crossbow targets before the time runs out.
   executionMode: 1
   sceneName: 
   unlockedByDefault: 1
@@ -23,7 +23,12 @@ MonoBehaviour:
   equipWeaponRewardOnStart: 0
   targetGroupId: crossbow_targets
   timeLimitSeconds: 60
-  requiredDestroyedTargets: 3
-  maxActiveTargets: 2
-  targetRespawnDelay: 2
+  requiredDestroyedTargets: 10
+  maxActiveTargets: 4
+  respawnTargetsAfterDestroyed: 0
+  activateAllTargetsAtStart: 1
+  useTargetSlotCountAsGoal: 1
+  targetRespawnDelay: 1
+  hideDestroyedTargetVisual: 1
+  disableDestroyedTargetColliders: 1
   countsTowardTargetRangeTrialCompletion: 1

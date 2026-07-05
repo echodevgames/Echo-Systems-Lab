@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31819e8a3042964fa355e5294192371, type: 3}
+  m_Name: WeaponHandlingData_Sniper
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponHandlingData
+  firePositionKick: {x: 0.5, y: 0.48, z: 0}
+  fireRotationKick: {x: -135, y: 90, z: -33}
+  randomRotationKick: {x: 33, y: 33, z: 33}
+  maxPositionOffset: {x: 10, y: 10, z: 10}
+  maxRotationOffset: {x: 145, y: 100, z: 45}
+  positionSnappiness: 12
+  rotationSnappiness: 12
+  positionReturnSpeed: 8
+  rotationReturnSpeed: 8
+  useAnimatorTriggers: 1
+  fireTriggerName: Fire
+  reloadTriggerName: Reload
+  equipTriggerName: Equip
