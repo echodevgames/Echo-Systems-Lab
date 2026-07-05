@@ -154,7 +154,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5583968047184097160}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -185,16 +185,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd9a73472259f24f9b30925d86ad796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  useSweepDetection: 1
+  useSweepDetection: 0
   sweepRadius: 0.04
   hitMask:
     serializedVersion: 2
     m_Bits: 65
   destroyOnNonDamageableSolidHit: 0
   missBehavior: 1
-  activeFlightTimeBeforeDrop: 0.2
+  activeFlightTimeBeforeDrop: 6
   destroyAfterDropTime: 8
-  droppedVelocityMultiplier: 0.15
+  droppedVelocityMultiplier: 10
   makeColliderSolidWhenDropped: 1
 --- !u!1 &9199579066632090733
 GameObject:

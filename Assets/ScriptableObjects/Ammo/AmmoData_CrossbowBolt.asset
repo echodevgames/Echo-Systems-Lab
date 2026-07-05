@@ -19,8 +19,8 @@ MonoBehaviour:
   hudColor: {r: 1, g: 1, b: 1, a: 1}
   caliberLabel: Bolt
   description: Crossbow Bolt
-  projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
+  projectilePrefab: {fileID: 5583968047184097160, guid: 48fe53e871c162143901b8675573de96, type: 3}
   damage: 100
-  projectileSpeed: 20
+  projectileSpeed: 30
   projectileLifetime: 40
   xpPerUse: 10

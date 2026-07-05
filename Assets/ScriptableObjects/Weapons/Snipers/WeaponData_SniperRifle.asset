@@ -28,8 +28,23 @@ MonoBehaviour:
   fireRate: 1.25
   isAutomatic: 0
   clipSize: 8
-  reloadTime: 0.75
+  reloadTime: 1.6
   infiniteReserveAmmo: 1
+  reloadMode: 0
+  canFireDuringReload: 0
+  cancelReloadOnFire: 0
+  reloadStartTime: 0.25
+  reloadRoundInsertTime: 0.45
+  reloadEndTime: 0.25
+  playReloadStartFeedback: 1
+  playReloadInsertFeedback: 1
+  playReloadEndFeedback: 1
+  fullReloadInsertFeedbackTime: 0.5
+  fullReloadEndFeedbackLeadTime: 0.05
+  canDryFire: 1
+  dryFireCooldown: 0.2
+  emptyFireBehavior: 2
+  emptyFireReloadDelay: 0.12
   projectilesPerShot: 1
   spreadAngle: 0
   xpPerUse: 10

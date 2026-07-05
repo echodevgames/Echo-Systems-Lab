@@ -125,6 +125,25 @@ public class WeaponHandlingData : ScriptableObject
     public float reticleScaleSnappiness = 32f;
     public float reticleScaleReturnSpeed = 18f;
 
+    [Header("Reload Audio")]
+    public AudioClip[] reloadStartAudioClips;
+    public AudioClip[] reloadInsertAudioClips;
+    public AudioClip[] reloadEndAudioClips;
+
+    [Range(0f, 1f)] public float reloadAudioVolume = 1f;
+    public Vector2 reloadAudioPitchRange = new Vector2(0.96f, 1.04f);
+
+    [Header("Dry Fire Audio")]
+    public AudioClip[] dryFireAudioClips;
+    [Range(0f, 1f)] public float dryFireAudioVolume = 1f;
+    public Vector2 dryFireAudioPitchRange = new Vector2(0.96f, 1.04f);
+
+    [Header("Reload Animator Triggers")]
+    public string reloadStartTriggerName = "ReloadStart";
+    public string reloadInsertTriggerName = "ReloadInsert";
+    public string reloadEndTriggerName = "ReloadEnd";
+    public string dryFireTriggerName = "DryFire";
+
     [Header("Animator Triggers")]
     public bool useAnimatorTriggers = true;
     public string fireTriggerName = "Fire";

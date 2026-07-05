@@ -30,6 +30,21 @@ MonoBehaviour:
   clipSize: 6
   reloadTime: 2.2
   infiniteReserveAmmo: 1
+  reloadMode: 1
+  canFireDuringReload: 1
+  cancelReloadOnFire: 1
+  reloadStartTime: 0.25
+  reloadRoundInsertTime: 0.45
+  reloadEndTime: 0.27
+  playReloadStartFeedback: 0
+  playReloadInsertFeedback: 1
+  playReloadEndFeedback: 0
+  fullReloadInsertFeedbackTime: 0.5
+  fullReloadEndFeedbackLeadTime: 0.05
+  canDryFire: 1
+  dryFireCooldown: 0.3
+  emptyFireBehavior: 2
+  emptyFireReloadDelay: 0.12
   projectilesPerShot: 1
   spreadAngle: 0.5
   xpPerUse: 10

@@ -77,6 +77,22 @@ MonoBehaviour:
   maxReticleScaleKick: 0.25
   reticleScaleSnappiness: 32
   reticleScaleReturnSpeed: 18
+  reloadStartAudioClips:
+  - {fileID: 8300000, guid: e0c70bed5c1a4443083a81de5648c7d5, type: 3}
+  reloadInsertAudioClips:
+  - {fileID: 8300000, guid: 3f03aa2e48e365c4c9ef563c26bc471a, type: 3}
+  reloadEndAudioClips:
+  - {fileID: 8300000, guid: 9158afb6966d445db9caf1dccf7acbcc, type: 3}
+  reloadAudioVolume: 1
+  reloadAudioPitchRange: {x: 0.96, y: 1.04}
+  dryFireAudioClips:
+  - {fileID: 8300000, guid: 9b06061aa7794aa489f8b7e430c21a64, type: 3}
+  dryFireAudioVolume: 1
+  dryFireAudioPitchRange: {x: 0.96, y: 1.04}
+  reloadStartTriggerName: ReloadStart
+  reloadInsertTriggerName: ReloadInsert
+  reloadEndTriggerName: ReloadEnd
+  dryFireTriggerName: DryFire
   useAnimatorTriggers: 1
   fireTriggerName: Fire
   reloadTriggerName: Reload

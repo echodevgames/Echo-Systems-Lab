@@ -48,7 +48,7 @@ MonoBehaviour:
   parentMuzzleFlashToMuzzle: 1
   fireAudioClips:
   - {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
-  fireAudioVolume: 1
+  fireAudioVolume: 0.99903995
   fireAudioPitchRange: {x: 0.5, y: 0.5}
   useReticleRecoil: 1
   useWeaponKickForReticle: 1
@@ -76,6 +76,21 @@ MonoBehaviour:
   maxReticleScaleKick: 0.25
   reticleScaleSnappiness: 32
   reticleScaleReturnSpeed: 18
+  reloadStartAudioClips:
+  - {fileID: 8300000, guid: e0c70bed5c1a4443083a81de5648c7d5, type: 3}
+  reloadInsertAudioClips:
+  - {fileID: 8300000, guid: eb5685b26a6494994af389a3293064e8, type: 3}
+  reloadEndAudioClips:
+  - {fileID: 8300000, guid: 9158afb6966d445db9caf1dccf7acbcc, type: 3}
+  reloadAudioVolume: 1
+  reloadAudioPitchRange: {x: 0.96, y: 1.04}
+  dryFireAudioClips: []
+  dryFireAudioVolume: 1
+  dryFireAudioPitchRange: {x: 0.96, y: 1.04}
+  reloadStartTriggerName: ReloadStart
+  reloadInsertTriggerName: ReloadInsert
+  reloadEndTriggerName: ReloadEnd
+  dryFireTriggerName: DryFire
   useAnimatorTriggers: 1
   fireTriggerName: Fire
   reloadTriggerName: Reload
