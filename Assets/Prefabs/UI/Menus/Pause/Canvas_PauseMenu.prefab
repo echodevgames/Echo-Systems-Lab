@@ -1021,6 +1021,7 @@ MonoBehaviour:
   playerWeaponLoadoutController: {fileID: 0}
   inputReader: {fileID: 0}
   mainPausePanel: {fileID: 4200235308987020859}
+  settingsMenuUI: {fileID: 0}
   keybindingsMenuUI: {fileID: 0}
   creditsMenuUI: {fileID: 0}
   resumeButton: {fileID: 6979382569699109052}
@@ -2284,7 +2285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5688003052794409015
 RectTransform:
   m_ObjectHideFlags: 0

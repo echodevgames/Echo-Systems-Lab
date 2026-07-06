@@ -375,14 +375,15 @@ MonoBehaviour:
   fallbackMuzzlePoint: {fileID: 4088175618822117598}
   inputReader: {fileID: 2483783096219201155}
   ammoInventory: {fileID: 8679630083994812437}
-  viewModelController: {fileID: 0}
+  viewModelController: {fileID: 2292471376596136282}
+  reticleRecoilUI: {fileID: 0}
   autoEquipSavedWeapon: 1
   muzzleForwardOffset: 0.15
   aimMask:
     serializedVersion: 2
     m_Bits: 4294967295
   aimDistance: 1000
-  debugAimRays: 0
+  debugAimRays: 1
 --- !u!114 &2252759787046056143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9271b3f4a6565574498d346c6c2d56ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponViewModelController
+  inputReader: {fileID: 0}
+  characterController: {fileID: 7055887531380423159}
   fallbackFirePositionKick: {x: 0, y: -0.015, z: -0.08}
   fallbackFireRotationKick: {x: -4, y: 0, z: 0}
   fallbackRandomRotationKick: {x: 1, y: 0.75, z: 1.25}
@@ -483,12 +486,29 @@ MonoBehaviour:
   fallbackRotationSnappiness: 24
   fallbackPositionReturnSpeed: 12
   fallbackRotationReturnSpeed: 12
+  fallbackUseLookSway: 1
+  fallbackLookSwayPositionAmount: {x: 0.015, y: 0.015, z: 0}
+  fallbackLookSwayRotationAmount: {x: 1.5, y: 2.5, z: 1}
+  fallbackMaxLookSwayPosition: {x: 0.06, y: 0.06, z: 0.02}
+  fallbackMaxLookSwayRotation: {x: 6, y: 8, z: 5}
+  fallbackLookSwaySnappiness: 14
+  fallbackLookSwayReturnSpeed: 10
+  fallbackUseMovementBob: 1
+  fallbackMovementBobPositionAmount: {x: 0.025, y: 0.018, z: 0.01}
+  fallbackMovementBobRotationAmount: {x: 1.2, y: 0.8, z: 1.6}
+  fallbackMovementBobFrequency: 8
+  fallbackMovementBobSnappiness: 12
+  fallbackMovementBobReturnSpeed: 10
+  fallbackMovementInputThreshold: 0.1
+  fallbackUseIdleBob: 1
+  fallbackIdleBobPositionAmount: {x: 0, y: 0.006, z: 0}
+  fallbackIdleBobRotationAmount: {x: 0.25, y: 0.15, z: 0.15}
+  fallbackIdleBobFrequency: 1.6
+  fallbackIdleBobSnappiness: 8
   fallbackUseAnimatorTriggers: 1
   fallbackFireTriggerName: Fire
   fallbackReloadTriggerName: Reload
   fallbackEquipTriggerName: Equip
-  weaponAudioSource: {fileID: 0}
-  autoCreateAudioSource: 1
   debugLogs: 0
 --- !u!1 &5585662650559727100
 GameObject:

@@ -1,4 +1,5 @@
 //------MainMenuController.cs START-----
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +13,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button creditsButton;
     [SerializeField] private Button quitButton;
 
+    [Header("Panels")]
     [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private SettingsMenuUI settingsMenuUI;
     [SerializeField] private CreditsMenuUI creditsMenuUI;
 
     [Header("Scenes")]
@@ -27,7 +30,7 @@ public class MainMenuController : MonoBehaviour
             loadGameButton.onClick.AddListener(LoadGame);
 
         if (settingsButton != null)
-            settingsButton.onClick.AddListener(OpenSettingsStub);
+            settingsButton.onClick.AddListener(OpenSettings);
 
         if (creditsButton != null)
             creditsButton.onClick.AddListener(OpenCredits);
@@ -58,9 +61,15 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene(hubSceneName);
     }
 
-    private void OpenSettingsStub()
+    private void OpenSettings()
     {
-        Debug.Log("Settings menu stub.");
+        if (settingsMenuUI != null)
+        {
+            settingsMenuUI.OpenFrom(mainMenuPanel);
+            return;
+        }
+
+        Debug.LogWarning("MainMenuController has no SettingsMenuUI assigned.");
     }
 
     private void OpenCredits()

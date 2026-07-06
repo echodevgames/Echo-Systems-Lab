@@ -620,15 +620,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5121324, g: 0.5396226, b: 0.51960874, a: 1}
+  m_Color: {r: 0, g: 0.09803922, b: 0.022641497, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1105,7 +1105,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &20013852853309328
 MonoBehaviour:
@@ -1160,17 +1160,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionTerminalUI
   terminalRoot: {fileID: 7502664290109214398}
+  terminalTitleText: {fileID: 8682642974953493284}
   missionButtonParent: {fileID: 8768322056850789282}
   missionButtonPrefab: {fileID: 3247816280593789063, guid: 6a8f655e8d287fa488fcc5fc342d6f67, type: 3}
   closeButton: {fileID: 5190777950455426374}
-  missions:
-  - {fileID: 11400000, guid: 14b78b68e161d11429b3d8b192b12166, type: 2}
-  - {fileID: 11400000, guid: bf1614f3a8cb7ac40a4671fa0960a33c, type: 2}
-  - {fileID: 11400000, guid: eb8d3cf011855ec4fb3b14d4173fcfa9, type: 2}
-  - {fileID: 11400000, guid: 5ccbf0290627d7946ba28e256d32c807, type: 2}
-  - {fileID: 11400000, guid: 0a5458fa446505d4bb54983b536a29a6, type: 2}
-  - {fileID: 11400000, guid: 1e6b04b9d8a8b1e489a08dd53713da17, type: 2}
-  - {fileID: 11400000, guid: 65629094382dcb64aa479e4b7ae05e55, type: 2}
+  defaultTerminalData: {fileID: 11400000, guid: 84524809ea00f59448ac6b08ba54efb0, type: 2}
 --- !u!114 &5412301146973388400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,8 +1177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2981ae66a6ee82f409d2062988d3ae5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionComputer
-  terminalData: {fileID: 0}
-  terminalUI: {fileID: 0}
+  terminalData: {fileID: 11400000, guid: 84524809ea00f59448ac6b08ba54efb0, type: 2}
+  terminalUI: {fileID: 3600993093623792003}
   fallbackPromptText: Press E to open Mission Terminal
 --- !u!1 &8061424724271172349
 GameObject:

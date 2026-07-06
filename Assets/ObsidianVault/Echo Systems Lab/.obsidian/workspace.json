@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Echo_Systems_Lab_Milestone_4B_Professional_Weapon_Feedback_And_Reload_Architecture.md",
+                "file": "Echo_Systems_Lab_Master_Design_Doc.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Echo_Systems_Lab_Milestone_4B_Professional_Weapon_Feedback_And_Reload_Architecture"
+              "title": "Echo_Systems_Lab_Master_Design_Doc"
             }
           }
         ],
@@ -200,9 +200,9 @@
   },
   "active": "6117c7b1a0b65fab",
   "lastOpenFiles": [
+    "Echo_Systems_Lab_Milestone_4B_Professional_Weapon_Feedback_And_Reload_Architecture.md",
     "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
     "Echo_Systems_Lab_Milestone_4B_Professional_Weapon_Feedback_And_Reload_Architecture.md.meta",
-    "Echo_Systems_Lab_Milestone_4B_Professional_Weapon_Feedback_And_Reload_Architecture.md",
     "Echo_Systems_Lab_Milestone_4A_Weapon_View_Model_Recoil_Foundation.md.meta",
     "Echo_Systems_Lab_Milestone_4A_Weapon_View_Model_Recoil_Foundation.md",
     "Echo_Systems_Lab_Milestone_3G_PickupSpawner_Setup_Methods.md",

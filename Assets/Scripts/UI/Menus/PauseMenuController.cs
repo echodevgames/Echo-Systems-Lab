@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
-
-
     [Header("References")]
     [SerializeField] private GameObject pauseRoot;
     [SerializeField] private SimpleFirstPersonController playerController;
@@ -15,7 +13,10 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private PlayerWeaponController playerWeaponController;
     [SerializeField] private PlayerWeaponLoadoutController playerWeaponLoadoutController;
     [SerializeField] private PlayerInputReader inputReader;
+
+    [Header("Panels")]
     [SerializeField] private GameObject mainPausePanel;
+    [SerializeField] private SettingsMenuUI settingsMenuUI;
     [SerializeField] private KeybindingsMenuUI keybindingsMenuUI;
     [SerializeField] private CreditsMenuUI creditsMenuUI;
 
@@ -31,8 +32,6 @@ public class PauseMenuController : MonoBehaviour
 
     [Header("Scenes")]
     [SerializeField] private string mainMenuSceneName = "MainMenu";
-
-
 
     private bool isPaused;
 
@@ -51,7 +50,7 @@ public class PauseMenuController : MonoBehaviour
             loadButton.onClick.AddListener(Load);
 
         if (settingsButton != null)
-            settingsButton.onClick.AddListener(SettingsStub);
+            settingsButton.onClick.AddListener(OpenSettings);
 
         if (keybindsButton != null)
             keybindsButton.onClick.AddListener(OpenKeybindings);
@@ -99,6 +98,20 @@ public class PauseMenuController : MonoBehaviour
         if (pauseRoot != null)
             pauseRoot.SetActive(paused);
 
+        if (paused)
+        {
+            if (mainPausePanel != null)
+                mainPausePanel.SetActive(true);
+        }
+        else
+        {
+            if (settingsMenuUI != null)
+                settingsMenuUI.ForceClose(false);
+
+            if (mainPausePanel != null)
+                mainPausePanel.SetActive(true);
+        }
+
         Time.timeScale = paused ? 0f : 1f;
 
         if (inputReader != null)
@@ -134,10 +147,17 @@ public class PauseMenuController : MonoBehaviour
         Resume();
     }
 
-    private void SettingsStub()
+    private void OpenSettings()
     {
-        Debug.Log("Settings menu stub.");
+        if (settingsMenuUI != null)
+        {
+            settingsMenuUI.OpenFrom(mainPausePanel);
+            return;
+        }
+
+        Debug.LogWarning("PauseMenuController has no SettingsMenuUI assigned.");
     }
+
     private void OpenKeybindings()
     {
         if (mainPausePanel != null)
@@ -146,6 +166,7 @@ public class PauseMenuController : MonoBehaviour
         if (keybindingsMenuUI != null)
             keybindingsMenuUI.Open();
     }
+
     private void OpenCredits()
     {
         if (creditsMenuUI != null)
@@ -157,6 +178,7 @@ public class PauseMenuController : MonoBehaviour
         if (mainPausePanel != null)
             mainPausePanel.SetActive(true);
     }
+
     private void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
