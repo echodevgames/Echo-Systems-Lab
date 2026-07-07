@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6009915527949875959}
   - component: {fileID: 8287305703107911626}
+  - component: {fileID: 390927113266122519}
   m_Layer: 0
   m_Name: AudioSettingsManager
   m_TagString: Untagged
@@ -59,3 +60,19 @@ MonoBehaviour:
   defaultUiVolume: 1
   defaultAmbienceVolume: 0.8
   mutedDecibels: -80
+--- !u!114 &390927113266122519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422037875922019973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49639d7ba7dae448866987a291c9797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
+  dontDestroyOnLoad: 1
+  fallbackMixerGroup: {fileID: 24300002, guid: 798105d5335d4044fa8cd950d1365fbe, type: 2}
+  cleanupPaddingSeconds: 0.15
+  debugLogs: 1

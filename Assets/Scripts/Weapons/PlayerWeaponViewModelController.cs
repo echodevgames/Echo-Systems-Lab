@@ -60,7 +60,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     private Transform activeViewModel;
     private Transform activeMuzzlePoint;
     private Animator activeAnimator;
-    private AudioSource audioSource;
     private WeaponHandlingData activeHandlingData;
 
     private Vector3 baseLocalPosition;
@@ -92,14 +91,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
 
         if (characterController == null)
             characterController = GetComponent<CharacterController>();
-
-        audioSource = GetComponent<AudioSource>();
-
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 0f;
     }
 
     private void Update()
@@ -163,7 +154,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
 
         TrySetAnimatorTrigger(GetFireTriggerName());
         SpawnMuzzleFlash();
-        PlayFireAudio();
 
         if (debugLogs)
             Debug.Log($"View model fire feedback played. Rotation kick: {appliedRotationKick}");
@@ -178,6 +168,7 @@ public class PlayerWeaponViewModelController : MonoBehaviour
         if (debugLogs)
             Debug.Log("View model generic reload feedback played.");
     }
+
     public void PlayEquipFeedback()
     {
         TrySetAnimatorTrigger(GetEquipTriggerName());
@@ -186,11 +177,9 @@ public class PlayerWeaponViewModelController : MonoBehaviour
             Debug.Log("View model equip feedback played.");
     }
 
-
     public void PlayDryFireFeedback()
     {
         TrySetAnimatorTrigger(GetDryFireTriggerName());
-        PlayRandomAudioClip(GetDryFireAudioClips(), GetDryFireAudioVolume(), GetDryFirePitchRange());
 
         if (debugLogs)
             Debug.Log("View model dry fire feedback played.");
@@ -199,7 +188,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     public void PlayReloadStartFeedback()
     {
         TrySetAnimatorTrigger(GetReloadStartTriggerName());
-        PlayRandomAudioClip(GetReloadStartAudioClips(), GetReloadAudioVolume(), GetReloadAudioPitchRange());
 
         if (debugLogs)
             Debug.Log("View model reload start feedback played.");
@@ -208,7 +196,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     public void PlayReloadInsertFeedback()
     {
         TrySetAnimatorTrigger(GetReloadInsertTriggerName());
-        PlayRandomAudioClip(GetReloadInsertAudioClips(), GetReloadAudioVolume(), GetReloadAudioPitchRange());
 
         if (debugLogs)
             Debug.Log("View model reload insert feedback played.");
@@ -217,7 +204,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     public void PlayReloadEndFeedback()
     {
         TrySetAnimatorTrigger(GetReloadEndTriggerName());
-        PlayRandomAudioClip(GetReloadEndAudioClips(), GetReloadAudioVolume(), GetReloadAudioPitchRange());
 
         if (debugLogs)
             Debug.Log("View model reload end feedback played.");
@@ -519,27 +505,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
             Destroy(flash, lifetime);
     }
 
-    private void PlayFireAudio()
-    {
-        AudioClip[] clips = GetFireAudioClips();
-
-        if (clips == null || clips.Length == 0 || audioSource == null)
-            return;
-
-        AudioClip clip = clips[Random.Range(0, clips.Length)];
-
-        if (clip == null)
-            return;
-
-        Vector2 pitchRange = GetFireAudioPitchRange();
-
-        float minPitch = Mathf.Min(pitchRange.x, pitchRange.y);
-        float maxPitch = Mathf.Max(pitchRange.x, pitchRange.y);
-
-        audioSource.pitch = Random.Range(minPitch, maxPitch);
-        audioSource.PlayOneShot(clip, GetFireAudioVolume());
-    }
-
     private void TrySetAnimatorTrigger(string triggerName)
     {
         if (!ShouldUseAnimatorTriggers())
@@ -778,6 +743,34 @@ public class PlayerWeaponViewModelController : MonoBehaviour
             : fallbackEquipTriggerName;
     }
 
+    private string GetReloadStartTriggerName()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.reloadStartTriggerName
+            : "ReloadStart";
+    }
+
+    private string GetReloadInsertTriggerName()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.reloadInsertTriggerName
+            : "ReloadInsert";
+    }
+
+    private string GetReloadEndTriggerName()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.reloadEndTriggerName
+            : "ReloadEnd";
+    }
+
+    private string GetDryFireTriggerName()
+    {
+        return activeHandlingData != null
+            ? activeHandlingData.dryFireTriggerName
+            : "DryFire";
+    }
+
     private GameObject GetMuzzleFlashPrefab()
     {
         return activeHandlingData != null
@@ -816,137 +809,6 @@ public class PlayerWeaponViewModelController : MonoBehaviour
     private bool ShouldParentMuzzleFlashToMuzzle()
     {
         return activeHandlingData == null || activeHandlingData.parentMuzzleFlashToMuzzle;
-    }
-
-    private AudioClip[] GetFireAudioClips()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.fireAudioClips
-            : null;
-    }
-
-    private float GetFireAudioVolume()
-    {
-        return activeHandlingData != null
-            ? Mathf.Clamp01(activeHandlingData.fireAudioVolume)
-            : 1f;
-    }
-
-    private Vector2 GetFireAudioPitchRange()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.fireAudioPitchRange
-            : new Vector2(0.96f, 1.04f);
-    }
-    private string GetReloadStartTriggerName()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadStartTriggerName
-            : "ReloadStart";
-    }
-
-    private string GetReloadInsertTriggerName()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadInsertTriggerName
-            : "ReloadInsert";
-    }
-
-    private string GetReloadEndTriggerName()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadEndTriggerName
-            : "ReloadEnd";
-    }
-
-    private string GetDryFireTriggerName()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.dryFireTriggerName
-            : "DryFire";
-    }
-
-    private AudioClip[] GetReloadStartAudioClips()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadStartAudioClips
-            : null;
-    }
-
-    private AudioClip[] GetReloadInsertAudioClips()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadInsertAudioClips
-            : null;
-    }
-
-    private AudioClip[] GetReloadEndAudioClips()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadEndAudioClips
-            : null;
-    }
-
-    private AudioClip[] GetDryFireAudioClips()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.dryFireAudioClips
-            : null;
-    }
-
-    private float GetReloadAudioVolume()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadAudioVolume
-            : 1f;
-    }
-
-    private Vector2 GetReloadAudioPitchRange()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.reloadAudioPitchRange
-            : new Vector2(0.96f, 1.04f);
-    }
-
-    private float GetDryFireAudioVolume()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.dryFireAudioVolume
-            : 1f;
-    }
-
-    private Vector2 GetDryFirePitchRange()
-    {
-        return activeHandlingData != null
-            ? activeHandlingData.dryFireAudioPitchRange
-            : new Vector2(0.96f, 1.04f);
-    }
-    private void PlayRandomAudioClip(AudioClip[] clips, float volume, Vector2 pitchRange)
-    {
-        if (clips == null || clips.Length == 0)
-            return;
-
-        AudioClip clip = clips[Random.Range(0, clips.Length)];
-
-        if (clip == null)
-            return;
-
-        GameObject audioObject = new GameObject("WeaponFeedbackAudio");
-        audioObject.transform.position = activeViewModel != null
-            ? activeViewModel.position
-            : transform.position;
-
-        AudioSource source = audioObject.AddComponent<AudioSource>();
-        source.clip = clip;
-        source.volume = volume;
-        source.pitch = Random.Range(
-            Mathf.Min(pitchRange.x, pitchRange.y),
-            Mathf.Max(pitchRange.x, pitchRange.y));
-
-        source.spatialBlend = 0f;
-        source.Play();
-
-        Destroy(audioObject, clip.length + 0.25f);
     }
 }
 

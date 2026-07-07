@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponId: pistol_basic
   displayName: Pistol
   hudDisplayName: Pistol
-  weaponIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
+  weaponIcon: {fileID: 21300000, guid: e9f18ae5463622b4a95617ec29be264f, type: 3}
   description: A basic Pistol
   weaponType: Pistol
   viewModelPrefab: {fileID: 132593515715709520, guid: a7d05a5da5deaf64eac97ec77986ccb0, type: 3}
@@ -23,6 +23,7 @@ MonoBehaviour:
   viewLocalEulerAngles: {x: 0, y: 180, z: 0}
   viewLocalScale: {x: 2, y: 2, z: 2}
   handlingData: {fileID: 11400000, guid: a04da7eff9cc4634ea7cf29d6132c07d, type: 2}
+  audioData: {fileID: 11400000, guid: 724831c2451bfa740a4d08f6159ac956, type: 2}
   fireMode: 0
   defaultAmmo: {fileID: 11400000, guid: a45279fe36f6a6d42b814c50dc2c673d, type: 2}
   fireRate: 0.2

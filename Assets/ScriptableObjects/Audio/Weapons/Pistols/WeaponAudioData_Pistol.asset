@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9393a3dbfc55b24798f5df877e83c62, type: 3}
+  m_Name: WeaponAudioData_Pistol
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponAudioData
+  fireAudio: {fileID: 11400000, guid: 7cc94b00ce567f2439ec4cc131d37b9c, type: 2}
+  dryFireAudio: {fileID: 11400000, guid: e0322e220d403a74a993955f43e08e28, type: 2}
+  equipAudio: {fileID: 0}
+  reloadStartAudio: {fileID: 11400000, guid: 5e48d0db851f19f4c8e7a67a352077d8, type: 2}
+  reloadInsertAudio: {fileID: 11400000, guid: df9bd9a1b1b33ff44b7159a45a455523, type: 2}
+  reloadEndAudio: {fileID: 11400000, guid: 9195cc517f6caa84f9fb35c099960571, type: 2}
+  chamberAudio: {fileID: 0}
+  shellEjectAudio: {fileID: 0}
+  safetyClickAudio: {fileID: 0}
+  debugLogs: 0

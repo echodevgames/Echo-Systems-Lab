@@ -43,6 +43,13 @@ public class PlayerWeaponController : MonoBehaviour
     public event System.Action OnWeaponAmmoChanged;
     public event System.Action<WeaponData> OnWeaponChanged;
 
+    public event System.Action<WeaponData> OnWeaponEquipped;
+    public event System.Action<WeaponData> OnWeaponFired;
+    public event System.Action<WeaponData> OnWeaponDryFired;
+    public event System.Action<WeaponData> OnWeaponReloadStarted;
+    public event System.Action<WeaponData> OnWeaponReloadInserted;
+    public event System.Action<WeaponData> OnWeaponReloadEnded;
+
     public bool HasWeapon => currentWeapon != null;
     public WeaponData CurrentWeapon => currentWeapon;
     public int CurrentAmmoInClip => currentAmmoInClip;
@@ -214,6 +221,7 @@ public class PlayerWeaponController : MonoBehaviour
         isReloading = false;
         reloadPromptShown = false;
         nextDryFireTime = 0f;
+
         if (addToInventory)
             PlayerProgress.SetActiveWeapon(currentWeapon.weaponId);
 
@@ -239,6 +247,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         OnWeaponAmmoChanged?.Invoke();
         OnWeaponChanged?.Invoke(currentWeapon);
+        OnWeaponEquipped?.Invoke(currentWeapon);
     }
 
     private void TryEquipSavedWeapon()
@@ -347,6 +356,8 @@ public class PlayerWeaponController : MonoBehaviour
                 hasSharedWeaponRotationKick);
         }
 
+        OnWeaponFired?.Invoke(currentWeapon);
+
         Debug.Log($"{currentWeapon.displayName} ammo: {currentAmmoInClip}/{currentWeapon.clipSize}");
 
         if (currentAmmoInClip <= 0)
@@ -354,6 +365,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         OnWeaponAmmoChanged?.Invoke();
     }
+
     private void TryDryFire()
     {
         if (currentWeapon == null)
@@ -376,10 +388,13 @@ public class PlayerWeaponController : MonoBehaviour
         if (viewModelController != null)
             viewModelController.PlayDryFireFeedback();
 
+        OnWeaponDryFired?.Invoke(currentWeapon);
+
         Debug.Log($"{currentWeapon.displayName} dry fired.");
 
         OnWeaponAmmoChanged?.Invoke();
     }
+
     private void HandleEmptyFire()
     {
         if (currentWeapon == null)
@@ -402,6 +417,7 @@ public class PlayerWeaponController : MonoBehaviour
                 break;
         }
     }
+
     private void StartEmptyFireReloadDelay()
     {
         if (currentWeapon == null)
@@ -433,6 +449,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         TryReload();
     }
+
     private bool FireProjectilePattern()
     {
         AmmoData ammo = currentWeapon.defaultAmmo;
@@ -579,8 +596,6 @@ public class PlayerWeaponController : MonoBehaviour
         return otherObject.transform.IsChildOf(transform);
     }
 
-
-
     private Transform GetMuzzlePoint()
     {
         if (currentMuzzlePoint != null)
@@ -690,10 +705,13 @@ public class PlayerWeaponController : MonoBehaviour
                 ReloadFullClipRoutine(currentWeapon, currentWeapon.defaultAmmo));
         }
     }
+
     private IEnumerator ReloadFullClipRoutine(WeaponData weaponAtReloadStart, AmmoData ammoAtReloadStart)
     {
         isReloading = true;
         reloadPromptShown = false;
+
+        OnWeaponReloadStarted?.Invoke(weaponAtReloadStart);
 
         if (viewModelController != null)
         {
@@ -731,6 +749,8 @@ public class PlayerWeaponController : MonoBehaviour
 
             if (viewModelController != null)
                 viewModelController.PlayReloadInsertFeedback();
+
+            OnWeaponReloadInserted?.Invoke(weaponAtReloadStart);
         }
 
         if (weaponAtReloadStart.playReloadEndFeedback)
@@ -754,6 +774,8 @@ public class PlayerWeaponController : MonoBehaviour
 
             if (viewModelController != null)
                 viewModelController.PlayReloadEndFeedback();
+
+            OnWeaponReloadEnded?.Invoke(weaponAtReloadStart);
         }
 
         if (totalReloadTime > elapsedTime)
@@ -776,10 +798,13 @@ public class PlayerWeaponController : MonoBehaviour
 
         OnWeaponAmmoChanged?.Invoke();
     }
+
     private IEnumerator ReloadOneRoundAtATimeRoutine(WeaponData weaponAtReloadStart, AmmoData ammoAtReloadStart)
     {
         isReloading = true;
         reloadPromptShown = false;
+
+        OnWeaponReloadStarted?.Invoke(weaponAtReloadStart);
 
         if (viewModelController != null && weaponAtReloadStart.playReloadStartFeedback)
             viewModelController.PlayReloadStartFeedback();
@@ -810,16 +835,21 @@ public class PlayerWeaponController : MonoBehaviour
             if (viewModelController != null && weaponAtReloadStart.playReloadInsertFeedback)
                 viewModelController.PlayReloadInsertFeedback();
 
+            if (weaponAtReloadStart.playReloadInsertFeedback)
+                OnWeaponReloadInserted?.Invoke(weaponAtReloadStart);
+
             Debug.Log($"{weaponAtReloadStart.displayName} inserted round: {currentAmmoInClip}/{weaponAtReloadStart.clipSize}");
 
             OnWeaponAmmoChanged?.Invoke();
         }
 
         if (currentWeapon == weaponAtReloadStart &&
-            viewModelController != null &&
             weaponAtReloadStart.playReloadEndFeedback)
         {
-            viewModelController.PlayReloadEndFeedback();
+            if (viewModelController != null)
+                viewModelController.PlayReloadEndFeedback();
+
+            OnWeaponReloadEnded?.Invoke(weaponAtReloadStart);
         }
 
         yield return new WaitForSeconds(Mathf.Max(0f, weaponAtReloadStart.reloadEndTime));

@@ -23,6 +23,7 @@ MonoBehaviour:
   viewLocalEulerAngles: {x: 0, y: 0, z: 0}
   viewLocalScale: {x: 1, y: 1, z: 1}
   handlingData: {fileID: 11400000, guid: 7cc173b41e39bd0448b39b51a411b043, type: 2}
+  audioData: {fileID: 11400000, guid: 55a9ebee433053c4d805790a276f55b3, type: 2}
   fireMode: 0
   defaultAmmo: {fileID: 11400000, guid: 5e1a4f5a45439674dac3c8370a2eb52a, type: 2}
   fireRate: 0.75

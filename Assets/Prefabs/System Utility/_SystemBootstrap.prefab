@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1372057873209112950}
   - component: {fileID: 5562912288451750085}
   - component: {fileID: 8261045706286470630}
+  - component: {fileID: 5868705387295117799}
+  - component: {fileID: 6226493718810334772}
   m_Layer: 0
   m_Name: _SystemBootstrap
   m_TagString: Untagged
@@ -60,3 +62,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveManager
   weaponDatabase: {fileID: 11400000, guid: f7c5783013782ef439e46e0ba4c57ecf, type: 2}
+--- !u!114 &5868705387295117799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830575517764200356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60480a35f7b8947438c73dfeed2c6954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioSettingsManager
+  audioMixer: {fileID: 24100000, guid: 798105d5335d4044fa8cd950d1365fbe, type: 2}
+  dontDestroyOnLoad: 1
+  masterVolumeParameter: MasterVolume
+  musicVolumeParameter: MusicVolume
+  sfxVolumeParameter: SFXVolume
+  weaponsVolumeParameter: WeaponsVolume
+  uiVolumeParameter: UIVolume
+  ambienceVolumeParameter: AmbienceVolume
+  defaultMasterVolume: 1
+  defaultMusicVolume: 0.8
+  defaultSfxVolume: 1
+  defaultWeaponsVolume: 1
+  defaultUiVolume: 1
+  defaultAmbienceVolume: 0.8
+  mutedDecibels: -80
+--- !u!114 &6226493718810334772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830575517764200356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49639d7ba7dae448866987a291c9797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAudioManager
+  dontDestroyOnLoad: 1
+  fallbackMixerGroup: {fileID: 24300002, guid: 798105d5335d4044fa8cd950d1365fbe, type: 2}
+  cleanupPaddingSeconds: 0.15
+  debugLogs: 1

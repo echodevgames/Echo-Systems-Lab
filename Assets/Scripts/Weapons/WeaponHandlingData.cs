@@ -68,11 +68,6 @@ public class WeaponHandlingData : ScriptableObject
     public float muzzleFlashLifetime = 0.08f;
     public bool parentMuzzleFlashToMuzzle = true;
 
-    [Header("Fire Audio")]
-    public AudioClip[] fireAudioClips;
-    [Range(0f, 1f)] public float fireAudioVolume = 1f;
-    public Vector2 fireAudioPitchRange = new Vector2(0.96f, 1.04f);
-
     [Header("Reticle Recoil")]
     public bool useReticleRecoil = true;
 
@@ -124,19 +119,6 @@ public class WeaponHandlingData : ScriptableObject
     public float maxReticleScaleKick = 0.25f;
     public float reticleScaleSnappiness = 32f;
     public float reticleScaleReturnSpeed = 18f;
-
-    [Header("Reload Audio")]
-    public AudioClip[] reloadStartAudioClips;
-    public AudioClip[] reloadInsertAudioClips;
-    public AudioClip[] reloadEndAudioClips;
-
-    [Range(0f, 1f)] public float reloadAudioVolume = 1f;
-    public Vector2 reloadAudioPitchRange = new Vector2(0.96f, 1.04f);
-
-    [Header("Dry Fire Audio")]
-    public AudioClip[] dryFireAudioClips;
-    [Range(0f, 1f)] public float dryFireAudioVolume = 1f;
-    public Vector2 dryFireAudioPitchRange = new Vector2(0.96f, 1.04f);
 
     [Header("Reload Animator Triggers")]
     public string reloadStartTriggerName = "ReloadStart";

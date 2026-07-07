@@ -23,6 +23,7 @@ MonoBehaviour:
   viewLocalEulerAngles: {x: 0, y: 0, z: 0}
   viewLocalScale: {x: 1, y: 1, z: 1}
   handlingData: {fileID: 11400000, guid: 06079579e778c274f9514f9882b7fa04, type: 2}
+  audioData: {fileID: 11400000, guid: a436cbbee80a8ac4aa7e1415f8a86169, type: 2}
   fireMode: 0
   defaultAmmo: {fileID: 11400000, guid: f962c27d9ca1ac440bd0967f5d14c745, type: 2}
   fireRate: 1.1
@@ -30,6 +31,21 @@ MonoBehaviour:
   clipSize: 1
   reloadTime: 2
   infiniteReserveAmmo: 1
+  reloadMode: 0
+  canFireDuringReload: 0
+  cancelReloadOnFire: 1
+  reloadStartTime: 0.25
+  reloadRoundInsertTime: 0.45
+  reloadEndTime: 0.25
+  playReloadStartFeedback: 1
+  playReloadInsertFeedback: 0
+  playReloadEndFeedback: 0
+  fullReloadInsertFeedbackTime: 0.5
+  fullReloadEndFeedbackLeadTime: 0.05
+  canDryFire: 1
+  dryFireCooldown: 0.2
+  emptyFireBehavior: 0
+  emptyFireReloadDelay: 0.12
   projectilesPerShot: 1
   spreadAngle: 0.05
   xpPerUse: 10

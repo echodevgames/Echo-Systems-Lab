@@ -47,6 +47,9 @@ public class WeaponData : ScriptableObject
     [Header("Handling")]
     public WeaponHandlingData handlingData;
 
+    [Header("Audio")]
+    public WeaponAudioData audioData;
+
     [Header("Firing")]
     public WeaponFireMode fireMode = WeaponFireMode.Projectile;
     public AmmoData defaultAmmo;
