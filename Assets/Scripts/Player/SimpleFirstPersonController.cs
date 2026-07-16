@@ -1,10 +1,13 @@
 //-----SimpleFirstPersonController.cs START-----
 
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class SimpleFirstPersonController : MonoBehaviour
 {
+    public event Action OnJumped;
+
     [Header("References")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private PlayerInputReader inputReader;
@@ -12,6 +15,11 @@ public class SimpleFirstPersonController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float gravity = -20f;
+
+    [Header("Jump")]
+    [SerializeField] private bool canJump = true;
+    [SerializeField] private float jumpHeight = 1.25f;
+    [SerializeField] private float groundedStickForce = -2f;
 
     [Header("Look")]
     [SerializeField] private float mouseSensitivity = 0.2f;
@@ -22,6 +30,9 @@ public class SimpleFirstPersonController : MonoBehaviour
     private float verticalVelocity;
     private float cameraPitch;
     private bool inputEnabled = true;
+
+    public bool IsGrounded => characterController != null && characterController.isGrounded;
+    public float VerticalVelocity => verticalVelocity;
 
     private void Awake()
     {
@@ -68,16 +79,21 @@ public class SimpleFirstPersonController : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (inputReader == null)
+        if (inputReader == null || characterController == null)
             return;
+
+        bool isGrounded = characterController.isGrounded;
+
+        if (isGrounded && verticalVelocity < 0f)
+            verticalVelocity = groundedStickForce;
+
+        if (canJump && isGrounded && inputReader.JumpPressed)
+            Jump();
 
         Vector2 moveInput = inputReader.MoveInput;
 
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         move = move.normalized * moveSpeed;
-
-        if (characterController.isGrounded && verticalVelocity < 0f)
-            verticalVelocity = -2f;
 
         verticalVelocity += gravity * Time.deltaTime;
 
@@ -85,6 +101,14 @@ public class SimpleFirstPersonController : MonoBehaviour
         finalMove.y = verticalVelocity;
 
         characterController.Move(finalMove * Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        OnJumped?.Invoke();
+
+        Debug.Log("Player jumped.");
     }
 
     public void SetInputEnabled(bool enabled)

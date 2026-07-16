@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2809509477977778510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -111,9 +111,9 @@ RectTransform:
   m_Father: {fileID: 8492095361482916607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &4239993527673610767
 CanvasRenderer:
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3908884365157564740}
   m_HandleRect: {fileID: 8961206809706435912}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 6302237363256575077}
   - component: {fileID: 5782844101466594874}
   - component: {fileID: 3218905814957791572}
+  - component: {fileID: 3991064734933650745}
   m_Layer: 5
   m_Name: Canvas_CreditsMenuUI
   m_TagString: Untagged
@@ -324,6 +325,29 @@ MonoBehaviour:
   rowPrefab: {fileID: 7000673737655732829, guid: 63c224af7be1d7249a27190c75a5ca1c, type: 3}
   backButton: {fileID: 8044983095807670345}
   creditsDatabase: {fileID: 11400000, guid: 398d77a1267f31146853f8223184e1f1, type: 2}
+--- !u!114 &3991064734933650745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850516644128467994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433e5ab6139291c44a5142eedf7b3466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAudioBinder
+  uiAudioData: {fileID: 11400000, guid: 8339f27de53398d40aa6256869c3198b, type: 2}
+  bindOnAwake: 1
+  includeInactiveChildren: 1
+  bindButtons: 1
+  bindSliders: 1
+  bindToggles: 1
+  bindDropdowns: 1
+  playMenuOpenOnEnable: 0
+  playMenuCloseOnDisable: 0
+  sliderAudioInterval: 0.05
+  debugLogs: 0
 --- !u!1 &2047555692401970112
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +800,7 @@ RectTransform:
   m_Father: {fileID: 6524855097907009096}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -990,9 +1014,9 @@ RectTransform:
   m_Father: {fileID: 8492095361482916607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6366194631574143438
 CanvasRenderer:
@@ -1080,9 +1104,9 @@ RectTransform:
   m_Father: {fileID: 8492095361482916607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: -17, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8576755572426332975
 CanvasRenderer:
@@ -1165,7 +1189,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7402075830514325793}
   m_HandleRect: {fileID: 4322126301538594646}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1204,7 +1228,7 @@ RectTransform:
   m_Father: {fileID: 2640376880633718598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1355,8 +1379,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00025458308, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00015706274, y: 0}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6678815323743990569
 MonoBehaviour:

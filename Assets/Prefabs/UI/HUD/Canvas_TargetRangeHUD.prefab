@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2175282465717943734}
   - component: {fileID: 158019345231618580}
   - component: {fileID: 4844625624247986634}
+  - component: {fileID: 5429913099942668643}
   m_Layer: 5
   m_Name: Canvas_TargetRangeHUD
   m_TagString: Untagged
@@ -126,6 +127,29 @@ MonoBehaviour:
   missionAccuracyText: {fileID: 3959793508327608958}
   completionText: {fileID: 665646546884101534}
   autoFindMissingReferences: 1
+--- !u!114 &5429913099942668643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49762439247105351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433e5ab6139291c44a5142eedf7b3466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAudioBinder
+  uiAudioData: {fileID: 0}
+  bindOnAwake: 1
+  includeInactiveChildren: 1
+  bindButtons: 1
+  bindSliders: 1
+  bindToggles: 1
+  bindDropdowns: 1
+  playMenuOpenOnEnable: 0
+  playMenuCloseOnDisable: 0
+  sliderAudioInterval: 0.05
+  debugLogs: 0
 --- !u!1 &2434479887384491416
 GameObject:
   m_ObjectHideFlags: 0

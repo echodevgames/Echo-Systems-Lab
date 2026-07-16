@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Echo_Systems_Lab_Master_Design_Doc.md",
+                "file": "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Echo_Systems_Lab_Master_Design_Doc"
+              "title": "Echo_Systems_Lab_Checkpoint_Build_Plan_Format"
             }
           }
         ],
@@ -200,6 +200,7 @@
   },
   "active": "6117c7b1a0b65fab",
   "lastOpenFiles": [
+    "Echo_Systems_Lab_Master_Design_Doc.md",
     "Echo_Systems_Lab_Milestone_4B_Professional_Weapon_Feedback_And_Reload_Architecture.md",
     "Echo_Systems_Lab_Checkpoint_Build_Plan_Format.md",
     "Echo_Systems_Lab_Milestone_4B_Professional_Weapon_Feedback_And_Reload_Architecture.md.meta",
@@ -217,7 +218,6 @@
     "Milestone_3F_Weapon_Bandolier_HUD.md.meta",
     "Milestone_3E_Credits_Menu_Foundation.md.meta",
     "Milestone_3G_Weapon_Drop_Pickup_And_Flexible_Spawner.md.meta",
-    "Echo_Systems_Lab_Master_Design_Doc.md",
     "Echo_Systems_Lab_Milestone_3C_Weapon_Ammo_HUD_And_Ammo_Pickups.md",
     "Echo_Systems_Lab_Milestone_3D_Player_Core_HUD_Foundation.md.meta",
     "Echo_Systems_Lab_Milestone_3B_Keybindings_Menu_Foundation.md",

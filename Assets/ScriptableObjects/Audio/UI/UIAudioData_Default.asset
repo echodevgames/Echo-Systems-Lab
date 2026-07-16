@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01bbff2762643b34fbbad21f9580e591, type: 3}
+  m_Name: UIAudioData_Default
+  m_EditorClassIdentifier: Assembly-CSharp::UIAudioData
+  buttonHoverAudio: {fileID: 11400000, guid: 88a7bb457b3acc34687d0f7a6c13e495, type: 2}
+  buttonClickAudio: {fileID: 11400000, guid: 17b8eb5d08a54984e8e9336d5d82ead7, type: 2}
+  buttonDeniedAudio: {fileID: 11400000, guid: 12770e9a2d36ac44e89cff5ae077f3c7, type: 2}
+  menuOpenAudio: {fileID: 11400000, guid: 6777be61c604a8347b946a91f87d2b06, type: 2}
+  menuCloseAudio: {fileID: 11400000, guid: 1a0f6690186320841a60ff3a9eb02950, type: 2}
+  menuBackAudio: {fileID: 11400000, guid: 353c8e450388de5468514dc79b74d543, type: 2}
+  sliderChangedAudio: {fileID: 11400000, guid: 77d2680b9fda78d4e9b166302a637f50, type: 2}
+  toggleChangedAudio: {fileID: 11400000, guid: 72f12d3d947044846b8c9b4d9f40bef0, type: 2}
+  dropdownChangedAudio: {fileID: 11400000, guid: e565e6dbae93fd444b55e71197c5c1b9, type: 2}
+  debugLogs: 0

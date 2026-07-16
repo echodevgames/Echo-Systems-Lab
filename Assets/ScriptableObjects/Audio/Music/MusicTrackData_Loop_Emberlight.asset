@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd932bbabf954cb40ab5b8a006e0149e, type: 3}
+  m_Name: MusicTrackData_Loop_Emberlight
+  m_EditorClassIdentifier: Assembly-CSharp::MusicTrackData
+  musicClip: {fileID: 8300000, guid: 0388a3460cc96db438c33c8e98a0377b, type: 3}
+  outputMixerGroup: {fileID: 8533825456002469707, guid: 798105d5335d4044fa8cd950d1365fbe, type: 2}
+  volume: 1
+  pitch: 1
+  loop: 1
+  restartIfAlreadyPlaying: 0
+  ignoreListenerPause: 0
+  fadeInTime: 1
+  fadeOutTime: 1

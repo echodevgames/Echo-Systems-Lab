@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbe801fbc5d397498d07ef01ee6ebe9, type: 3}
+  m_Name: AmbienceLoopData_Loop_Wind3
+  m_EditorClassIdentifier: Assembly-CSharp::AmbienceLoopData
+  loopClip: {fileID: 8300000, guid: b61a804d641650f4fbce1355bf341f24, type: 3}
+  outputMixerGroup: {fileID: -6158649836620508350, guid: 798105d5335d4044fa8cd950d1365fbe, type: 2}
+  volume: 0.5
+  pitchRange: {x: 1, y: 1}
+  loop: 1
+  playOnStart: 1
+  ignoreListenerPause: 0
+  fadeInTime: 1
+  fadeOutTime: 1
+  spatialBlend: 0
+  minDistance: 1
+  maxDistance: 30
+  rolloffMode: 0

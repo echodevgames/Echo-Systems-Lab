@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5e3ca681490a147a07cc200795a808, type: 3}
+  m_Name: FootstepSurfaceData_Default
+  m_EditorClassIdentifier: Assembly-CSharp::FootstepSurfaceData
+  surfaceId: Default
+  walkFootstepAudio: {fileID: 11400000, guid: b41221c6a0ebb4748892c694eeb68251, type: 2}
+  runFootstepAudio: {fileID: 11400000, guid: 7eab96297cbf607439ef0c9a8c009fd2, type: 2}
+  jumpTakeoffAudio: {fileID: 11400000, guid: 7fad11c2a1f70b64fb883604d975816e, type: 2}
+  landingAudio: {fileID: 11400000, guid: 404683a9be57c9044805b2e8cd68aba5, type: 2}
+  overrideStepIntervals: 0
+  walkStepInterval: 0.45
+  runStepInterval: 0.32

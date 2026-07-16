@@ -912,6 +912,7 @@ GameObject:
   - component: {fileID: 1024198898978147064}
   - component: {fileID: 1768280962476320882}
   - component: {fileID: 3953870354345106544}
+  - component: {fileID: 1873703710382765693}
   m_Layer: 5
   m_Name: Canvas_PauseMenu
   m_TagString: Untagged
@@ -1033,6 +1034,29 @@ MonoBehaviour:
   creditsButton: {fileID: 0}
   quitButton: {fileID: 7982643753087898918}
   mainMenuSceneName: MainMenu
+--- !u!114 &1873703710382765693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200235308987020859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433e5ab6139291c44a5142eedf7b3466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAudioBinder
+  uiAudioData: {fileID: 0}
+  bindOnAwake: 1
+  includeInactiveChildren: 1
+  bindButtons: 1
+  bindSliders: 1
+  bindToggles: 1
+  bindDropdowns: 1
+  playMenuOpenOnEnable: 0
+  playMenuCloseOnDisable: 0
+  sliderAudioInterval: 0.05
+  debugLogs: 0
 --- !u!1 &5090256494099857329
 GameObject:
   m_ObjectHideFlags: 0

@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 2334497088955609946}
   - component: {fileID: 2292471376596136282}
   - component: {fileID: 3019011782419535151}
+  - component: {fileID: 7981350363746588634}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -531,6 +532,36 @@ MonoBehaviour:
   playReloadInsertAudio: 1
   playReloadEndAudio: 1
   debugLogs: 1
+--- !u!114 &7981350363746588634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793965773873358335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60b80f42c71d494a93cde990ace0611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFootstepAudioController
+  characterController: {fileID: 7055887531380423159}
+  inputReader: {fileID: 2483783096219201155}
+  footstepOrigin: {fileID: 4675657072698218932}
+  defaultSurface: {fileID: 11400000, guid: 45a3d7430933a4b4fa159ad474bd1ed8, type: 2}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  groundCheckDistance: 1.35
+  movementInputThreshold: 0.1
+  minimumHorizontalVelocity: 0.15
+  useRunFootstepsAboveSpeed: 0
+  runSpeedThreshold: 4.5
+  defaultWalkStepInterval: 0.45
+  defaultRunStepInterval: 0.32
+  playLandingAudio: 1
+  minimumAirTimeForLandingAudio: 0.15
+  playAttachedToPlayer: 1
+  debugLogs: 0
 --- !u!1 &5585662650559727100
 GameObject:
   m_ObjectHideFlags: 0
