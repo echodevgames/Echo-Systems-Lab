@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5e3ca681490a147a07cc200795a808, type: 3}
   m_Name: FootstepSurfaceData_Tile
   m_EditorClassIdentifier: Assembly-CSharp::FootstepSurfaceData
-  surfaceId: Default
+  surfaceId: Tile
   walkFootstepAudio: {fileID: 11400000, guid: b41221c6a0ebb4748892c694eeb68251, type: 2}
   runFootstepAudio: {fileID: 11400000, guid: 7eab96297cbf607439ef0c9a8c009fd2, type: 2}
   jumpTakeoffAudio: {fileID: 11400000, guid: 7fad11c2a1f70b64fb883604d975816e, type: 2}
