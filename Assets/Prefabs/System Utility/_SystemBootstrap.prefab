@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5868705387295117799}
   - component: {fileID: 6226493718810334772}
   - component: {fileID: 229341145289005040}
+  - component: {fileID: 4845895017458422567}
+  - component: {fileID: 1674992210908542908}
   m_Layer: 0
   m_Name: _SystemBootstrap
   m_TagString: Untagged
@@ -83,12 +85,12 @@ MonoBehaviour:
   weaponsVolumeParameter: WeaponsVolume
   uiVolumeParameter: UIVolume
   ambienceVolumeParameter: AmbienceVolume
-  defaultMasterVolume: 1
-  defaultMusicVolume: 0.8
-  defaultSfxVolume: 1
-  defaultWeaponsVolume: 1
-  defaultUiVolume: 1
-  defaultAmbienceVolume: 0.8
+  defaultMasterVolume: 0.5
+  defaultMusicVolume: 0.5
+  defaultSfxVolume: 0.5
+  defaultWeaponsVolume: 0.5
+  defaultUiVolume: 0.5
+  defaultAmbienceVolume: 0.5
   mutedDecibels: -80
 --- !u!114 &6226493718810334772
 MonoBehaviour:
@@ -105,7 +107,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   fallbackMixerGroup: {fileID: 24300002, guid: 798105d5335d4044fa8cd950d1365fbe, type: 2}
   cleanupPaddingSeconds: 0.15
-  debugLogs: 1
+  debugLogs: 0
 --- !u!114 &229341145289005040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,3 +120,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585ada01baaeab040bc5e06f7dd88f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
+  dontDestroyOnLoad: 1
+  debugLogs: 0
+--- !u!114 &4845895017458422567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830575517764200356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d5b773366e38c48a50be6fdf98b817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GraphicsSettingsManager
+  dontDestroyOnLoad: 1
+  useStartupResolutionAsDefault: 1
+  fallbackDefaultWidth: 1920
+  fallbackDefaultHeight: 1080
+  defaultWindowed: 0
+  defaultQualityLevel: -1
+  defaultVSyncEnabled: 1
+  defaultTargetFrameRate: -1
+  defaultBrightness: 1
+  defaultUiScale: 1
+  minimumBrightness: 0.5
+  maximumBrightness: 1.5
+  minimumUiScale: 0.85
+  maximumUiScale: 1.15
+  restrictToDesignedAspectRatio: 1
+  designedAspectRatio: {x: 16, y: 9}
+  aspectTolerance: 0.02
+  forceNativeResolutionWhenFullscreen: 1
+  debugLogs: 0
+--- !u!114 &1674992210908542908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3830575517764200356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba692e63a0f32864d8301f092b66895e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIScaleApplier
+  rootsToScale:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  graphicsSettingsManager: {fileID: 4845895017458422567}
+  debugLogs: 0

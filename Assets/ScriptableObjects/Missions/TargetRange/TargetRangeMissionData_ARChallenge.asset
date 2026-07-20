@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionData
   missionId: target_range_ar_challenge
   displayName: AR Drill
-  description: Destroy  AR targets before the time runs out.
+  description: Destroy all  targets in the building before the time runs out.
   executionMode: 1
   sceneName: 
   unlockedByDefault: 1

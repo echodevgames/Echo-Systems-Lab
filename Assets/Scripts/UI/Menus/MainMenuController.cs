@@ -6,16 +6,18 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    [Header("Buttons")]
+    [Header("Main Buttons")]
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button loadGameButton;
-    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button audioSettingsButton;
+    [SerializeField] private Button graphicsSettingsButton;
     [SerializeField] private Button creditsButton;
     [SerializeField] private Button quitButton;
 
     [Header("Panels")]
     [SerializeField] private GameObject mainMenuPanel;
-    [SerializeField] private SettingsMenuUI settingsMenuUI;
+    [SerializeField] private AudioSettingsMenuUI audioSettingsMenuUI;
+    [SerializeField] private GraphicsSettingsMenuUI graphicsSettingsMenuUI;
     [SerializeField] private CreditsMenuUI creditsMenuUI;
 
     [Header("Scenes")]
@@ -29,8 +31,11 @@ public class MainMenuController : MonoBehaviour
         if (loadGameButton != null)
             loadGameButton.onClick.AddListener(LoadGame);
 
-        if (settingsButton != null)
-            settingsButton.onClick.AddListener(OpenSettings);
+        if (audioSettingsButton != null)
+            audioSettingsButton.onClick.AddListener(OpenAudioSettings);
+
+        if (graphicsSettingsButton != null)
+            graphicsSettingsButton.onClick.AddListener(OpenGraphicsSettings);
 
         if (creditsButton != null)
             creditsButton.onClick.AddListener(OpenCredits);
@@ -41,6 +46,15 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
+        if (mainMenuPanel != null)
+            mainMenuPanel.SetActive(true);
+
+        if (audioSettingsMenuUI != null)
+            audioSettingsMenuUI.ForceClose(false);
+
+        if (graphicsSettingsMenuUI != null)
+            graphicsSettingsMenuUI.ForceClose(false);
+
         if (loadGameButton != null && SaveManager.Instance != null)
             loadGameButton.interactable = SaveManager.Instance.HasSaveFile();
     }
@@ -61,21 +75,37 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene(hubSceneName);
     }
 
-    private void OpenSettings()
+    private void OpenAudioSettings()
     {
-        if (settingsMenuUI != null)
+        if (audioSettingsMenuUI != null)
         {
-            settingsMenuUI.OpenFrom(mainMenuPanel);
+            audioSettingsMenuUI.OpenFrom(mainMenuPanel);
             return;
         }
 
-        Debug.LogWarning("MainMenuController has no SettingsMenuUI assigned.");
+        Debug.LogWarning("MainMenuController has no AudioSettingsMenuUI assigned.");
+    }
+
+    private void OpenGraphicsSettings()
+    {
+        if (graphicsSettingsMenuUI != null)
+        {
+            graphicsSettingsMenuUI.OpenFrom(mainMenuPanel);
+            return;
+        }
+
+        Debug.LogWarning("MainMenuController has no GraphicsSettingsMenuUI assigned.");
     }
 
     private void OpenCredits()
     {
         if (creditsMenuUI != null)
+        {
             creditsMenuUI.OpenFrom(mainMenuPanel);
+            return;
+        }
+
+        Debug.LogWarning("MainMenuController has no CreditsMenuUI assigned.");
     }
 
     private void QuitGame()

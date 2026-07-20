@@ -19,7 +19,7 @@ MonoBehaviour:
   hudColor: {r: 1, g: 1, b: 1, a: 1}
   caliberLabel: .45
   description: .45 Caliber Magnum Round
-  projectilePrefab: {fileID: 5583968047184097160, guid: bea23547929329c45818f2e529cabd6d, type: 3}
+  projectilePrefab: {fileID: 5583968047184097160, guid: 2dee02b0a79f37740839102b3f66e789, type: 3}
   damage: 30
   projectileSpeed: 60
   projectileLifetime: 20

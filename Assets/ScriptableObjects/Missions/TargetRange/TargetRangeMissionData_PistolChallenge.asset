@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionData
   missionId: target_range_pistol_challenge
   displayName: Pistol Drill
-  description: Destroy 3 Pistol targets before the time runs out.
+  description: Destroy 25 Pistol targets before the time runs out.
   executionMode: 1
   sceneName: 
   unlockedByDefault: 1
@@ -25,5 +25,10 @@ MonoBehaviour:
   timeLimitSeconds: 60
   requiredDestroyedTargets: 25
   maxActiveTargets: 40
+  respawnTargetsAfterDestroyed: 1
+  activateAllTargetsAtStart: 0
+  useTargetSlotCountAsGoal: 0
   targetRespawnDelay: 4
+  hideDestroyedTargetVisual: 1
+  disableDestroyedTargetColliders: 1
   countsTowardTargetRangeTrialCompletion: 1

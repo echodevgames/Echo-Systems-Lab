@@ -18261,6 +18261,10 @@ PrefabInstance:
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 6068231392619191008}
+    - target: {fileID: 3674321383870582462, guid: 97d75e14304273f46b3861495396acd2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4013226036637319075, guid: 97d75e14304273f46b3861495396acd2, type: 3}
       propertyPath: m_SortingOrder
       value: 5
@@ -18301,6 +18305,10 @@ PrefabInstance:
       propertyPath: playerStats
       value: 
       objectReference: {fileID: 6068231392619191010}
+    - target: {fileID: 5566081856895518110, guid: 97d75e14304273f46b3861495396acd2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5714192910903329831, guid: 97d75e14304273f46b3861495396acd2, type: 3}
       propertyPath: audioSettingsManager
       value: 

@@ -407,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2114477281724786496
 RectTransform:
   m_ObjectHideFlags: 0
@@ -447,3 +447,7 @@ MonoBehaviour:
   slotPrefab: {fileID: 4676296633125794268, guid: ac56b17f25057c34c85aee88fdc4ac46, type: 3}
   inputReader: {fileID: 0}
   weaponController: {fileID: 0}
+  loadoutController: {fileID: 0}
+  scrollThreshold: 0.01
+  scrollCooldown: 0.12
+  invertScrollDirection: 0

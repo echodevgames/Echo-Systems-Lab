@@ -15,7 +15,7 @@ MonoBehaviour:
   ammoId: ammo_9mm
   displayName: 9mm Round
   hudDisplayName: 
-  ammoIcon: {fileID: 21300000, guid: 168ce0fc20be4384ea636ddbc7b39c5a, type: 3}
+  ammoIcon: {fileID: 21300000, guid: 8734d867d2cb0264d84f8576e35b172d, type: 3}
   hudColor: {r: 1, g: 1, b: 1, a: 1}
   caliberLabel: 9mm
   description: 9mm Pistol Round

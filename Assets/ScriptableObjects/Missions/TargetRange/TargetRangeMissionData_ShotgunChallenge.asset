@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetRangeMissionData
   missionId: target_range_shotgun_challenge
   displayName: Shotgun Drill
-  description: Destroy 3 Shotgun targets before the time runs out.
+  description: Destroy all Shotgun targets before the time runs out.
   executionMode: 1
   sceneName: 
   unlockedByDefault: 1

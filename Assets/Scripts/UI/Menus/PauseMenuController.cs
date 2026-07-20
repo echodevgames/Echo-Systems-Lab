@@ -16,7 +16,7 @@ public class PauseMenuController : MonoBehaviour
 
     [Header("Panels")]
     [SerializeField] private GameObject mainPausePanel;
-    [SerializeField] private SettingsMenuUI settingsMenuUI;
+    [SerializeField] private AudioSettingsMenuUI audioSettingsMenuUI;
     [SerializeField] private KeybindingsMenuUI keybindingsMenuUI;
     [SerializeField] private CreditsMenuUI creditsMenuUI;
 
@@ -105,8 +105,8 @@ public class PauseMenuController : MonoBehaviour
         }
         else
         {
-            if (settingsMenuUI != null)
-                settingsMenuUI.ForceClose(false);
+            if (audioSettingsMenuUI != null)
+                audioSettingsMenuUI.ForceClose(false);
 
             if (mainPausePanel != null)
                 mainPausePanel.SetActive(true);
@@ -149,13 +149,13 @@ public class PauseMenuController : MonoBehaviour
 
     private void OpenSettings()
     {
-        if (settingsMenuUI != null)
+        if (audioSettingsMenuUI != null)
         {
-            settingsMenuUI.OpenFrom(mainPausePanel);
+            audioSettingsMenuUI.OpenFrom(mainPausePanel);
             return;
         }
 
-        Debug.LogWarning("PauseMenuController has no SettingsMenuUI assigned.");
+        Debug.LogWarning("PauseMenuController has no AudioSettingsMenuUI assigned.");
     }
 
     private void OpenKeybindings()

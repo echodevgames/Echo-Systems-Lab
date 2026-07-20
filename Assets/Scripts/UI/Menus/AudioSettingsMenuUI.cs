@@ -1,10 +1,10 @@
-//-----SettingsMenuUI.cs START-----
+//-----AudioSettingsMenuUI.cs START-----
 
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsMenuUI : MonoBehaviour
+public class AudioSettingsMenuUI : MonoBehaviour
 {
     [Header("Root")]
     [SerializeField] private GameObject settingsRoot;
@@ -137,7 +137,7 @@ public class SettingsMenuUI : MonoBehaviour
     {
         if (audioSettingsManager == null)
         {
-            Debug.LogWarning("SettingsMenuUI could not find AudioSettingsManager.");
+            Debug.LogWarning("AudioSettingsMenuUI could not find AudioSettingsManager.");
             return;
         }
 
@@ -238,4 +238,4 @@ public class SettingsMenuUI : MonoBehaviour
     }
 }
 
-//-----SettingsMenuUI.cs END-----
+//-----AudioSettingsMenuUI.cs END-----
